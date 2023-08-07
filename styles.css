@@ -1,0 +1,26 @@
+
+#navbar {
+    height: 80px; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-between; 
+    background-color: #BBB; 
+    padding-right: 10px; 
+}
+.logo {
+    width: 100PX; 
+    float: left; 
+}  
+.navbar__link {
+    margin-left: 30px; 
+    color: #242424; 
+    text-decoration: none; 
+} 
+.navbar__link--marg_left_10px { 
+    margin-left: 10px; 
+}
+.navbar__link--beige { 
+    color: #EEE;
+} 
+

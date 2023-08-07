@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
     <title>Just Stream It</title>
     <link rel="favicon" src="./imgs/favicon.ico">
 </head>
 <body>
 
-    <header class="color_dark_grey">
-        <ul id="menu">
-            <li><img src="./imgs/logo-jsi.png" alt="Logo Just Stream It"></li>
-            <li>Accueil</li>
-            <li>Catégories</li>
-        </ul>
+    <header  id="navbar">
+        <a class="navbar__link navbar__link--marg_left_10px" href="index.html">
+            <img class="logo" src="./imgs/logo-jsi.png" alt="Logo Just Stream It">
+        </a>
+        <div>
+            <a class="navbar__link navbar__link--beige" href="index.html">Accueil</a>
+            <a class="navbar__link" href="categories.html">Catégories</a>
+        </div>
     </header>
     
-    <div id="page">
+    <div id="wraper">
 
         <section id="top">
             <div class="left">
@@ -28,7 +31,7 @@
             </div>
         </section>
 
-        <div id="content">
+        <section id="content">
             <ul id="sliders">
                 <li>
                     <p class="center">Films les mieux notés</p>
@@ -72,7 +75,7 @@
                     </ul>
                 </li>
             </ul>
-        </div>
+        </section>
 
     </div>
     
