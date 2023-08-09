@@ -1,26 +1,83 @@
-
-#navbar {
-    height: 80px; 
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
-    justify-content: space-between; 
-    background-color: #BBB; 
-    padding-right: 10px; 
+.navbar {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #bbb;
+  padding-right: 10px;
 }
-.logo {
-    width: 100PX; 
-    float: left; 
-}  
-.navbar__link {
-    margin-left: 30px; 
-    color: #242424; 
-    text-decoration: none; 
-} 
-.navbar__link--marg_left_10px { 
-    margin-left: 10px; 
+.navbar .navbar__link {
+  margin-left: 30px;
+  color: #242424;
+  text-decoration: none;
 }
-.navbar__link--beige { 
-    color: #EEE;
-} 
+.navbar .navbar__link__logo {
+  width: 100PX;
+  float: left;
+}
+.navbar .navbar__link--marg_left_10px {
+  margin-left: 10px;
+}
+.navbar .navbar__link__link--beige {
+  color: #555555;
+}
 
+@media screen and (max-width: 499px) {
+  .navbar {
+    height: 100px;
+    flex-direction: column;
+  }
+  .navbar .navbar__link {
+    margin-left: 0;
+  }
+  .navbar .navbar__link__logo {
+    width: 100PX;
+    float: left;
+  }
+}
+/* best */
+.best {
+  background-image: url("https://m.media-amazon.com/images/M/MV5BNjA5Y2ZhYzctNDc1Yy00OGViLWI3NGUtOTYwZmE3NDFiYmIxXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR72,0,182,268_AL_.jpg");
+  background-repeat: no-repeat;
+  margin: 10PX auto;
+  height: 300px;
+}
+.best__intro {
+  padding: 10px;
+  padding-top: 40px;
+  color: #ff0000;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: black;
+}
+.best__intro__title {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+.best__intro__subtitle {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+.best__intro__text {
+  font-size: 1.5rem;
+}
+
+.btn {
+  display: flex;
+  direction: row;
+}
+.btn__play {
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  background-color: #eee;
+  border-radius: 5px;
+}
+.btn__more_infos {
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  background-color: #5A565D;
+  border-radius: 5px;
+  color: #eee;
+}
+
+/*# sourceMappingURL=styles.css.map */

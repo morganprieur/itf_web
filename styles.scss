@@ -1,0 +1,111 @@
+
+$link_color: #242424; 
+$title_color: #ff0000; 
+$light_color: #eee; 
+$light_grey: #bbb;
+$dark_grey: #5A565D; 
+$button_radius: 5px; 
+$title_margin: 10px 0; 
+
+// color: #eee; 
+@mixin intro_color { 
+    color: $title_color; 
+    -webkit-text-stroke: 1px; 
+    -webkit-text-stroke-color: black;
+} 
+
+@mixin button($back_color) { 
+    line-height:1.5;
+    padding: 0.375rem 0.75rem;
+    background-color: $back_color; 
+    border-radius: $button_radius; 
+}
+
+.navbar {
+    height: 80px; 
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-between; 
+    background-color: $light_grey; 
+    padding-right: 10px; 
+    .navbar__link {
+        margin-left: 30px; 
+        color: $link_color; 
+        // color: #242424; 
+        text-decoration: none; 
+        &__logo {
+            width: 100PX; 
+            float: left; 
+        } 
+        &--marg_left_10px { 
+            margin-left: 10px; 
+        }
+        &__link--beige { 
+            // color: #EEE;
+            color: darken(#EEE, 60%);  
+        } 
+    } 
+} 
+// .navbar__link__logo {
+//     width: 100PX; 
+//     float: left; 
+// } 
+
+@media screen and (max-width: 499px) { 
+    .navbar { 
+        height: 100px; 
+        // flex-direction: row; 
+        flex-direction: column; 
+        .navbar__link {
+            margin-left: 0; 
+            &__logo { 
+                width: 100PX; 
+                float: left; 
+            } 
+        } 
+    } 
+} 
+
+
+/* best */ 
+.best { 
+    background-image: url('https://m.media-amazon.com/images/M/MV5BNjA5Y2ZhYzctNDc1Yy00OGViLWI3NGUtOTYwZmE3NDFiYmIxXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR72,0,182,268_AL_.jpg'); 
+    background-repeat: no-repeat;
+    // width: 99%; 
+    margin: 10PX auto; 
+    height: 300px; 
+    &__intro { 
+        padding: 10px; 
+        padding-top: 40px;  
+        @include intro_color;
+        &__title { 
+            font-size: 3rem;
+            // margin: 10px 0;
+            margin: $title_margin;
+        } 
+        &__subtitle { 
+            font-size: 2rem; 
+            // margin: 10px 0;
+            margin: $title_margin;
+        } 
+        &__text { 
+            font-size: 1.5rem;
+        }
+    }
+} 
+
+.btn { 
+    display: flex; 
+    direction: row; 
+    &__play { 
+        @include button($light_color); 
+    } 
+    &__more_infos { 
+        @include button($dark_grey); 
+        color: $light_color; 
+    }
+}
+
+
+

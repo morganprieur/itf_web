@@ -9,9 +9,9 @@
 </head>
 <body>
 
-    <header  id="navbar">
+    <header  class="navbar">
         <a class="navbar__link navbar__link--marg_left_10px" href="index.html">
-            <img class="logo" src="./imgs/logo-jsi.png" alt="Logo Just Stream It">
+            <img class="navbar__link__logo" src="./imgs/logo-jsi.png" alt="Logo Just Stream It">
         </a>
         <div>
             <a class="navbar__link navbar__link--beige" href="index.html">Accueil</a>
@@ -19,15 +19,17 @@
         </div>
     </header>
     
-    <div id="wraper">
+    <!-- <div id="wraper"> -->
 
-        <section id="top">
-            <div class="left">
-                <h3>Titre de la vidéo</h3>
-                <a class="button_play" href="">Play</a>
+        <section class="best">
+            <div class="best__intro">
+                <h3 class="best__intro__title">Titre de la vidéo</h3>
+                <h4 class="best__intro__subtitle">Watch season X Episode Y</h4>
+                <p class="best__intro__text">résumé de la vidéo</p>
             </div>
-            <div class="right">
-                <img id="top_img" alt="Affiche film Y">
+            <div class="btn">
+                <button class="btn btn__play">Play</button>
+                <button class="btn btn__more_infos">More infos</button>
             </div>
         </section>
 
@@ -77,7 +79,7 @@
             </ul>
         </section>
 
-    </div>
+    <!-- </div> -->
     
 </body>
 </html>
