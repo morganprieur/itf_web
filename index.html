@@ -9,77 +9,85 @@
 </head>
 <body>
 
-    <header  class="navbar">
-        <a class="navbar__link navbar__link--marg_left_10px" href="index.html">
-            <img class="navbar__link__logo" src="./imgs/logo-jsi.png" alt="Logo Just Stream It">
+    <header  class="header">
+        <a class="header__logo" href="index.html"><!-- navbar__link navbar__link--marg_left -->
+            <img class="header__logo__img" src="./imgs/logo-jsi.png" alt="Logo Just Stream It">
         </a>
-        <div>
-            <a class="navbar__link navbar__link--beige" href="index.html">Accueil</a>
-            <a class="navbar__link" href="categories.html">Catégories</a>
-        </div>
+        <a class="header__link" href="index.html">
+            Accueil
+        </a>
+        <ul class="navbar header__link header__link--categories"><!-- navbar__link -->
+            Catégories 
+            <li class="one_category"><a href="#mieux_notes">Les mieux_notes</a></li>
+            <li class="one_category"><a href="#category_1">Catégorie 1</a></li>
+            <li class="one_category"><a href="#category_2">Catégorie 2</a></li>
+            <li class="one_category"><a href="#category_3">Catégorie 3</a></li>
+        </ul>
+        <div class="clear"></div>
     </header>
     
+    <div class="clear"></div>
     <!-- <div id="wraper"> -->
 
         <section class="best">
             <div class="best__intro">
                 <h3 class="best__intro__title">Titre de la vidéo</h3>
                 <h4 class="best__intro__subtitle">Watch season X Episode Y</h4>
-                <p class="best__intro__text">résumé de la vidéo</p>
+                <p class="best__intro__text">
+                    résumé de la vidéo
+                </p>
+
+                <div class="btns">
+                    <a href="#" class="btns__play">Play</a>
+                    <a href="#" class="btns__more_infos">More infos</a>
+                </div>
             </div>
-            <div class="btn">
-                <button class="btn btn__play">Play</button>
-                <button class="btn btn__more_infos">More infos</button>
-            </div>
+
+            <img 
+                class="best__img" 
+                alt="Affiche film best note" 
+                height="450px" 
+                src="https://m.media-amazon.com/images/M/MV5BNjA5Y2ZhYzctNDc1Yy00OGViLWI3NGUtOTYwZmE3NDFiYmIxXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR72,0,182,268_AL_.jpg" 
+            >
+
+            <div class="clear"></div> 
         </section>
 
-        <section id="content">
-            <ul id="sliders">
-                <li>
-                    <p class="center">Films les mieux notés</p>
-                    <ul id="ratings">
-                        <li>
-                            <figure>
-                                <img src="" alt="Affiche film Z">
-                            </figure>
-                        </li>
-                        <li>modal</li>
-                    </ul>
-                </li>
-                <li><p class="center">Catégorie 1</p>
-                    <ul id="cat_1">
-                        <li>
-                            <figure>
-                                <img src="" alt="Affiche film Z">
-                            </figure>
-                        </li>
-                        <li>modal</li>
-                    </ul>
-                </li>
-                <li><p class="center">Catégorie 2</p>
-                    <ul id="cat_2">
-                        <li>
-                            <figure>
-                                <img src="" alt="Affiche film Z">
-                            </figure>
-                        </li>
-                        <li>modal</li>
-                    </ul>
-                </li>
-                <li><p class="center">Catégorie 3</p>
-                    <ul id="cat_3">
-                        <li>
-                            <figure>
-                                <img src="" alt="Affiche film Z">
-                            </figure>
-                        </li>
-                        <li>modal</li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
+        <!-- <section id="content"> -->
+        <section id="sliders" class="sliders">
+            
+            <div id="cat_mieux_notes" class="sliders__category"><!-- category "les mieux notés" -->
+                <h4 class="sliders__category__title">
+                    Les mieux notés
+                </h4>
+                
+                <div id="slider_mieux_notes" class="sliders__category__films"><!-- for -->
+                </div>
+            </div>
 
-    <!-- </div> -->
+            <div id="cat1" class="sliders__category"><!-- category "les mieux notés" -->
+                <h4 class="sliders__category__title">
+                    Romance
+                </h4>
+                
+                <div id="slider_cat1" class="sliders__category__films"><!-- for -->
+                </div>
+            </div>
+            <div id="cat2" class="sliders__category"><!-- category "les mieux notés" -->
+                <h4 class="sliders__category__title">
+                    Drama
+                </h4>
+                
+                <div id="slider_cat2" class="sliders__category__films"><!-- for -->
+                </div>
+            </div>
+        </section>
+        <!-- </section> -->
+
+    <footer>
+        <a href="#">Mentions légales</a> | <a href="#">Contact</a>
+    </footer>
     
+    <script src="titles.js"></script>
 </body>
 </html>
