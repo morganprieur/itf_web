@@ -243,77 +243,9 @@ ul, li {
 
 .one_film { 
     &__img {
-        &.one_film_0_1 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_0_2 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_0_3 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_0_4 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_0_5 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_0_6 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_0_7 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-
-        &.one_film_1_1 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_1_2 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_1_3 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_1_4 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_1_5 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_1_6 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
-        &.one_film_1_7 { 
-            @include background_image; 
-            display: inline-block; 
-            height: 150px; 
-        } 
+        @include background_image; 
+        display: inline-block; 
+        height: 150px; 
     } 
     &__title { 
         position: relative; 

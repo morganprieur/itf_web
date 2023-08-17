@@ -1,29 +1,21 @@
 
 
 async function retrieveApiFilms(category_name) { 
-
-    const response_films = await fetch("http://localhost:8000/api/v1/titles/?genre="+category_name, {
-    // 'headers': {} 
-    }) 
+    const response_films = await fetch("http://localhost:8000/api/v1/titles/?genre="+category_name, {}) 
     const data_films = await response_films.json(); 
 
     return data_films; 
 } 
-async function retrieveApiBestFilms() { 
 
-    const response_films = await fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", {
-    // 'headers': {} 
-    }) 
+async function retrieveApiBestFilms() { 
+    const response_films = await fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", {}) 
     const data_films = await response_films.json(); 
 
     return data_films; 
 } 
 
 async function retrieveApiCategories() { 
-
-    const response_genres = await fetch("http://localhost:8000/api/v1/genres/", {
-    // 'headers': {} 
-    }) 
+    const response_genres = await fetch("http://localhost:8000/api/v1/genres/", {}) 
     const data_genres = await response_genres.json(); 
 
     return data_genres; 
@@ -47,17 +39,6 @@ const main = async(category_name, category_id) => {
     const data_one_category = document.getElementById(category_id); 
     // const data_one_category = document.getElementById('sliders_one_category'); 
 
-    /* modal */ 
-    // const set_one_modal = () => { 
-
-        modal_classnames_by_tags = {
-            'img': 'modal__img', 
-            'h3': 'modal__title', 
-            'p': 'modal__genre', 
-            'p':'modal__publish_date'
-        }; 
-        // const one_modal = document.getElementById('one_modal') 
-    // } 
 
     films.forEach(element => {
         // console.log(element) 
@@ -66,31 +47,37 @@ const main = async(category_name, category_id) => {
         one_film_div.className = 'one_film' 
         
         let one_film_div_a = document.createElement('a') 
-        one_film_div_a.className = 'one_film__img one_film_0_1' 
+        one_film_div_a.className = `one_film__img one_film_0_${element.id}` 
         one_film_div_a.style.backgroundImage = `url(${element.image_url})` 
         
         let one_film_div_a_h5 = document.createElement('h5') 
         one_film_div_a_h5.className = 'one_film__title' 
         one_film_div_a_h5.innerHTML = element.title 
         
+        // // debug 
+        let one_film_div_a_genre = document.createElement('p') 
+        one_film_div_a_genre.className = 'one_film__genre' 
+        one_film_div_a_genre.innerHTML = '' 
+        genres = element.genres 
+        console.log('genres 70 : '+genres) 
+        for(let genre of genres) { 
+            console.log('genre 72 : '+genre) 
+            one_film_div_a_genre.innerHTML += `${genre}<br>` 
+        } 
+        
         /* one_modal */ 
         let one_modal = document.createElement('div') 
         one_modal.className = 'modal' 
-        // set_one_modal() 
-        for (property in modal_classnames_by_tags) { 
-            let modal_img = document.createElement(property) 
-            modal_img.className = modal_classnames_by_tags[property] 
-            
-            one_modal.appendChild(modal_img) 
-        }
-        one_film_div.appendChild(one_modal) 
-
-
+        
+        
+        
         one_film_div_a.appendChild(one_film_div_a_h5) 
+        one_film_div_a.appendChild(one_film_div_a_genre) 
         one_film_div.appendChild(one_film_div_a) 
-
-
+        one_film_div.appendChild(one_modal) 
         data_one_category.appendChild(one_film_div)  
+
+
     }); 
     
 
