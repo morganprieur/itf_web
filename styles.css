@@ -176,6 +176,20 @@ ul, li {
   box-shadow: 0px 0px 2px #eee;
   color: #bbb;
 }
+.btns__modal {
+  line-height: 1.5rem;
+  padding: 0.375rem 0.75rem;
+  background-color: #eee;
+  border-radius: 5px;
+  border: 1px #bbb solid;
+  text-decoration: none;
+  box-shadow: 0px 0px 2px #eee;
+  color: #444;
+  width: 90px;
+  position: relative;
+  top: 50px;
+  cursor: pointer;
+}
 
 /* SLIDERS */
 .sliders {
@@ -206,9 +220,11 @@ ul, li {
 }
 .one_film__title {
   position: relative;
-  top: 30px;
+  top: 10px;
   width: 100px;
-  font-size: 1.1rem;
+  height: 30px;
+  text-overflow: ellipsis;
+  font-size: 0.8rem;
   text-align: left;
   margin: 0;
   color: #444;
@@ -230,8 +246,13 @@ ul, li {
   padding: 0 30px;
 }
 
-.one_film a:hover .modal {
+.none {
+  display: none;
+}
+
+.block {
   display: block;
+  width: 70%;
 }
 
 /* FOOTER */

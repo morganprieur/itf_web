@@ -209,11 +209,19 @@ ul, li {
     display: inline-block; 
     &__play { 
         @include button($light_color); 
-        color: $dark_grey
+        color: $dark_grey;
     } 
     &__more_infos { 
         @include button($dark_grey); 
         color: $light_grey; 
+    } 
+    &__modal { 
+        @include button(($light_color)); 
+        color: $dark_grey; 
+        width: 90px; 
+        position: relative; 
+        top: 50px; 
+        cursor: pointer; 
     } 
 } 
 
@@ -249,9 +257,11 @@ ul, li {
     } 
     &__title { 
         position: relative; 
-        top: 30px; 
+        top: 10px; 
         width: 100px; 
-        font-size: 1.1rem;
+        height: 30px; 
+        text-overflow: ellipsis; 
+        font-size: .8rem;
         text-align: left; 
         margin: 0; 
         color: $dark_grey; 
@@ -264,7 +274,6 @@ ul, li {
 // } 
 
 .modal { 
-    // display: none; 
     background-color: $background_color; 
     width: 80%; 
     height: 800px; 
@@ -275,9 +284,16 @@ ul, li {
         padding: 0 30px; 
     } 
 } 
-.one_film a:hover .modal { 
+.none { 
+    display: none; 
+} 
+.block { 
     display: block; 
-}
+    width: 70%; 
+} 
+// .one_film a:hover .modal { 
+//     display: block; 
+// }
 
 
 
