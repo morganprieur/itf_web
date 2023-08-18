@@ -1,66 +1,81 @@
 
 
-async function retrieveApiFilms(category_name) { 
-    const response_films = await fetch("http://localhost:8000/api/v1/titles/?genre="+category_name, {}) 
-    const data_films = await response_films.json(); 
+async function retrieveFilmsByCategories(category_name) { 
+    const response_categories = await fetch("http://localhost:8000/api/v1/titles/?genre="+category_name, {}) 
+    const data_categories = await response_categories.json(); 
 
-    return data_films; 
+    return data_categories; 
 } 
 
-async function retrieveApiBestFilms() { 
-    const response_films = await fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", {}) 
-    const data_films = await response_films.json(); 
+async function retrieveApiBestFilm() { 
+    const response_best_film = await fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", {}) 
+    const data_best_film = await response_best_film.json(); 
 
-    return data_films; 
+    return data_best_film; 
 } 
 
-async function retrieveApiCategories() { 
-    const response_genres = await fetch("http://localhost:8000/api/v1/genres/", {}) 
-    const data_genres = await response_genres.json(); 
+// async function retrieveApiCategories() { 
+//     const response_genres = await fetch("http://localhost:8000/api/v1/genres/", {}) 
+//     const data_genres = await response_genres.json(); 
 
-    return data_genres; 
+//     return data_genres; 
+// } 
+
+async function retrieveOneFilm(id) { 
+    const response_one_film = await fetch(`http://localhost:8000/api/v1/titles/${id}`, {}) 
+    const data_one_film = await response_one_film.json(); 
+
+    return data_one_film; 
 } 
 
-function replaceClass(classe) { 
-    // console.log(classe) 
-    // mod.removeClass('none') 
-    // mod.className = 'block' 
-    window.onload = function() { 
-        mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
-        console.log(`mod : ${mod}`) 
-        // mod.replace('none' , 'block' ) 
-        mod.removeClass('none') 
-        mod.className = 'block' 
-        // mod.replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
-    } 
-        // if (document.getElementsByClassName(classe).style.display == 'none') { 
-            //     document.getElementsByClassName(classe).style.display = 'block';
-            // } else { 
-                //     document.getElementById(id).style.display = 'none';
-                // } 
-} 
+// function replaceClass(classe) { 
+//     // console.log(classe) 
+//     // mod.removeClass('none') 
+//     // mod.className = 'block' 
+//     window.onload = function() { 
+//         mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
+//         console.log(`mod : ${mod}`) 
+//         // mod.replace('none' , 'block' ) 
+//         mod.removeClass('none') 
+//         mod.className = 'block' 
+//         // mod.replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
+//     } 
+//         // if (document.getElementsByClassName(classe).style.display == 'none') { 
+//             //     document.getElementsByClassName(classe).style.display = 'block';
+//             // } else { 
+//                 //     document.getElementById(id).style.display = 'none';
+//                 // } 
+// } 
 
 // main 
 const main = async(category_name, category_id) => { 
   
     let apiFilms; 
     if(category_name=='best_films') { 
-        apiFilms = await retrieveApiBestFilms(); 
+        apiFilms = await retrieveApiBestFilm(); 
     } else { 
-        apiFilms = await retrieveApiFilms(category_name); 
+        apiFilms = await retrieveFilmsByCategories(category_name); 
     }
     const films = apiFilms.results; 
 
-    const apiGenres = await retrieveApiCategories(); 
-    const categories = apiGenres.results; 
+    // let id; 
+    // const details = await retrieveOneFilm(id) 
+
+    // const apiGenres = await retrieveApiCategories(); 
+    // const categories = apiGenres.results; 
 
     
     const data_one_category = document.getElementById(category_id); 
     // const data_one_category = document.getElementById('sliders_one_category'); 
 
-
-    films.forEach(element => {
-        console.log(element) 
+    for (element of films) { 
+    // films.forEach(element => {
+        // console.log(element) 
+        // details = retrieveOneFilm(9) 
+        // id = element.id 
+        // console.log(details) 
+        // console.log(details.date_published) 
+        // console.log(details.rated) 
 
         let one_film_div = document.createElement('div') 
         one_film_div.className = 'one_film' 
@@ -125,9 +140,10 @@ const main = async(category_name, category_id) => {
         } 
         one_film_div_a_button.innerHTML = 'Détails' 
         
-        // one_film_div_a_button.addEventListener('click', replaceClass(classe)) 
-        // one_film_div_a_button.addEventListener('click', replaceClass(`modal__${element.id}`)) 
-        // onclick="masquer_div('a_masquer');"
+        const details = await retrieveOneFilm(element.id) 
+        console.log(details) 
+        console.log(details.date_published) 
+        console.log(details.rated) 
         
         let modal_img = document.createElement('img') 
         modal_img.className = 'modal__img' 
@@ -153,12 +169,14 @@ const main = async(category_name, category_id) => {
 
         let modal_date = document.createElement('p') 
         modal_date.className = 'modal__publish_date' 
-        modal_date.innerHTML = element.date_published 
+        modal_date.innerHTML = details.date_published 
+        // modal_date.innerHTML = element.date_published 
         one_modal.appendChild(modal_date) 
 
         let modal_rated = document.createElement('p') 
         modal_rated.className = 'modal__rated' 
-        modal_rated.innerHTML = element.rated 
+        modal_rated.innerHTML = details.rated 
+        // modal_rated.innerHTML = element.rated 
         one_modal.appendChild(modal_rated) 
 
         let modal_imdb_score = document.createElement('p') 
@@ -207,7 +225,7 @@ const main = async(category_name, category_id) => {
         data_one_category.appendChild(one_film_div)  
 
 
-    }); 
+    } // ); 
     
 
 } 
