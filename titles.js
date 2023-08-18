@@ -21,6 +21,25 @@ async function retrieveApiCategories() {
     return data_genres; 
 } 
 
+function replaceClass(classe) { 
+    // console.log(classe) 
+    // mod.removeClass('none') 
+    // mod.className = 'block' 
+    window.onload = function() { 
+        mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
+        console.log(`mod : ${mod}`) 
+        // mod.replace('none' , 'block' ) 
+        mod.removeClass('none') 
+        mod.className = 'block' 
+        // mod.replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
+    } 
+        // if (document.getElementsByClassName(classe).style.display == 'none') { 
+            //     document.getElementsByClassName(classe).style.display = 'block';
+            // } else { 
+                //     document.getElementById(id).style.display = 'none';
+                // } 
+} 
+
 // main 
 const main = async(category_name, category_id) => { 
   
@@ -41,7 +60,7 @@ const main = async(category_name, category_id) => {
 
 
     films.forEach(element => {
-        // console.log(element) 
+        console.log(element) 
 
         let one_film_div = document.createElement('div') 
         one_film_div.className = 'one_film' 
@@ -59,73 +78,105 @@ const main = async(category_name, category_id) => {
         // one_film_div_a_genre.className = 'one_film__genre' 
         // one_film_div_a_genre.innerHTML = '' 
         // genres = element.genres 
-        // console.log('genres 70 : '+genres) 
+        // // console.log('genres 70 : '+genres) 
         // for(let genre of genres) { 
-        //     console.log('genre 72 : '+genre) 
+        //     // console.log('genre 72 : '+genre) 
         //     one_film_div_a_genre.innerHTML += `${genre}<br>` 
         // } 
 
         /* one_modal */ 
         let one_modal = document.createElement('div') 
-        one_modal.className = `modal__${element.id} none` 
+        // one_modal.className = `modal__${element.id} none` 
+        one_modal.className = `modal display_none` 
+        one_modal.setAttribute('id', `modal_${element.id}`)
         
         // const replaceClass = () => { 
-        //     replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
+            // replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
         // } 
         // classe = 'one_film__title' 
-        classe = `modal__${element.id}` 
+        let classe = `modal_${element.id}` 
         // console.log(classe) 
         // window.onload = function () {
-        //     let els = document.getElementsByClassName("bold");
-        //     console.log(els);
-        // } 
-        function replaceClass(classe) { 
-            console.log(classe) 
-            // mod.removeClass('none') 
-            // mod.className = 'block' 
-            window.onload = function() { 
-                mod = document.getElementsByClassName(classe) 
-                console.log(`mod : ${mod}`) 
-                mod.replace('none' , 'block' ) 
-                // mod.replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
-            } 
-                // if (document.getElementsByClassName(classe).style.display == 'none') { 
-                    //     document.getElementsByClassName(classe).style.display = 'block';
-                    // } else { 
-                        //     document.getElementById(id).style.display = 'none';
-                        // } 
-        } 
-
+            //     let els = document.getElementsByClassName("bold");
+            //     console.log(els);
+            // } 
+            
+            
         let one_film_div_a_button = document.createElement('button') 
         one_film_div_a_button.classList = 'one_film__button btns__modal' 
-        one_film_div_a_button.setAttribute('onclick', replaceClass(classe))
+        // one_film_div_a_button.setAttribute('onclick', replaceClass(classe))
+        
+        one_film_div_a_button.onclick = function() { 
+            // replaceClass(classe) 
+            console.log(classe) 
+            // window.onload = function () {
+                // let mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
+                let mod = one_modal 
+                console.log(mod.className) 
+                // mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
+                // console.log(`mod : ${mod}`) 
+                // mod.removeClass('none') 
+                mod.classList.remove('display_none')
+                mod.classList.add('block') 
+                // mod.classList.remove('display_none').add('block') 
+                // mod.className = 'block' 
+                // mod.replace('none' , 'block' ) 
+            // } 
+        } 
         one_film_div_a_button.innerHTML = 'Détails' 
         
-        one_film_div_a_button.addEventListener('click', replaceClass(classe)) 
+        // one_film_div_a_button.addEventListener('click', replaceClass(classe)) 
         // one_film_div_a_button.addEventListener('click', replaceClass(`modal__${element.id}`)) 
         // onclick="masquer_div('a_masquer');"
         
         let modal_img = document.createElement('img') 
         modal_img.className = 'modal__img' 
+        modal_img.setAttribute('alt', `Affiche du film ${element.title}`)
+        modal_img.setAttribute('src', `${element.image_url}`)
         one_modal.appendChild(modal_img) 
+        
         let modal_title = document.createElement('h3') 
         modal_title.className = 'modal__title' 
+        modal_title.innerHTML = element.title 
         one_modal.appendChild(modal_title) 
+
         let modal_genres = document.createElement('p') 
         modal_genres.className = 'modal__genres' 
+        modal_genres.innerHTML = 'Genres : <br> ' 
+        genres = element.genres 
+        // console.log('genres 70 : '+genres) 
+        for(let genre of genres) { 
+            // console.log('genre 72 : '+genre) 
+            modal_genres.innerHTML += `${genre}<br>` 
+        } 
         one_modal.appendChild(modal_genres) 
+
         let modal_date = document.createElement('p') 
         modal_date.className = 'modal__publish_date' 
+        modal_date.innerHTML = element.date_published 
         one_modal.appendChild(modal_date) 
+
         let modal_rated = document.createElement('p') 
         modal_rated.className = 'modal__rated' 
+        modal_rated.innerHTML = element.rated 
         one_modal.appendChild(modal_rated) 
-        let modal_score_imdb = document.createElement('p') 
-        modal_score_imdb.className = 'modal__score_imdb' 
-        one_modal.appendChild(modal_score_imdb) 
+
+        let modal_imdb_score = document.createElement('p') 
+        modal_imdb_score.className = 'modal__imdb_score' 
+        modal_imdb_score.innerHTML = element.imdb_score 
+        one_modal.appendChild(modal_imdb_score) 
+
         let modal_director = document.createElement('p') 
         modal_director.className = 'modal__director' 
+        modal_director.innerHTML = 'Directors : <br> ' 
+        directors = element.directors 
+        // console.log('genres 70 : '+genres) 
+        for(let director of directors) { 
+            // console.log('genre 72 : '+genre) 
+            modal_director.innerHTML += `${director}<br>` 
+        } 
         one_modal.appendChild(modal_director) 
+        
         let modal_casting_list = document.createElement('p') 
         modal_casting_list.className = 'modal__casting_list' 
         one_modal.appendChild(modal_casting_list) 
@@ -141,6 +192,11 @@ const main = async(category_name, category_id) => {
         let modal_abstract = document.createElement('p') 
         modal_abstract.className = 'modal__abstract' 
         one_modal.appendChild(modal_abstract) 
+        let clear_div = document.createElement('div') 
+        clear_div.className = 'clear' 
+        one_modal.appendChild(clear_div) 
+
+        // <div class="clear"></div>
         
         
         one_film_div_a.appendChild(one_film_div_a_h5) 
@@ -154,34 +210,10 @@ const main = async(category_name, category_id) => {
     }); 
     
 
-    /* categories */ 
-    // const data_sliders = document.getElementById('sliders'); 
-
-    // categories.forEach(element => { 
-    //     // console.log(element) 
-
-    //     let one_slider = document.createElement('div') 
-    //     one_slider.className = 'siders__category' 
-        
-    //     let sliders_category_title = document.createElement('h4') 
-    //     sliders_category_title.className = 'sliders_one_category__title' 
-    //     sliders_category_title.innerHTML = element.name 
-
-    //     one_slider.appendChild(sliders_category_title) 
-    //     one_slider.appendChild(data_one_category) 
-    //     // one_slider.append(data_per_film()) 
-
-
-    //     data_sliders.appendChild(one_slider) 
-
-    // }); 
-
-
-
-    //   } 
 } 
 
 main('best_films', 'slider_mieux_notes') 
 main('romance', 'slider_cat1') 
 main('drama', 'slider_cat2') 
+main('animation', 'slider_cat3') 
 
