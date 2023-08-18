@@ -255,6 +255,9 @@ ul, li {
 .modal__resume {
   padding: 0 30px;
 }
+.modal__close_button {
+  float: right;
+}
 
 .display_none {
   display: none;

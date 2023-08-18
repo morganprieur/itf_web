@@ -47,6 +47,16 @@ async function retrieveOneFilm(id) {
 //                 // } 
 // } 
 
+
+
+/* one_modal --> à sortir du for() ***/ 
+let one_modal = document.createElement('div') 
+one_modal.className = `modal display_none` 
+// one_modal.setAttribute('id', `modal_${element.id}`) 
+
+    
+
+
 // main 
 const main = async(category_name, category_id) => { 
   
@@ -71,11 +81,6 @@ const main = async(category_name, category_id) => {
     for (element of films) { 
     // films.forEach(element => {
         // console.log(element) 
-        // details = retrieveOneFilm(9) 
-        // id = element.id 
-        // console.log(details) 
-        // console.log(details.date_published) 
-        // console.log(details.rated) 
 
         let one_film_div = document.createElement('div') 
         one_film_div.className = 'one_film' 
@@ -99,101 +104,107 @@ const main = async(category_name, category_id) => {
         //     one_film_div_a_genre.innerHTML += `${genre}<br>` 
         // } 
 
-        /* one_modal */ 
-        let one_modal = document.createElement('div') 
-        // one_modal.className = `modal__${element.id} none` 
-        one_modal.className = `modal display_none` 
-        one_modal.setAttribute('id', `modal_${element.id}`)
+
+        // /* one_modal --> à sortir du for() ***/ 
+        // let one_modal = document.createElement('div') 
+        // one_modal.className = `modal display_none` 
+        // // one_modal.setAttribute('id', `modal_${element.id}`) 
         
-        // const replaceClass = () => { 
-            // replace( /(?:^|\s)none(?!\S)/g , 'block' ) 
-        // } 
-        // classe = 'one_film__title' 
-        let classe = `modal_${element.id}` 
-        // console.log(classe) 
-        // window.onload = function () {
-            //     let els = document.getElementsByClassName("bold");
-            //     console.log(els);
-            // } 
-            
-            
+        // Open modal button 
         let one_film_div_a_button = document.createElement('button') 
         one_film_div_a_button.classList = 'one_film__button btns__modal' 
-        // one_film_div_a_button.setAttribute('onclick', replaceClass(classe))
         
+        const id = element.id 
+        async function get_details(id) {
+            const details = await retrieveOneFilm(id) 
+            console.log(details) 
+
+            // détails modal 
+            let modal_img = document.createElement('img') 
+            modal_img.className = 'modal__img' 
+            modal_img.setAttribute('alt', `Affiche du film ${element.title}`)
+            modal_img.setAttribute('src', `${element.image_url}`)
+            one_modal.appendChild(modal_img) 
+
+
+            let modal_close_button = document.createElement('button') 
+            modal_close_button.className = 'modal__close_button btns__modal' 
+            
+            modal_close_button.onclick = function() { 
+                // console.log(mod.className) 
+                one_modal.classList.remove('block')
+                one_modal.classList.add('display_none') 
+            } 
+            modal_close_button.innerHTML = 'X Fermer' 
+            one_modal.appendChild(modal_close_button) 
+
+
+            
+            let modal_title = document.createElement('h3') 
+            modal_title.className = 'modal__title' 
+            modal_title.innerHTML = element.title 
+            modal_title.innerHTML += element.id 
+            one_modal.appendChild(modal_title) 
+
+            let modal_genres = document.createElement('p') 
+            modal_genres.className = 'modal__genres' 
+            modal_genres.innerHTML = 'Genres : <br> ' 
+            genres = element.genres 
+            for(let genre of genres) { 
+                modal_genres.innerHTML += `${genre}<br>` 
+            } 
+            one_modal.appendChild(modal_genres) 
+
+            let modal_date = document.createElement('p') 
+            modal_date.className = 'modal__publish_date' 
+            modal_date.innerHTML = details.date_published 
+            one_modal.appendChild(modal_date) 
+
+            let modal_rated = document.createElement('p') 
+            modal_rated.className = 'modal__rated' 
+            modal_rated.innerHTML = details.rated 
+            one_modal.appendChild(modal_rated) 
+
+            return details 
+        } 
+
+        // details button onclick 
+        // one_film_div_a_button.onclick = function() { 
         one_film_div_a_button.onclick = function() { 
-            // replaceClass(classe) 
-            console.log(classe) 
-            // window.onload = function () {
-                // let mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
-                let mod = one_modal 
-                console.log(mod.className) 
-                // mod = document.getElementById(classe)  // c'est ça la bonen question inspecteur ! 
-                // console.log(`mod : ${mod}`) 
-                // mod.removeClass('none') 
-                mod.classList.remove('display_none')
-                mod.classList.add('block') 
-                // mod.classList.remove('display_none').add('block') 
-                // mod.className = 'block' 
-                // mod.replace('none' , 'block' ) 
-            // } 
+            one_modal.classList.remove('display_none')
+            one_modal.classList.add('block') 
+            one_modal.setAttribute('id', `modal_${element.id}`) 
+            /* Get the details data for one film */ 
+            get_details(id) 
+            // const details = await retrieveOneFilm(element.id) 
+            // console.log(element.id) 
+            // console.log(details) 
+            // console.log(details.date_published) 
+            // console.log(details.rated) 
+
+            
         } 
         one_film_div_a_button.innerHTML = 'Détails' 
+
         
-        const details = await retrieveOneFilm(element.id) 
-        console.log(details) 
-        console.log(details.date_published) 
-        console.log(details.rated) 
-        
-        let modal_img = document.createElement('img') 
-        modal_img.className = 'modal__img' 
-        modal_img.setAttribute('alt', `Affiche du film ${element.title}`)
-        modal_img.setAttribute('src', `${element.image_url}`)
-        one_modal.appendChild(modal_img) 
-        
-        let modal_title = document.createElement('h3') 
-        modal_title.className = 'modal__title' 
-        modal_title.innerHTML = element.title 
-        one_modal.appendChild(modal_title) 
 
-        let modal_genres = document.createElement('p') 
-        modal_genres.className = 'modal__genres' 
-        modal_genres.innerHTML = 'Genres : <br> ' 
-        genres = element.genres 
-        // console.log('genres 70 : '+genres) 
-        for(let genre of genres) { 
-            // console.log('genre 72 : '+genre) 
-            modal_genres.innerHTML += `${genre}<br>` 
-        } 
-        one_modal.appendChild(modal_genres) 
+        // détails modal 
 
-        let modal_date = document.createElement('p') 
-        modal_date.className = 'modal__publish_date' 
-        modal_date.innerHTML = details.date_published 
-        // modal_date.innerHTML = element.date_published 
-        one_modal.appendChild(modal_date) 
+        // let modal_imdb_score = document.createElement('p') 
+        // modal_imdb_score.className = 'modal__imdb_score' 
+        // modal_imdb_score.innerHTML = element.imdb_score 
+        // one_modal.appendChild(modal_imdb_score) 
 
-        let modal_rated = document.createElement('p') 
-        modal_rated.className = 'modal__rated' 
-        modal_rated.innerHTML = details.rated 
-        // modal_rated.innerHTML = element.rated 
-        one_modal.appendChild(modal_rated) 
-
-        let modal_imdb_score = document.createElement('p') 
-        modal_imdb_score.className = 'modal__imdb_score' 
-        modal_imdb_score.innerHTML = element.imdb_score 
-        one_modal.appendChild(modal_imdb_score) 
-
-        let modal_director = document.createElement('p') 
-        modal_director.className = 'modal__director' 
-        modal_director.innerHTML = 'Directors : <br> ' 
-        directors = element.directors 
-        // console.log('genres 70 : '+genres) 
-        for(let director of directors) { 
-            // console.log('genre 72 : '+genre) 
-            modal_director.innerHTML += `${director}<br>` 
-        } 
-        one_modal.appendChild(modal_director) 
+        // let modal_director = document.createElement('p') 
+        // modal_director.className = 'modal__director' 
+        // modal_director.innerHTML = 'Directors : <br> ' 
+        // directors = element.directors 
+        // // console.log('genres 70 : '+genres) 
+        // for(let director of directors) { 
+        //     // console.log('genre 72 : '+genre) 
+        //     modal_director.innerHTML += `${director}<br>` 
+        // } 
+        // one_modal.appendChild(modal_director) 
         
         let modal_casting_list = document.createElement('p') 
         modal_casting_list.className = 'modal__casting_list' 
@@ -221,8 +232,11 @@ const main = async(category_name, category_id) => {
         // one_film_div_a.appendChild(one_film_div_a_genre) 
         one_film_div_a.appendChild(one_film_div_a_button) 
         one_film_div.appendChild(one_film_div_a) 
-        one_film_div.appendChild(one_modal) 
-        data_one_category.appendChild(one_film_div)  
+        // one_film_div.appendChild(one_modal) 
+        data_one_category.appendChild(one_film_div) 
+
+        let container_div = document.getElementById('container') 
+        container_div.appendChild(one_modal) 
 
 
     } // ); 

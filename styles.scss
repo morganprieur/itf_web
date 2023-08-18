@@ -296,6 +296,9 @@ ul, li {
     &__resume { 
         padding: 0 30px; 
     } 
+    &__close_button { 
+        float: right; 
+    } 
 } 
 .display_none { 
     display: none; 
