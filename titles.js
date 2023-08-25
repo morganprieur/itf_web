@@ -115,6 +115,8 @@ const main = async(category_name, category_id) => {
         one_film_div_a_button.classList = 'one_film__button btns__modal' 
         
         const id = element.id 
+        console.log('id L118 : '+id) 
+
         async function get_details(id) {
             const details = await retrieveOneFilm(id) 
             console.log(details) 
@@ -122,8 +124,8 @@ const main = async(category_name, category_id) => {
             // détails modal 
             let modal_img = document.createElement('img') 
             modal_img.className = 'modal__img' 
-            modal_img.setAttribute('alt', `Affiche du film ${element.title}`)
-            modal_img.setAttribute('src', `${element.image_url}`)
+            modal_img.setAttribute('alt', `Affiche du film ${details.title}`)
+            modal_img.setAttribute('src', `${details.image_url}`)
             one_modal.appendChild(modal_img) 
 
 
@@ -137,19 +139,16 @@ const main = async(category_name, category_id) => {
             } 
             modal_close_button.innerHTML = 'X Fermer' 
             one_modal.appendChild(modal_close_button) 
-
-
             
-            let modal_title = document.createElement('h3') 
-            modal_title.className = 'modal__title' 
-            modal_title.innerHTML = element.title 
-            modal_title.innerHTML += element.id 
-            one_modal.appendChild(modal_title) 
+            let modal_title = document.createElement('h3'); 
+            modal_title.className = 'modal__title'; 
+            modal_title.innerHTML = `${details.title} ${details.id}`; 
+            one_modal.appendChild(modal_title); 
 
             let modal_genres = document.createElement('p') 
             modal_genres.className = 'modal__genres' 
             modal_genres.innerHTML = 'Genres : <br> ' 
-            genres = element.genres 
+            genres = details.genres 
             for(let genre of genres) { 
                 modal_genres.innerHTML += `${genre}<br>` 
             } 
@@ -169,7 +168,6 @@ const main = async(category_name, category_id) => {
         } 
 
         // details button onclick 
-        // one_film_div_a_button.onclick = function() { 
         one_film_div_a_button.onclick = function() { 
             one_modal.classList.remove('display_none')
             one_modal.classList.add('block') 

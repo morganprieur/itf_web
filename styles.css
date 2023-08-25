@@ -235,12 +235,13 @@ ul, li {
 
 .modal {
   position: fixed;
-  top: 0px;
-  left: 0;
-  background-color: rgba(90, 86, 93, 0.9);
-  width: 100%;
+  top: 50px;
+  left: 50px;
+  z-index: 1;
+  background-color: rgba(166, 163, 169, 0.9);
+  width: 80%;
   height: 600px;
-  z-index: 1000;
+  margin: 20px 100px;
 }
 .modal__img {
   width: 35%;
