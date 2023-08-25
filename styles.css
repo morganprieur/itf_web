@@ -187,7 +187,8 @@ ul, li {
   color: #444;
   width: 90px;
   position: relative;
-  top: 50px;
+  top: 0;
+  right: 10px;
   cursor: pointer;
 }
 
@@ -230,7 +231,7 @@ ul, li {
   margin: 0;
   color: #444;
   background-color: rgba(238, 238, 238, 0.8);
-  border-radius: 2%;
+  border-radius: 5px;
 }
 
 .modal {
@@ -238,13 +239,14 @@ ul, li {
   top: 50px;
   left: 50px;
   z-index: 1;
-  background-color: rgba(166, 163, 169, 0.9);
+  background-color: rgba(116, 111, 119, 0.9);
   width: 80%;
   height: 600px;
+  border-radius: 10px;
   margin: 20px 100px;
 }
 .modal__img {
-  width: 35%;
+  height: 400px;
   float: left;
   margin: 0 10px;
 }
@@ -252,6 +254,7 @@ ul, li {
   color: #eee;
   -webkit-text-stroke: 1px;
   -webkit-text-stroke-color: black;
+  font-size: 2rem;
 }
 .modal__resume {
   padding: 0 30px;

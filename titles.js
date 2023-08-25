@@ -49,7 +49,7 @@ async function retrieveOneFilm(id) {
 
 
 
-/* one_modal --> à sortir du for() ***/ 
+// one_modal 
 let one_modal = document.createElement('div') 
 one_modal.className = `modal display_none` 
 // one_modal.setAttribute('id', `modal_${element.id}`) 
@@ -67,13 +67,6 @@ const main = async(category_name, category_id) => {
         apiFilms = await retrieveFilmsByCategories(category_name); 
     }
     const films = apiFilms.results; 
-
-    // let id; 
-    // const details = await retrieveOneFilm(id) 
-
-    // const apiGenres = await retrieveApiCategories(); 
-    // const categories = apiGenres.results; 
-
     
     const data_one_category = document.getElementById(category_id); 
     // const data_one_category = document.getElementById('sliders_one_category'); 
@@ -93,23 +86,6 @@ const main = async(category_name, category_id) => {
         one_film_div_a_h5.className = 'one_film__title' 
         one_film_div_a_h5.innerHTML = element.title 
         
-        // // debug 
-        // let one_film_div_a_genre = document.createElement('p') 
-        // one_film_div_a_genre.className = 'one_film__genre' 
-        // one_film_div_a_genre.innerHTML = '' 
-        // genres = element.genres 
-        // // console.log('genres 70 : '+genres) 
-        // for(let genre of genres) { 
-        //     // console.log('genre 72 : '+genre) 
-        //     one_film_div_a_genre.innerHTML += `${genre}<br>` 
-        // } 
-
-
-        // /* one_modal --> à sortir du for() ***/ 
-        // let one_modal = document.createElement('div') 
-        // one_modal.className = `modal display_none` 
-        // // one_modal.setAttribute('id', `modal_${element.id}`) 
-        
         // Open modal button 
         let one_film_div_a_button = document.createElement('button') 
         one_film_div_a_button.classList = 'one_film__button btns__modal' 
@@ -121,48 +97,62 @@ const main = async(category_name, category_id) => {
             const details = await retrieveOneFilm(id) 
             console.log(details) 
 
+            // wraper modal 
+            let modal_wraper = document.createElement('div'); 
+            modal_wraper.setAttribute('id', 'modal_wraper'); 
+
             // détails modal 
             let modal_img = document.createElement('img') 
             modal_img.className = 'modal__img' 
             modal_img.setAttribute('alt', `Affiche du film ${details.title}`)
-            modal_img.setAttribute('src', `${details.image_url}`)
-            one_modal.appendChild(modal_img) 
+            modal_img.setAttribute('src', `${details.image_url}`); 
+            modal_wraper.appendChild(modal_img); 
 
+            // one_modal.appendChild(modal_img) 
 
+            // Close_modal button 
             let modal_close_button = document.createElement('button') 
             modal_close_button.className = 'modal__close_button btns__modal' 
             
             modal_close_button.onclick = function() { 
                 // console.log(mod.className) 
-                one_modal.classList.remove('block')
-                one_modal.classList.add('display_none') 
+                modal_wraper.remove(); 
+                one_modal.classList.remove('block'); 
+                one_modal.classList.add('display_none'); 
             } 
             modal_close_button.innerHTML = 'X Fermer' 
-            one_modal.appendChild(modal_close_button) 
+            modal_wraper.appendChild(modal_close_button); 
+            // one_modal.appendChild(modal_close_button) 
             
             let modal_title = document.createElement('h3'); 
             modal_title.className = 'modal__title'; 
             modal_title.innerHTML = `${details.title} ${details.id}`; 
-            one_modal.appendChild(modal_title); 
+            modal_wraper.appendChild(modal_title); 
+            // one_modal.appendChild(modal_title); 
 
-            let modal_genres = document.createElement('p') 
-            modal_genres.className = 'modal__genres' 
-            modal_genres.innerHTML = 'Genres : <br> ' 
-            genres = details.genres 
+            let modal_genres = document.createElement('p'); 
+            modal_genres.className = 'modal__genres'; 
+            modal_genres.innerHTML = 'Genres : <br> '; 
+            genres = details.genres; 
+            modal_genres.innerHTML = 'Genres : <br>'; 
             for(let genre of genres) { 
-                modal_genres.innerHTML += `${genre}<br>` 
+                modal_genres.innerHTML += `${genre}<br>`; 
             } 
-            one_modal.appendChild(modal_genres) 
+            modal_wraper.appendChild(modal_genres); 
+            // one_modal.appendChild(modal_genres) 
 
             let modal_date = document.createElement('p') 
             modal_date.className = 'modal__publish_date' 
             modal_date.innerHTML = details.date_published 
-            one_modal.appendChild(modal_date) 
+            modal_wraper.appendChild(modal_date); 
+            // one_modal.appendChild(modal_date) 
 
             let modal_rated = document.createElement('p') 
             modal_rated.className = 'modal__rated' 
             modal_rated.innerHTML = details.rated 
-            one_modal.appendChild(modal_rated) 
+            modal_wraper.appendChild(modal_rated); 
+
+            one_modal.appendChild(modal_wraper) 
 
             return details 
         } 

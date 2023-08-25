@@ -15,7 +15,6 @@ $category_title_size: 1.5rem; /* pas utilisé */
 
 $button_shaddow: 0px 0px 2px $light_color; 
 
-// color: #eee; 
 @mixin stroked_text($main_color) { 
     color: $main_color; 
     -webkit-text-stroke: 1px; 
@@ -24,7 +23,7 @@ $button_shaddow: 0px 0px 2px $light_color;
 @mixin text_bg { 
     background-color: rgba(#eee, .8); 
     // opacity: .8; 
-    border-radius: 2%; 
+    border-radius: $button_radius; 
 } 
 
 // @mixin background_image($img_url) { 
@@ -220,7 +219,8 @@ ul, li {
         color: $dark_grey; 
         width: 90px; 
         position: relative; 
-        top: 50px; 
+        top: 0; 
+        right: 10px; 
         cursor: pointer; 
     } 
 } 
@@ -280,17 +280,19 @@ ul, li {
     top: 50px; 
     left: 50px; 
     z-index: 1; 
-    background-color: rgba(lighten($background_color, 30%), .9); 
+    background-color: rgba(lighten($background_color, 10%), .9); 
     width: 80%; 
     height: 600px; 
+    border-radius: 10px; 
     margin: 20px 100px; 
     &__img { 
-        width: 35%; 
+        height: 400px; 
         float: left; 
         margin: 0 10px; 
     } 
     &__title { 
         @include stroked_text($title_color); 
+        font-size: 2rem; 
     } 
     &__resume { 
         padding: 0 30px; 
