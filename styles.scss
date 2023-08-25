@@ -136,7 +136,6 @@ ul, li {
 @media screen and (max-width: 499px) { 
     .header { 
         min-height: 150px; 
-        // flex-direction: row; 
         flex-direction: column; 
         &__logo { 
             margin: 0 auto; 
