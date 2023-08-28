@@ -218,8 +218,8 @@ ul, li {
         color: $dark_grey; 
         width: 90px; 
         position: relative; 
-        top: 0; 
-        right: 10px; 
+        top: 70px; 
+        left: 5px; 
         cursor: pointer; 
     } 
 } 
@@ -251,6 +251,7 @@ ul, li {
 } 
 
 .one_film { 
+    width: 110px; 
     &__img {
         @include background_image; 
         display: inline-block; 
@@ -267,6 +268,7 @@ ul, li {
         margin: 0; 
         color: $dark_grey; 
         @include text_bg; 
+        padding: 2px; 
     } 
 } 
 
@@ -281,17 +283,18 @@ ul, li {
     z-index: 1; 
     background-color: rgba(lighten($background_color, 10%), .9); 
     width: 80%; 
-    height: 600px; 
+    min-height: 400px; 
     border-radius: 10px; 
     margin: 20px 100px; 
     &__img { 
-        height: 400px; 
+        height: 300px; 
         float: left; 
         margin: 0 10px; 
     } 
     &__title { 
         @include stroked_text($title_color); 
         font-size: 2rem; 
+        margin: 10px;
     } 
     &__resume { 
         padding: 0 30px; 

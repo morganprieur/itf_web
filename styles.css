@@ -187,8 +187,8 @@ ul, li {
   color: #444;
   width: 90px;
   position: relative;
-  top: 0;
-  right: 10px;
+  top: 70px;
+  left: 5px;
   cursor: pointer;
 }
 
@@ -213,6 +213,9 @@ ul, li {
   display: flex;
 }
 
+.one_film {
+  width: 110px;
+}
 .one_film__img {
   background-repeat: no-repeat;
   background-size: contain;
@@ -232,6 +235,7 @@ ul, li {
   color: #444;
   background-color: rgba(238, 238, 238, 0.8);
   border-radius: 5px;
+  padding: 2px;
 }
 
 .modal {
@@ -241,12 +245,12 @@ ul, li {
   z-index: 1;
   background-color: rgba(116, 111, 119, 0.9);
   width: 80%;
-  height: 600px;
+  min-height: 400px;
   border-radius: 10px;
   margin: 20px 100px;
 }
 .modal__img {
-  height: 400px;
+  height: 300px;
   float: left;
   margin: 0 10px;
 }
@@ -255,6 +259,7 @@ ul, li {
   -webkit-text-stroke: 1px;
   -webkit-text-stroke-color: black;
   font-size: 2rem;
+  margin: 10px;
 }
 .modal__resume {
   padding: 0 30px;
