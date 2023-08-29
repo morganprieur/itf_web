@@ -59,6 +59,16 @@ const main = async(category_name, category_id) => {
     
     const data_one_category = document.getElementById(category_id); 
 
+    //  Button "More infos" for the best film 
+    const best_more_button = document.getElementsByClassName('btns__more_infos')[0]; 
+    // console.log('best_more_button : '+best_more_button.textContent) 
+    // Voir avec co si le bouton "fermer" s'affiche 
+    best_more_button.onclick = function() { 
+        one_modal.classList.remove('display_none') 
+        one_modal.classList.add('block') 
+        one_modal.setAttribute('id', `modal_${element.id}`) 
+        get_details(id); 
+    } 
 
     async function get_details(id) { 
         console.log(`id L65 : ${id}`) 
