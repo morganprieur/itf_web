@@ -1,0 +1,14 @@
+version: "3.9"
+   
+services:
+    
+  front: 
+    image: p6_front
+    build: . 
+    volumes: 
+      - .:/usr/share/nginx/html
+    # restart: always 
+    # pour html -> port 80 : 
+    ports: 
+      - 80:80 
+
