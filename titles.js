@@ -1,32 +1,9 @@
 
-
-async function retrieveFilmsByCategories(category_name) { 
-    const response_categories = await fetch("http://localhost:8000/api/v1/titles/?genre="+category_name, {}) 
-    const data_categories = await response_categories.json(); 
-    return data_categories; 
-} 
-async function retrieveApiBestFilm() { 
-    const response_best_film = await fetch("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", {}) 
-    const data_best_film = await response_best_film.json(); 
-    return data_best_film; 
-} 
-async function retrieveOneFilm(id) { 
-    const response_one_film = await fetch(`http://localhost:8000/api/v1/titles/${id}`, {}) 
-    const data_one_film = await response_one_film.json(); 
-
-    return data_one_film; 
-} 
-async function retrieveGenrePage2(category_name) { 
-    const response_genre_p2 = await fetch(`http://localhost:8000/api/v1/titles?genre=&genre_contains=${category_name}&page=2`, {}) 
-    const data_genre_p2 = await response_genre_p2.json(); 
-    return data_genre_p2; 
-} 
-async function retrieveBestPage2() { // category_name 
-    const response_best_p2 = await fetch(`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2`, {}) 
-    const data_best_p2 = await response_best_p2.json(); 
-    return data_best_p2; 
-} 
-
+import { retrieveApiBestFilm } from "./requests.js"; 
+import { retrieveBestPage2 } from "./requests.js"; 
+import { retrieveFilmsByCategories } from "./requests.js"; 
+import { retrieveGenrePage2 } from "./requests.js"; 
+import { retrieveOneFilm } from "./requests.js"; 
 
 // one_modal 
 let one_modal = document.createElement('div') 
@@ -45,17 +22,27 @@ const main = async(category_name, category_id) => {
         apiSuite = await retrieveGenrePage2(category_name); 
     } 
 
+    const bestFilm = apiFilms.results[0]; 
     const films = apiFilms.results; 
     const films_suite = apiSuite.results; 
+    console.log('bestFilm : '+bestFilm.id); 
     
 
     if(films.length<=5) { 
         // console.log(films.length); 
-        for(i=0; i<2; i++) { 
+        for(let i=0; i<2; i++) { 
             films.push(films_suite[i]); 
         } 
         // console.log(films.length); 
     } 
+
+
+    const best_section = document.getElementsByClassName('best')[0]; 
+    const best_intro_div = document.getElementsByClassName('best__intro')[0]; 
+    const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
+    const best_intro_subtitle_h4 = document.getElementsByClassName('best__intro__subtitle')[0]; 
+    const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
+    const best_img = document.getElementsByClassName('best__img')[0]; 
     
     const data_one_category = document.getElementById(category_id); 
 
@@ -67,7 +54,7 @@ const main = async(category_name, category_id) => {
         one_modal.classList.remove('display_none') 
         one_modal.classList.add('block') 
         one_modal.setAttribute('id', `modal_${element.id}`) 
-        get_details(id); 
+        get_details(element.id); 
     } 
 
     async function get_details(id) { 
@@ -183,9 +170,13 @@ const main = async(category_name, category_id) => {
         return details 
     } 
     
-    for (element of films) { 
+    // console.log('max : '+Math.max(films.imdb_score)+' '+films.title); 
+    best_intro_title_h3.innerHTML = films[0].title+' '+films[0].imdb_score; 
+    
+    for (let element of films) { 
 
         // console.log(element); 
+
 
         let one_film_div = document.createElement('div') 
         one_film_div.className = 'one_film' 
