@@ -243,12 +243,16 @@ ul, li {
   background-color: rgba(116, 111, 119, 0.9);
   width: 80%;
   min-height: 400px;
+  max-height: 600px;
   border-radius: 10px;
   margin: 20px 100px;
 }
-.modal__img {
-  height: 300px;
+.modal__col_1, .modal__col_2 {
   float: left;
+  height: 500px;
+}
+.modal__img {
+  height: 500px;
   margin: 0 10px;
 }
 .modal__title {

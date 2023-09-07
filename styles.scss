@@ -286,11 +286,16 @@ ul, li {
     background-color: rgba(lighten($background_color, 10%), .9); 
     width: 80%; 
     min-height: 400px; 
+    max-height: 600px; 
     border-radius: 10px; 
     margin: 20px 100px; 
-    &__img { 
-        height: 300px; 
+    &__col_1, &__col_2 { 
         float: left; 
+        height: 500px; 
+    } 
+    &__img { 
+        height: 500px; 
+        // float: left; 
         margin: 0 10px; 
     } 
     &__title { 
