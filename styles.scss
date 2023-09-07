@@ -169,11 +169,11 @@ ul, li {
             font-size: 3rem;
             margin: $title_margin;
         } 
-        &__subtitle { 
-            @include stroked_text($light_color);
-            font-size: 2rem; 
-            margin: $title_margin;
-        } 
+        // &__subtitle { 
+        //     @include stroked_text($light_color);
+        //     font-size: 2rem; 
+        //     margin: $title_margin;
+        // } 
         &__text { 
             font-size: 1.2rem; 
             min-height: 320px; 
@@ -181,7 +181,9 @@ ul, li {
     } 
     &__img { 
         float: right; 
-        height: 500px; 
+        @include background_image; 
+        height: 450px; 
+        width: 25%; 
     } 
 } 
 

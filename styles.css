@@ -124,20 +124,17 @@ ul, li {
   font-size: 3rem;
   margin: 10px 0;
 }
-.best__intro__subtitle {
-  color: #eee;
-  -webkit-text-stroke: 1px;
-  -webkit-text-stroke-color: black;
-  font-size: 2rem;
-  margin: 10px 0;
-}
 .best__intro__text {
   font-size: 1.2rem;
   min-height: 320px;
 }
 .best__img {
   float: right;
-  height: 500px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #5A565D;
+  height: 450px;
+  width: 25%;
 }
 
 @media screen and (max-width: 499px) {

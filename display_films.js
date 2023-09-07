@@ -9,12 +9,22 @@ import { retrieveOneFilm } from "./requests.js";
 let one_modal = document.createElement('div') 
 one_modal.className = `modal display_none` 
 
+// // Probleme *** 
+// const get_details = async (id) => { 
+//     console.log(`id L65 : ${id}`) 
+//     // const details = await retrieveOneFilm(id).then(function(result){ 
+//     const details = await retrieveOneFilm(id).then(function(result){ 
+//         console.log('result : ', result); 
+//     }) 
+//     // console.log(`détails : ${details}`) 
+//     return details; 
+// } 
+// FunctionWhichReturnsAPromise()
+//    .then(function(result){
+//         console.log(result)
+//     }) 
 
-const get_details = async (id) => { 
-    console.log(`id L65 : ${id}`) 
-    const details = await retrieveOneFilm(id) 
-    console.log(`détails : ${details}`) 
-
+/* 
     // wraper modal 
     let modal_wraper = document.createElement('div'); 
     modal_wraper.setAttribute('id', 'modal_wraper'); 
@@ -47,7 +57,7 @@ const get_details = async (id) => {
     modal_genres.className = 'modal__genres'; 
     modal_genres.innerHTML = 'Genres : <br> '; 
     genres = details.genres; 
-    console.log('genres : '+genres)
+    // console.log('genres : '+genres)
     modal_genres.innerHTML = 'Genres : <br>'; 
     for(let genre of genres) { 
         modal_genres.innerHTML += `${genre}<br>`; 
@@ -73,9 +83,9 @@ const get_details = async (id) => {
     modal_director.className = 'modal__director'; 
     modal_director.innerHTML = 'Directors : <br>'; 
     directors = element.directors; 
-    console.log('directors 126 : '+directors); 
+    // console.log('directors 126 : '+directors); 
     for(director of directors) { 
-        console.log('director 128 : '+director); 
+        // console.log('director 128 : '+director); 
         modal_director.innerHTML += `${director}<br>`; 
     } 
     modal_wraper.appendChild(modal_director); 
@@ -122,20 +132,36 @@ const get_details = async (id) => {
 
     return details 
 } 
+*/ 
+
 
 const display_best_film = async () => { 
     const apiBestFilm = await retrieveApiBestFilm(); 
     const bestFilm = apiBestFilm.results[0]; 
-    console.log('bestFilm.title : '+bestFilm.title); 
+    // console.log('bestFilm.id : '+bestFilm.id); 
+
+    // const result = get_details(bestFilm.id); 
+    const details = await retrieveOneFilm(bestFilm.id); 
+    // console.log('bestFilm details : ', details); 
+    // console.log('bestFilm detail.id : ', detail.id); 
 
     const best_section = document.getElementsByClassName('best')[0]; 
     const best_intro_div = document.getElementsByClassName('best__intro')[0]; 
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
-    const best_intro_subtitle_h4 = document.getElementsByClassName('best__intro__subtitle')[0]; 
-    const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
-    const best_img = document.getElementsByClassName('best__img')[0]; 
-
     best_intro_title_h3.innerHTML = bestFilm.title+' '+bestFilm.imdb_score; 
+    
+    const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
+    best_intro_text_p.innerHTML = details.long_description+' '+bestFilm.id; 
+    
+    const best_img = document.createElement('div'); 
+    best_img.classList.add('best__img'); 
+    best_img.style.backgroundImage = `url(${bestFilm.image_url})`; 
+
+    const clear_div = document.createElement('div'); 
+    clear_div.classList.add('clear'); 
+
+    best_section.appendChild(best_img); 
+    best_section.appendChild(clear_div); 
 
 } 
 display_best_film(); 
