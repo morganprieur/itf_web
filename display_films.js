@@ -5,9 +5,7 @@ import { retrieveFilmsByCategories } from "./requests.js";
 import { retrieveGenrePage2 } from "./requests.js"; 
 import { retrieveOneFilm } from "./requests.js"; 
 
-// one_modal 
-let one_modal = document.createElement('div') 
-one_modal.className = `modal display_none` 
+
 
 // // Probleme *** 
 // const get_details = async (id) => { 
@@ -24,11 +22,38 @@ one_modal.className = `modal display_none`
 //         console.log(result)
 //     }) 
 
-/* 
+
+const create_modal = async (id) => { 
+    const container_div = document.getElementById('container'); 
+
+    // one_modal 
+    let one_modal = document.createElement('div') 
+    // one_modal.className = `modal display_none` 
+    one_modal.classList.add('modal'); 
+    one_modal.classList.add('block'); 
+    
     // wraper modal 
     let modal_wraper = document.createElement('div'); 
-    modal_wraper.setAttribute('id', 'modal_wraper'); 
+    modal_wraper.classList.add('modal_wraper'); 
 
+    const details = await retrieveOneFilm(id); 
+
+    let modal_title = document.createElement('h3'); 
+    modal_title.className = 'modal__title'; 
+    modal_title.innerHTML = `${details.title}`; 
+    modal_wraper.appendChild(modal_title); 
+
+    let modal_year = document.createElement('p'); 
+    modal_year.className = 'modal__year'; 
+    modal_year.innerHTML = `${details.year}`; 
+    modal_wraper.appendChild(modal_year); 
+
+    one_modal.appendChild(modal_wraper) 
+    container_div.appendChild(one_modal); 
+} 
+// create_modal(); 
+
+/* 
     // détails modal 
     let modal_img = document.createElement('img') 
     modal_img.className = 'modal__img' 
@@ -128,10 +153,10 @@ one_modal.className = `modal display_none`
     clear_div.className = 'clear' 
     modal_wraper.appendChild(clear_div) 
 
-    one_modal.appendChild(modal_wraper) 
+
 
     return details 
-} 
+// } 
 */ 
 
 
@@ -152,6 +177,21 @@ const display_best_film = async () => {
     
     const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
     best_intro_text_p.innerHTML = details.long_description+' '+bestFilm.id; 
+
+    const btns_more_infos = document.getElementsByClassName('btns__more_infos')[0]; 
+    btns_more_infos.onclick = function() { 
+        create_modal(bestFilm.id); 
+        // modal_wraper.classList.remove('display_none') 
+        // modal_wraper.classList.add('block') 
+        // modal_wraper.setAttribute('id', `modal_${element.id}`) 
+        console.log('details L178 : ', details.year); 
+    } 
+    // best_more_button.onclick = function() { 
+    //     //         one_modal.classList.remove('display_none') 
+    //     //         one_modal.classList.add('block') 
+    //     //         one_modal.setAttribute('id', `modal_${element.id}`) 
+    //     //         get_details(element.id); 
+    //     //     } 
     
     const best_img = document.createElement('div'); 
     best_img.classList.add('best__img'); 
@@ -162,6 +202,8 @@ const display_best_film = async () => {
 
     best_section.appendChild(best_img); 
     best_section.appendChild(clear_div); 
+
+
 
 } 
 display_best_film(); 
