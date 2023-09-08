@@ -21,6 +21,10 @@ ul, li {
   clear: both;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 /* .header - .navbar */
 .header {
   position: sticky;
@@ -250,10 +254,16 @@ ul, li {
 .modal__col_1, .modal__col_2 {
   float: left;
   height: 500px;
+  margin-right: 10px;
+}
+.modal__col_2, .modal__col_3 {
+  height: 400px;
+}
+.modal__col_4 {
+  width: 90%;
 }
 .modal__img {
   height: 500px;
-  margin: 0 10px;
 }
 .modal__title {
   color: #eee;
@@ -261,9 +271,6 @@ ul, li {
   -webkit-text-stroke-color: black;
   font-size: 2rem;
   margin: 10px;
-}
-.modal__resume {
-  padding: 0 30px;
 }
 .modal__close_button {
   float: right;

@@ -31,6 +31,8 @@ clear_div.classList.add('clear');
 
 const create_modal = async (id) => { 
 
+    console.log('fct create_modal ok'); 
+
     // document container 
     const container_div = document.getElementById('container'); 
 
@@ -44,33 +46,31 @@ const create_modal = async (id) => {
     modal_wraper.classList.add('modal_wraper'); 
     modal_wraper.setAttribute('id', `modal_${id}`); 
 
-    // 3 columns 
-    const modal_col_1 = document.createElement('div'); 
-    modal_col_1.classList.add('modal__col_1'); 
-    modal_wraper.appendChild(modal_col_1); 
-
-    const modal_col_2 = document.createElement('div'); 
-    modal_col_2.classList.add('modal__col_2'); 
-    modal_wraper.appendChild(modal_col_2); 
-    
-    const modal_col_3 = document.createElement('div'); 
-    modal_col_3.classList.add('modal__col_3'); 
-    modal_wraper.appendChild(modal_col_3); 
-
-    const modal_col_4 = document.createElement('div'); 
-    modal_col_4.classList.add('modal__col_4'); 
-    modal_wraper.appendChild(modal_col_4); 
-
-    // const div_list = [modal_col_1, modal_col_2, modal_col_3, modal_col_4]; 
+    // 4 columns 
     let div_list = []; 
     let modal_col; 
     for (let i=1; i<=4; i++) { 
         modal_col = document.createElement('div'); 
         modal_col.classList.add('modal__col_' + i); 
         div_list.push(modal_col); 
-        modal_wraper.appendChild(modal_col); 
-    }
+        console.log(div_list); 
+    } 
+    
+    const modal_cols = document.createElement('div'); 
+    modal_cols.classList.add('modal__columns'); 
+    modal_cols.appendChild(div_list[1]); 
+    modal_cols.appendChild(div_list[2]); 
+    modal_cols.appendChild(div_list[3]); 
+    modal_wraper.appendChild(div_list[0]); 
+    modal_wraper.appendChild(modal_cols); 
 
+    // titles in bold 
+    const span_bold = (name_var, element, string, parent) => { 
+        name_var = document.createElement(element); 
+        name_var.classList.add('bold'); 
+        name_var.innerHTML = string; 
+        parent.appendChild(name_var); 
+    } 
 
     // detail data 
     const details = await retrieveOneFilm(id); 
@@ -81,73 +81,86 @@ const create_modal = async (id) => {
     modal_img.className = 'modal__img' 
     modal_img.setAttribute('alt', `Affiche du film ${details.title}`)
     modal_img.setAttribute('src', `${details.image_url}`); 
-    modal_col_1.appendChild(modal_img); 
+    // modal_col_1.appendChild(modal_img); 
     div_list[0].appendChild(modal_img); 
 
     // modal column 2 
-    // title modal 
+    // modal title 
     const modal_title = document.createElement('h3'); 
     modal_title.className = 'modal__title'; 
-    modal_title.innerHTML = `${details.title}`; 
-    modal_col_2.appendChild(modal_title); 
+    modal_title.innerHTML += `${details.title}`; 
+    // modal_col_2.appendChild(modal_title); 
+    div_list[1].appendChild(modal_title); 
 
     // modal genres 
     const modal_genres = document.createElement('p'); 
     modal_genres.className = 'modal__genres'; 
-    modal_genres.innerHTML = 'Genres : <br> '; 
-    // console.log('genres : '+genres) 
+    span_bold('modal_genres_title', 'span', 'Genres : ', modal_genres); 
+    // modal_genres.innerHTML = 'Genres : <br> '; 
     if (details.genres>1) { 
         for(let genre of details.genres) { 
             modal_genres.innerHTML += `${genre}<br>`; 
         } 
     } else { 
-        modal_genres.innerHTML += `${details.genre}<br>`; 
+        modal_genres.innerHTML += details.genre; 
     } 
-    modal_col_2.appendChild(modal_genres); 
+    // modal_col_2.appendChild(modal_genres); 
+    div_list[1].appendChild(modal_genres); 
 
     // modal date 
     const modal_date = document.createElement('p'); 
     modal_date.className = 'modal__publish_date'; 
-    modal_date.innerHTML = `Publication : ${details.date_published}`;  
-    modal_col_2.appendChild(modal_date); 
+    span_bold('modal_date_title', 'span', 'Publication : ', modal_date); 
+    modal_date.innerHTML += details.date_published;  
+    // modal_col_2.appendChild(modal_date); 
+    div_list[1].appendChild(modal_date); 
 
     // modal rated 
     const modal_rated = document.createElement('p') 
     modal_rated.className = 'modal__rated' 
-    modal_rated.innerHTML = `Note moyenne : ${details.rated}`; 
-    modal_col_2.appendChild(modal_rated); 
+    span_bold('modal_rated_title', 'span', 'Note moyenne : ', modal_rated); 
+    modal_rated.innerHTML += details.rated; 
+    // modal_col_2.appendChild(modal_rated); 
+    div_list[1].appendChild(modal_rated); 
 
     // modal imdb_score 
     const modal_imdb_score = document.createElement('p'); 
     modal_imdb_score.className = 'modal__imdb_score'; 
-    modal_imdb_score.innerHTML = `Score Imdb : ${details.imdb_score}`; 
-    modal_col_2.appendChild(modal_imdb_score); 
+    span_bold('modal_imdb_score_title', 'span', 'Score Imdb : ', modal_imdb_score); 
+    modal_imdb_score.innerHTML += details.imdb_score; 
+    // modal_col_2.appendChild(modal_imdb_score); 
+    div_list[1].appendChild(modal_imdb_score); 
 
     // modal duration 
     const modal_duration = document.createElement('p'); 
     modal_duration.className = 'modal__duration'; 
-    modal_duration.innerHTML = `Durée : ${details.duration}`; 
-    modal_col_2.appendChild(modal_duration); 
+    span_bold('modal_duration_title', 'span', 'Durée : ', modal_duration); 
+    modal_duration.innerHTML += details.duration; 
+    // modal_col_2.appendChild(modal_duration); 
+    div_list[1].appendChild(modal_duration); 
 
     // modal country 
     const modal_country = document.createElement('p'); 
     modal_country.className = 'modal__country'; 
-    modal_country.innerHTML = 'Pays : <br>'; 
-    console.log('countries L138 : '+details.countries[0]); 
+    span_bold('modal_country_title', 'span', 'Pays : <br>', modal_country); 
+    // console.log('countries L138 : '+details.countries[0]); 
     if (details.countries.length>1) { 
         for(let country of details.countries) { 
             modal_country.innerHTML += `${country}<br>`; 
         }
     } else { 
-        modal_country.innerHTML += `${details.countries[0]}<br>`; 
+        modal_country.innerHTML += details.countries[0]; 
     } 
-    modal_col_2.appendChild(modal_country); 
+    // modal_col_2.appendChild(modal_country); 
+    div_list[1].appendChild(modal_country); 
 
     // modal box office  
     const modal_income = document.createElement('p'); 
     modal_income.className = 'modal__income'; 
-    modal_income.innerHTML = `Box office : ${details.worldwide_gross_income}`; 
-    modal_col_2.appendChild(modal_income); 
+    span_bold('modal_income_title', 'span', 'Box office : ', modal_income); 
+    modal_income.innerHTML += details.worldwide_gross_income; 
+    // modal_col_2.appendChild(modal_income); 
+    div_list[1].appendChild(modal_income); 
 
 
 
@@ -161,37 +174,40 @@ const create_modal = async (id) => {
         one_modal.classList.add('display_none'); 
     } 
     modal_close_button.innerHTML = 'X Fermer' 
-    modal_col_3.appendChild(modal_close_button); 
+    // modal_col_3.appendChild(modal_close_button); 
+    div_list[2].appendChild(modal_close_button); 
 
     // modal directors 
     const modal_director = document.createElement('p'); 
     modal_director.className = 'modal__director'; 
-    modal_director.innerHTML = 'Directors : <br>'; 
-    console.log('directors L103 : '+details.directors[0]); 
+    span_bold('modal_director_title', 'span', 'Directors : <br>', modal_director); 
+    // console.log('directors L103 : '+details.directors[0]); 
     if (details.directors.length>1) { 
         for(let director of details.directors) { 
             // console.log('director 128 : '+director); 
             modal_director.innerHTML += `${director}<br>`; 
         } 
     } else { 
-        modal_director.innerHTML += `${details.directors[0]}<br>`; 
+        modal_director.innerHTML += details.directors[0]; 
     } 
-    modal_col_3.appendChild(modal_director); 
+    // modal_col_3.appendChild(modal_director); 
+    div_list[2].appendChild(modal_director); 
 
     // modal casting 
     const modal_casting_list = document.createElement('p'); 
     modal_casting_list.className = 'modal__casting_list'; 
-    modal_casting_list.innerHTML = 'Casting : <br>'; 
-    console.log('actors L118 : '+details.actors[0]); 
-    console.log('actors.length L119 : '+details.actors.length); 
+    span_bold('modal_casting_list_title', 'span', 'Casting : <br>', modal_casting_list); 
+    // console.log('actors L118 : '+details.actors[0]); 
+    // console.log('actors.length L119 : '+details.actors.length); 
     if (details.actors.length>1) { 
         for(let actor of details.actors) { 
             modal_casting_list.innerHTML += `${actor}<br>`; 
         } 
     } else { 
-        modal_casting_list.innerHTML += `${details.actors[0]}<br>`; 
+        modal_casting_list.innerHTML += details.actors[0]; 
     } 
-    modal_col_3.appendChild(modal_casting_list); 
+    // modal_col_3.appendChild(modal_casting_list); 
+    div_list[2].appendChild(modal_casting_list); 
 
     
     // modal wraper 
@@ -202,8 +218,10 @@ const create_modal = async (id) => {
     // modal abstract 
     const modal_abstract = document.createElement('p'); 
     modal_abstract.className = 'modal__abstract'; 
-    modal_abstract.innerHTML = `Synopsis : ${details.long_description}`; 
-    modal_col_4.appendChild(modal_abstract); 
+    span_bold('modal_abstract_title', 'span', 'Synopsis : <br>', modal_abstract); 
+    modal_abstract.innerHTML += details.long_description; 
+    // modal_col_4.appendChild(modal_abstract); 
+    div_list[3].appendChild(modal_abstract); 
 
 
 
@@ -213,34 +231,34 @@ const create_modal = async (id) => {
 } 
 
 
+const apiBestFilm = await retrieveApiBestFilm(); 
 
 const display_best_film = async () => { 
-    const apiBestFilm = await retrieveApiBestFilm(); 
-    const bestFilm = apiBestFilm.results[0]; 
-    // console.log('bestFilm.id : '+bestFilm.id); 
+    const theBest = apiBestFilm.results[0]; 
+    // console.log('theBest.id : '+theBest.id); 
 
-    // const result = get_details(bestFilm.id); 
-    const details = await retrieveOneFilm(bestFilm.id); 
-    // console.log('bestFilm details : ', details); 
-    // console.log('bestFilm detail.id : ', detail.id); 
+    // const result = get_details(theBest.id); 
+    const details = await retrieveOneFilm(theBest.id); 
+    // console.log('theBest details : ', details); 
+    // console.log('theBest detail.id : ', detail.id); 
 
     const best_section = document.getElementsByClassName('best')[0]; 
     const best_intro_div = document.getElementsByClassName('best__intro')[0]; 
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
-    best_intro_title_h3.innerHTML = bestFilm.title+' '+bestFilm.imdb_score; 
+    best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score; 
     
     const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
-    best_intro_text_p.innerHTML = details.long_description+' '+bestFilm.id; 
+    best_intro_text_p.innerHTML = details.long_description+' '+theBest.id; 
 
     const btns_more_infos = document.getElementsByClassName('btns__more_infos')[0]; 
     btns_more_infos.onclick = async function() { 
-        await create_modal(bestFilm.id); 
+        await create_modal(theBest.id); 
     } 
 
     
     const best_img = document.createElement('div'); 
     best_img.classList.add('best__img'); 
-    best_img.style.backgroundImage = `url(${bestFilm.image_url})`; 
+    best_img.style.backgroundImage = `url(${theBest.image_url})`; 
 
 
     best_section.appendChild(best_img); 
@@ -252,6 +270,11 @@ const display_best_film = async () => {
 await display_best_film(); 
 
 
+const display_sliders = async () => { 
+    // const apiBestFilm = await retrieveApiBestFilm(); 
+    const bestFilm = apiBestFilm.results[0]; 
+
+} 
 
 // main 
 // const main = async(category_name, category_id) => { 
