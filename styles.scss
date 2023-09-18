@@ -80,7 +80,7 @@ ul, li {
 
     &__logo {
         float: left; 
-        margin-left: 100px;
+        margin-left: 100px; 
         margin-right: 60%; 
         &__img { 
             height: 70px; 
@@ -216,12 +216,12 @@ ul, li {
         color: $light_grey; 
     } 
     &__modal { 
-        @include button(($light_color)); 
+        @include button($light_color); 
         color: $dark_grey; 
         width: 90px; 
         position: relative; 
-        top: 70px; 
-        left: 5px; 
+        top: 0; 
+        right: 35px; 
         cursor: pointer; 
     } 
 } 
@@ -233,7 +233,8 @@ ul, li {
     background-color: $background_color; 
     
     &__category { 
-        height: 150px; 
+        border: 1px red solid; 
+        height: 300px; 
         width: 80%; 
         margin: 0 auto; 
         padding-bottom: 10px; 
@@ -247,17 +248,36 @@ ul, li {
         } 
         &__films { 
             border: 2px solid green; 
-            display: flex; 
+            display: inline-block; 
+            height: 250px; 
+            width: 1000px; 
         } 
-    }
+    } 
+} 
+
+.slide_left, .slide_right { 
+    width: 50px; 
+    height: 250px; 
+    position: relative; 
+    top: 70px; 
+    font-size: 30px; 
+} 
+
+.slide_left { 
+    float: left; 
+    left: 10px;
+} 
+
+.slide_right { 
+    right: 10px;
 } 
 
 .one_film { 
-    width: 110px; 
     &__img {
         @include background_image; 
         display: inline-block; 
-        height: 150px; 
+        height: 250px; 
+        width: 200px; 
     } 
     &__title { 
         position: relative; 
@@ -274,10 +294,6 @@ ul, li {
     } 
 } 
 
-// .one_film_0_1 { 
-
-// } 
-
 .modal { 
     position: fixed; 
     top: 50px; 
@@ -289,21 +305,26 @@ ul, li {
     max-height: 600px; 
     border-radius: 10px; 
     margin: 20px 100px; 
+
     &__col_1, &__col_2 { 
         float: left; 
-        height: 500px; 
+        // height: 500px; 
         margin-right: 10px; 
     } 
-    &__col_2, &__col_3 { 
-        height: 400px; 
+
+    &__columns { 
+        min-height: 300px; 
+        max-height: 400px; 
     } 
+
     &__col_4 { 
-        // clear: left; 
         width: 90%; 
     } 
+    
     &__img { 
         height: 500px; 
     } 
+    
     &__title { 
         @include stroked_text($title_color); 
         font-size: 2rem; 
@@ -320,9 +341,6 @@ ul, li {
 .block { 
     display: block;
 } 
-// .one_film a:hover .modal { 
-//     display: block; 
-// }
 
 
 

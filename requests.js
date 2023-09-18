@@ -25,11 +25,11 @@ async function retrieveGenrePage2(category_name) {
     return data_genre_p2; 
 } 
 // export 
-async function retrieveBestPage2() { // category_name 
+async function retrieveBestsPage2() { // category_name 
     const response_best_p2 = await fetch(`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2`, {}) 
     const data_best_p2 = await response_best_p2.json(); 
     return data_best_p2; 
 } 
 
 
-export {retrieveApiBestFilm, retrieveBestPage2, retrieveFilmsByCategories, retrieveGenrePage2, retrieveOneFilm};  
+export {retrieveApiBestFilm, retrieveBestsPage2, retrieveFilmsByCategories, retrieveGenrePage2, retrieveOneFilm};  

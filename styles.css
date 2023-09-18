@@ -188,8 +188,8 @@ ul, li {
   color: #444;
   width: 90px;
   position: relative;
-  top: 70px;
-  left: 5px;
+  top: 0;
+  right: 35px;
   cursor: pointer;
 }
 
@@ -198,7 +198,8 @@ ul, li {
   background-color: #5A565D;
 }
 .sliders__category {
-  height: 150px;
+  border: 1px red solid;
+  height: 300px;
   width: 80%;
   margin: 0 auto;
   padding-bottom: 10px;
@@ -211,18 +212,35 @@ ul, li {
 }
 .sliders__category__films {
   border: 2px solid green;
-  display: flex;
+  display: inline-block;
+  height: 250px;
+  width: 1000px;
 }
 
-.one_film {
-  width: 110px;
+.slide_left, .slide_right {
+  width: 50px;
+  height: 250px;
+  position: relative;
+  top: 70px;
+  font-size: 30px;
 }
+
+.slide_left {
+  float: left;
+  left: 10px;
+}
+
+.slide_right {
+  right: 10px;
+}
+
 .one_film__img {
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #5A565D;
   display: inline-block;
-  height: 150px;
+  height: 250px;
+  width: 200px;
 }
 .one_film__title {
   position: relative;
@@ -253,11 +271,11 @@ ul, li {
 }
 .modal__col_1, .modal__col_2 {
   float: left;
-  height: 500px;
   margin-right: 10px;
 }
-.modal__col_2, .modal__col_3 {
-  height: 400px;
+.modal__columns {
+  min-height: 300px;
+  max-height: 400px;
 }
 .modal__col_4 {
   width: 90%;
