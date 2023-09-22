@@ -1,8 +1,8 @@
 
 
 // export 
-async function retrieveFilmsByCategories(category_name) { 
-    const response_categories = await fetch("http://localhost:8000/api/v1/titles/?genre="+category_name, {}) 
+async function retrieveFilmsByCategories(category) { 
+    const response_categories = await fetch(`http://localhost:8000/api/v1/titles/?genre_contains=${category}`, {}) 
     const data_categories = await response_categories.json(); 
     return data_categories; 
 } 
@@ -19,8 +19,8 @@ async function retrieveOneFilm(id) {
     return data_one_film; 
 } 
 // export 
-async function retrieveGenrePage2(category_name) { 
-    const response_genre_p2 = await fetch(`http://localhost:8000/api/v1/titles?genre=&genre_contains=${category_name}&page=2`, {}) 
+async function retrieveCategoryPage2(category_name) { 
+    const response_genre_p2 = await fetch(`http://localhost:8000/api/v1/titles?genre_contains=${category_name}&page=2`, {}) 
     const data_genre_p2 = await response_genre_p2.json(); 
     return data_genre_p2; 
 } 
@@ -32,4 +32,4 @@ async function retrieveBestsPage2() { // category_name
 } 
 
 
-export {retrieveApiBestFilm, retrieveBestsPage2, retrieveFilmsByCategories, retrieveGenrePage2, retrieveOneFilm};  
+export {retrieveApiBestFilm, retrieveBestsPage2, retrieveFilmsByCategories, retrieveCategoryPage2, retrieveOneFilm};  

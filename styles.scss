@@ -3,7 +3,7 @@
 $link_color: #ddd; 
 $title_color: #eee; 
 $light_color: #eee; 
-$background_color: #5A565D; 
+$loc_background_color: #5A565D; 
 
 $light_grey: #bbb;
 $dark_grey: #444; 
@@ -29,7 +29,7 @@ $button_shaddow: 0px 0px 2px $light_color;
 @mixin background_image() { 
     background-repeat: no-repeat; 
     background-size: contain; 
-    background-color: $background_color; 
+    background-color: $loc_background_color; 
 } 
 
 @mixin button($button_back_color) { 
@@ -49,7 +49,7 @@ html {
 }
 body { 
     margin:0; 
-    background-color: $background_color; 
+    background-color: $loc_background_color; 
     color: $light_color; 
 } 
 ul, li { 
@@ -96,34 +96,34 @@ ul, li {
         text-align: center; 
     } 
 } 
-.navbar { 
-    margin-right: 100px;
-    height: 20px; 
-    &:hover { 
-        // text-decoration: underline; 
-        background-color: scale-color($dark_grey, $lightness: +40%); 
-        color: darken($dark_grey, 30%); 
-    }
+.header__categories li { 
+    display: none; 
 } 
-.navbar:hover .one_category a { 
+.header__categories:hover .one_category { 
+    // text-decoration: underline; 
     display: block; 
-    text-decoration: none;
+    // background-color: scale-color($dark_grey, $lightness: +40%); 
+    // color: darken($dark_grey, 30%); 
 } 
+// .navbar:hover .one_category a { 
+//     display: block; 
+//     text-decoration: none;
+// } 
 .one_category { 
     position: relative; 
     top: 18px; 
     width: 140px;
     left: -20px; 
     & a { 
-        display: none; 
-        background-color: $background_color; 
+        // display: none; 
+        background-color: $loc_background_color; 
         color: $light_grey; 
         line-height: 1.5rem; 
         background-color: $dark_grey; 
         padding: 5px; 
     } 
     &:hover { 
-        display: block; 
+        // display: block; 
         color: darken($dark_grey, 30%); 
     } 
     &:hover a { 
@@ -133,6 +133,7 @@ ul, li {
     }
 }
 
+// TODO 
 @media screen and (max-width: 499px) { 
     .header { 
         min-height: 150px; 
@@ -151,11 +152,14 @@ ul, li {
     }
 } 
 
+// #container { 
+//     background-color: #5A565D; 
+// } 
 
 /* best */ 
 .best { 
     border: 2px red solid; 
-    background-color: $background_color; 
+    background-color: $loc_background_color; 
     height: 500px; 
     width: 80%; 
     margin: 10px auto; 
@@ -187,6 +191,7 @@ ul, li {
     } 
 } 
 
+// TODO 
 @media screen and (max-width: 499px) { 
     .best__intro { 
         float: none; 
@@ -220,8 +225,8 @@ ul, li {
         color: $dark_grey; 
         width: 90px; 
         position: relative; 
-        top: 0; 
-        right: 35px; 
+        top: 170px; 
+        left: 35px; 
         cursor: pointer; 
     } 
 } 
@@ -230,7 +235,7 @@ ul, li {
 
 /* SLIDERS */ 
 .sliders { 
-    background-color: $background_color; 
+    background-color: $loc_background_color; 
     
     &__category { 
         border: 1px red solid; 
@@ -248,11 +253,21 @@ ul, li {
         } 
         &__films { 
             border: 2px solid green; 
-            display: inline-block; 
-            height: 250px; 
-            width: 1000px; 
+            // display: inline-block; 
+            // height: 250px; 
+            // width: 1000px; 
+            display: inline-block;
+            height: 250px;
+            width: 1000px;
+            display: flex;
+            overflow: hidden;
         } 
     } 
+} 
+
+.carousel-control-next, .carousel-control-prev { 
+    width: 5%; 
+    background-color: rgba(255, 255, 255, 0.2); 
 } 
 
 .slide_left, .slide_right { 
@@ -273,6 +288,7 @@ ul, li {
 } 
 
 .one_film { 
+    display: inline-block; 
     &__img {
         @include background_image; 
         display: inline-block; 
@@ -299,7 +315,7 @@ ul, li {
     top: 50px; 
     left: 50px; 
     z-index: 1; 
-    background-color: rgba(lighten($background_color, 10%), .9); 
+    background-color: rgba(lighten($loc_background_color, 10%), .9); 
     width: 80%; 
     min-height: 400px; 
     max-height: 600px; 
