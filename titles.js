@@ -1,9 +1,17 @@
 
-import { retrieveApiBestFilm } from "./requests.js"; 
-import { retrieveBestPage2 } from "./requests.js"; 
-import { retrieveFilmsByCategories } from "./requests.js"; 
-import { retrieveGenrePage2 } from "./requests.js"; 
+// All the films by categories 
+import { retrieveAllFilms } from "./requests.js"; 
+// // The best films category page 1 
+// import { retrieveApiBestFilm } from "./requests.js"; 
+// The best films category page 2 
+import { retrieveBestsPage2 } from "./requests.js"; 
+// // The films by categories page 1 
+// import { retrieveFilmsByCategories } from "./requests.js"; 
+// The films by categories page 2 
+import { retrieveCategoryPage2 } from "./requests.js"; 
+// 1 film 
 import { retrieveOneFilm } from "./requests.js"; 
+
 
 // one_modal 
 let one_modal = document.createElement('div') 
@@ -13,28 +21,103 @@ one_modal.className = `modal display_none`
 // main 
 const main = async(category_name, category_id) => { 
 
-    let apiFilms, apiSuite; 
-    if(category_name=='best_films') { 
-        apiFilms = await retrieveApiBestFilm(); 
-        apiSuite = await retrieveBestPage2(); // category_name 
-    } else { 
-        apiFilms = await retrieveFilmsByCategories(category_name); 
-        apiSuite = await retrieveGenrePage2(category_name); 
+    async function get_films(category_name) { 
+        let data_categories; 
+        if(category_name == 'best') { 
+            data_categories = await retrieveAllFilms('best'); 
+            // console.log('best T28 : '+data_categories.results[0].title) 
+        } else { 
+            data_categories = await retrieveAllFilms(category_name); 
+            // console.log('romance T31 : '+data_categories.results[0].title) 
+        } 
+        return data_categories.results; 
     } 
 
-    const bestFilm = apiFilms.results[0]; 
-    const films = apiFilms.results; 
-    const films_suite = apiSuite.results; 
-    console.log('bestFilm : '+bestFilm.id); 
+    // console.log(await get_films('romance'));  // ok 
+    // const bestFilms = await get_films('best'); 
+    // const theBest = bestFilms.shift(); 
+    // const newRomance = await get_films('romance'); 
+    // const newDrama = await get_films('drama'); 
+    // const newanimation = await get_films('animation'); 
+    // console.log('theBest T42 : '+theBest.title);  // ok 
+    // console.log('length bestFilms T43 : '+bestFilms.length); 
+    // console.log('bestFilms T44 : '+theBest[0].title);  // ok 
+    // console.log('romance T45 : '+newRomance[0].title);  // ok 
+    // console.log('drama T46 : '+newDrama[0].title);  // ok 
+    // console.log('animation T47 : '+newanimation[0].title);  // ok 
+
+    const categories_list = ['best', 'romance', 'drama', 'animation']; 
+    const cat_films = []; 
+    for (let cat_name of categories_list) {
+        cat_name = await get_films(cat_name); 
+        cat_films.push(cat_name); 
+    } 
+    console.log(cat_films);  // ok 
+
+    const theBest = cat_films[0][0]; 
+    console.log('theBest T58 : '+theBest.title); // ok 
+
+    const bestFilms = cat_films[0]; 
+    bestFilms.shift(); 
+    // for(let best of bestFilms) { 
+    //     console.log(best.title); 
+    // } 
+
+    const romanceFilms = cat_films[1]; 
+    const dramaFilms = cat_films[2]; 
+    const animationFilms = cat_films[3]; 
+
+    /* 
+    const apiBestFilms = await retrieveApiBestFilm(); 
+    const apiBestsSuite = await retrieveBestsPage2(); 
+
+    const apiFilms = await retrieveFilmsByCategories(category_name); 
+    const apiSuite = await retrieveCategoryPage2(category_name); 
+    */ 
+
+    // const theBest = get_films('best')[0]; // data_categories.results[0]; 
+    // console.log('theBest : '+theBest.id+' '+theBest.title); 
+
+    // const bestFilms = get_films('best'); 
+    // bestFilms.shift(); 
+    // console.log(bestFilms[0].title); 
+
+    // // const theBest = apiBestFilms.results[0]; 
+    // // const bestFilms = apiBestFilms.results; // retirer le 0 pour les afficher 
+    // const bestFilmsSuite = apiBestsSuite.results; 
+    // const films = apiFilms.results; 
+    // const films_suite = apiSuite.results; 
+    // // console.log('theBest : '+theBest.id+' '+theBest.title); 
+    // console.log(films); 
+    // console.log(films_suite); 
+    // console.log('films_suite.length T34 : '+films_suite.length); 
     
 
-    if(films.length<=5) { 
-        // console.log(films.length); 
-        for(let i=0; i<2; i++) { 
-            films.push(films_suite[i]); 
-        } 
-        // console.log(films.length); 
-    } 
+    // let filmsTotalLen = 7; 
+
+    // let bestsCurrentLen = bestFilms.length 
+    // bestFilms.shift() 
+    // let filmsCurrentLen = films.length 
+    // // if(bestsCurrentLen<=filmsTotalLen) { 
+    // console.log('bestFilms.length : '+bestFilms.length); 
+    // for(let i=0; i<filmsTotalLen-bestsCurrentLen; i++) { 
+    //     console.log(`i T53 : ${i}`) 
+    //     bestFilms.push(bestFilmsSuite.shift()); 
+    //     // bestFilms.push(bestFilmsSuite[i]); 
+    // } 
+    // console.log('bestFilms.length : '+bestFilms.length); 
+    // console.log('bestFilms : '+bestFilms); 
+    // // const lastBestFilm = films.length-1; 
+    // // console.log('films[-1].title : '+lastBestFilm.title); 
+    // // } 
+    // // if(filmsCurrentLen<=filmsTotalLen) { 
+    // console.log(films.length); 
+    // for(let i=0; i<filmsTotalLen-filmsCurrentLen; i++) { 
+    //     console.log(`i T62 : ${i}`) 
+    //     films.push(films_suite.shift()); 
+    //     // films.push(films_suite[i]); 
+    // } 
+    // console.log('films.length : '+films.length); 
 
 
     const best_section = document.getElementsByClassName('best')[0]; 
@@ -57,6 +140,7 @@ const main = async(category_name, category_id) => {
         get_details(element.id); 
     } 
 
+    // Modal content 
     async function get_details(id) { 
         console.log(`id L65 : ${id}`) 
         const details = await retrieveOneFilm(id) 
@@ -171,8 +255,14 @@ const main = async(category_name, category_id) => {
     } 
     
     // console.log('max : '+Math.max(films.imdb_score)+' '+films.title); 
-    best_intro_title_h3.innerHTML = films[0].title+' '+films[0].imdb_score; 
+    best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score+' '+theBest.id; 
+    // best_intro_title_h3.innerHTML = bestFilm.title+' '+bestFilm.imdb_score+' '+bestFilm.id; 
+    // best_intro_title_h3.innerHTML = films[0].title+' '+films[0].imdb_score; 
+    best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${theBest.image_url}>`; 
+    // best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${bestFilm.image_url}>`; 
+    best_section.appendChild(best_img); 
     
+    console.log('films[0].title T220 : '+films[0].title); 
     for (let element of films) { 
 
         // console.log(element); 

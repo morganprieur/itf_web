@@ -1,9 +1,15 @@
 
+// The best films category page 1 
 import { retrieveApiBestFilm } from "./requests.js"; 
-import { retrieveBestsPage2 } from "./requests.js"; 
+// The best films category page 2 
+import { retrieveBestPage2 } from "./requests.js"; 
+// The films by categories page 1 
 import { retrieveFilmsByCategories } from "./requests.js"; 
-import { retrieveCategoryPage2 } from "./requests.js"; 
+// The films by categories page 2 
+import { retrieveGenrePage2 } from "./requests.js"; 
+// 1 film 
 import { retrieveOneFilm } from "./requests.js"; 
+
 
 
 // orchestrateur : dagster 
@@ -54,7 +60,6 @@ const create_modal = async (id) => {
         modal_col = document.createElement('div'); 
         modal_col.classList.add('modal__col_' + i); 
         div_list.push(modal_col); 
-        // console.log(div_list); 
     } 
     
     const modal_cols = document.createElement('div'); 
@@ -233,10 +238,10 @@ const main = async(category_name, category_id) => {
         apiSuite = await retrieveCategoryPage2(category_name); 
     } 
 
-    const bestFilm = apiFilms.results[0]; 
+    // const bestFilm = apiFilms.results[0]; 
     const films = apiFilms.results; 
     const films_suite = apiSuite.results; 
-    console.log('bestFilm : '+bestFilm.id); 
+    // console.log('bestFilm : '+bestFilm.id); 
     
 
     if(films.length<=5) { 
@@ -250,6 +255,7 @@ const main = async(category_name, category_id) => {
     // the best 
     const theBest = apiFilms.results[0]; 
     const details = await retrieveOneFilm(theBest.id); 
+    console.log(theBest); 
     
     const best_section = document.getElementsByClassName('best')[0]; 
     const best_intro_div = document.getElementsByClassName('best__intro')[0]; 
@@ -302,14 +308,17 @@ const main = async(category_name, category_id) => {
     for (let element of films) { 
         
         const carousel_inner = data_one_category.getElementsByClassName('carousel-inner')[0]; 
-        console.log(carousel_inner.textContent); 
+        // console.log(carousel_inner.textContent); 
 
         let one_film_div; 
         one_film_div = create_node('div', 'one_film', carousel_inner); 
-        // one_film_div = create_node('div', 'one_film', data_one_category); 
+        one_film_div.classList.add('carousel-item'); 
+        
     
         const one_film_div_a = create_node('a', 'one_film__img', one_film_div); 
-        one_film_div_a.classList.add(`one_film_${element.id}`);  // element is not defined // 
+        one_film_div_a.classList.add(`one_film_${element.id}`); 
+        one_film_div_a.classList.add(`d-block`); 
+        one_film_div_a.classList.add(`w-100`); 
         one_film_div_a.style.backgroundImage = `url(${element.image_url})`; 
 
         const one_film_div_a_h5 = create_node('h5', 'one_film__title', one_film_div_a); 
@@ -410,8 +419,6 @@ await main('animation', 'slider_cat3');
     //     // async function get_details(id) { 
     //     //     const details = await retrieveOneFilm(id) 
     //     //     // console.log(details) 
-
-    //     //     details here ? *** 
 
     //     //     return details 
     //     // } 
