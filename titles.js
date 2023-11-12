@@ -13,233 +13,78 @@ import { retrieveCategoriesSuite } from "./requests.js";
 // 1 film 
 import { retrieveOneFilm } from "./requests.js"; 
 
-const liste = ['un', 'deux', 'trois', 'quarte']; 
-for(let li of liste) { 
-    console.log(li); 
-} 
-
-// one_modal 
-let one_modal = document.createElement('div') 
-one_modal.className = `modal display_none` 
 
 
 // main 
 // const main = async(category_name, category_id) => { 
 const main = async(categories_names, category_id) => { 
 
-    // console.log(categories_names); 
-    // let data_categories; 
-    // async function get_films(category_name) { 
+    let theBest; 
     async function get_films(categories_names) { 
-        let api_categories = []; 
-        // for(let cat_name of categories_names) { 
+
+        let troncated_categories = []; 
+        // let best_film; 
         for(let cat_name of categories_names) { 
-            // console.log(cat_name); 
             const api_category = await retrieveAllFilms(cat_name); 
             const api_category_suite = await retrieveCategoriesSuite(cat_name); 
-            // console.log(api_category); 
-            api_categories.push(api_category); 
-            api_categories.push(api_category_suite); 
-            // console.log(api_categories); 
+            const one_category = api_category.results; 
+            for(let cat_suite of api_category_suite.results) { 
+                one_category.push(cat_suite); 
+            } 
+            // Récupérer tehBest 
+            if(cat_name=='best') { 
+                theBest = one_category.shift(); 
+                // console.log(one_category);  // ok 
+            } 
+            console.log(theBest); // ok 
+            troncated_categories.push(one_category.slice(0, 7)); 
+            // console.log(troncated_categories); // 4 listes de 7 objets
         } 
-        return api_categories; 
+        return troncated_categories; 
     } 
     const cats = await get_films(categories_names); 
-    // const cats = await get_films(['best', 'romance', 'drama']); 
-    console.log(cats); 
-
-    // const bestsFilms = await get_films('best'); 
-    // console.log('bestsFilms T36 : '+bestsFilms); 
-    // console.log('bestsFilms[0] T37 : '+bestsFilms[0]); 
-    // console.log('bestsFilms[0].title T38 : '+bestsFilms[0].title); 
-
-    // async function get_films_suite(categories_names) { 
-    //     // console.log('cat_films T75 : '+cat_films[0]); // ok 
-    //     // let data_cats_suite = []; 
-    //     const CAT_TOTAL_LEN = 7; 
-    //     let catCurrLen; 
-    //     for(let cat_name of categories_names) { 
-    //         // const cat_films_suite = await retrieveCategoriesSuite(category_name); 
-    //         const cat_films_suite = await retrieveCategoriesSuite(cat_name); 
-    //         console.log(cat_name); // 
-    //         console.log(cat_films_suite); // 
-    //         console.log(cat_films_suite.results); // 
-    //         // console.log('cat_films_suite.results[0].title T51 : '+cat_films_suite.results[0].title); // ok 
-    //         // console.log('cat_films_suite.results.length T52 : '+cat_films_suite.results.length); // ok 
-    //         // for(let cat of cat_films) { 
-    //         for(let cat of all_categories) { 
-    //             console.log(cat); 
-    //             catCurrLen = cat.length; 
-    //             // console.log('catCurrLen T54 : '+catCurrLen); 
-    //             if (catCurrLen < CAT_TOTAL_LEN) { 
-    //                 for(let i=0; i<CAT_TOTAL_LEN-catCurrLen; i++) { 
-    //                     all_categories.push(cat_films_suite.results[i]); 
-    //                     console.log('all_categories T68 : '+all_categories); 
-    //                     // cat_films.push(cat_films_suite.results[i]); 
-    //                     // data_cats_suite.push(cat_films_suite.results[i]); 
-    //                     // console.log('data_cats_suite T89 : '+data_cats_suite); 
-    //                 } 
-    //             }
-    //         } 
-    //     } 
-    //     return all_categories; 
-    // } 
-    
-    // const all_categories = []; 
-    // for(let cat of categories_names) { 
-    //     all_categories.push(await get_films(cat)); 
-    //     all_categories.push(await get_films_suite(cat)); 
-    // } 
-    // console.log(all_categories); 
-    // console.log(all_categories.length); 
+    // console.log(cats);  // 4 listes de 7 objets ok 
 
 
-
-    // for(let cat_films of all_categories) { 
-    //     console.log(cat_films); 
-    //     console.log(cat_films.length); 
-    // } 
-
-    // console.log(await get_films('romance'));  // ok 
-    // const bestFilms = await get_films('best'); 
-    // const theBest = bestFilms.shift(); 
-    // const newRomance = await get_films('romance'); 
-    // const newDrama = await get_films('drama'); 
-    // const newanimation = await get_films('animation'); 
-    // console.log('theBest T42 : '+theBest.title);  // ok 
-    // console.log('length bestFilms T43 : '+bestFilms.length); 
-    // console.log('bestFilms T44 : '+theBest[0].title);  // ok 
-    // console.log('romance T45 : '+newRomance[0].title);  // ok 
-    // console.log('drama T46 : '+newDrama[0].title);  // ok 
-    // console.log('animation T47 : '+newanimation[0].title);  // ok 
-
-    // const categories_list = ['best', 'romance', 'drama', 'animation']; 
-    // const cat_films = []; 
-    // for (let cat_name of categories_list) {
-    //     cat_name = await get_films(cat_name); 
-    //     cat_films.push(cat_name); 
-    // } 
-    // console.log('cat_films T65: '+cat_films); // ok 
-    // console.log('cat_films T57 : '+cat_films[1][0].title);  // ok 
-
-    // const cat_films = await get_films(category_name); 
-    // console.log('cat_films[0].title T60 : '+cat_films[0].title);  // ok 
-    // console.log('cat_films.length T61 : '+cat_films.length);  // ok 
-    // // console.log('T66 : '+data_categories); // no 
-
-    // const theBest = cat_films[0][0]; 
-    // // console.log('theBest T58 : '+theBest.title); // ok 
-
-    // const bestFilms = cat_films[0]; 
-    // bestFilms.shift(); 
-    
-    /* 
-    // async function get_films_suite(category_name) { 
-    //     // console.log('cat_films T75 : '+cat_films[0]); // ok 
-    //     // let data_cats_suite = []; 
-    //     const catTotalLen = 7; 
-    //     let catCurrLen; 
-    //     const cat_films_suite = await retrieveCategoriesSuite(category_name); 
-    //     console.log('cat_films_suite.results[0].title T81 : '+cat_films_suite.results[0].title); // ok 
-    //     for(let cat of cat_films) { 
-    //         catCurrLen = cat.length; 
-    //         console.log('catCurrLen T82 : '+catCurrLen); 
-    //         if (catCurrLen < catTotalLen) { 
-    //             for(let i=0; i<catTotalLen-catCurrLen; i++) { 
-    //                 cat_films.push(cat_films_suite.results[i]); 
-    //                 // data_cats_suite.push(cat_films_suite.results[i]); 
-    //                 // console.log('data_cats_suite T89 : '+data_cats_suite); 
-    //             } 
-    //         }
-    //     } 
-    //     console.log('cat_films T93 : '+cat_films); 
-    //     return cat_films; 
-    //     // return data_cats_suite; 
-    // } 
-    // let films_bests = await get_films_suite('best'); 
-    // console.log('films_bests T89 : '+films_bests); 
-    // let films_romance = await get_films_suite('romance'); 
-    // console.log('films_romance T91 : '+films_romance); 
-    // let films_drama = await get_films_suite('drama'); 
-    // console.log('films_drama T93 : '+films_drama); 
-    // let films_animation = await get_films_suite('animation'); 
-    // console.log('films_animation T95 : '+films_animation); 
-    // // console.log('get_films_suite("best")  T93 : '+await get_films_suite('best')); 
-    // // get_films_suite('best'); 
-    // // get_films_suite('romance'); 
-    // // get_films_suite('drama'); 
-    // // get_films_suite('animation'); 
-
-    // // // console.log(bestFilms); 
-    // // const romanceFilms = cat_films[1]; 
-    // // // console.log(romanceFilms); 
-    // // const dramaFilms = cat_films[2]; 
-    // // // console.log(dramaFilms); 
-    // // const animationFilms = cat_films[3]; 
-    // // // console.log(animationFilms); 
-
-    // // get_films_suite('romance', data_categories); 
+    /* Tronquer une liste : 
+    python : 
+    firsts = selected[::2] 1 sur 2 à partir de 0 
+    seconds = selected[1::2] 1 sur 2 à partir de 1 
+    args : start:stop:step 
+    JS : 
+    animals.slice(2); 
+    arg : start 
+    animals.slice(2, 4); 
+    args : stop, nombre, stop 
+    animals.slice(-2); 
+    args : start en partant de la fin 
     */ 
 
-    // /* ==== pages 2 ==== */ 
-    // // const bestFilmsSuite = apiBestsSuite.results; 
-    // // const films = apiFilms.results; 
-    // // const films_suite = apiSuite.results; 
-    // // // console.log('theBest : '+theBest.id+' '+theBest.title); 
-    // // console.log(films); 
-    // // console.log(films_suite); 
-    // // console.log('films_suite.length T34 : '+films_suite.length); 
-
-    // /* ==== Add films from page 2 ==== */ 
-    // // for(let cat of cat_films) { 
-    // //     // let catTotalLen = 7; 
-    // //     let catCurrentLen = cat_films.length; 
-    // //     console.log('cat_films.length : '+cat_films.length); 
-        
-    // //     for(let i=0; i<catTotalLen-catCurrentLen; i++) { 
-    // //         console.log(`i T86 : ${i}`) 
-    // //         // cat.push(bestFilmsSuite.shift());  // page 2 *** 
-    // //         // bestFilms.push(bestFilmsSuite[i]); 
-    // //     } 
-    // // } 
-
-    // // let bestsCurrentLen = bestFilms.length 
-    // // bestFilms.shift() 
-    // // if(bestsCurrentLen<=filmsTotalLen) { 
-
-    // // console.log('bestFilms.length : '+bestFilms.length); 
-    // // console.log('bestFilms : '+bestFilms); 
-    // // // const lastBestFilm = films.length-1; 
-    // // // console.log('films[-1].title : '+lastBestFilm.title); 
-    // // // } 
-    // // // if(filmsCurrentLen<=filmsTotalLen) { 
-    // // console.log(films.length); 
-    // // for(let i=0; i<filmsTotalLen-filmsCurrentLen; i++) { 
-    // //     console.log(`i T62 : ${i}`) 
-    // //     films.push(films_suite.shift()); 
-    // //     // films.push(films_suite[i]); 
-    // // } 
-    // // console.log('films.length : '+films.length); 
-
-
-
+    // Afficher les données des films : 
     /* 
-    const apiBestFilms = await retrieveApiBestFilm(); 
-    const apiBestsSuite = await retrieveBestsPage2(); 
+    id 
+    title 
+    votes 
+    image_url 
+    details.long_description 
+    genres (liste) 
+    details.date_published 
+    details.rated 
+    details.imdb_score 
+    element.directors (liste) 
+    element.actors (liste) 
+    details.duration 
+    details.countries (liste) 
+    details.worldwide_gross_income 
 
-    const apiFilms = await retrieveFilmsByCategories(category_name); 
-    const apiSuite = await retrieveCategoryPage2(category_name); 
+
     */ 
-
-    // const theBest = get_films('best')[0]; // data_categories.results[0]; 
-    // console.log('theBest : '+theBest.id+' '+theBest.title); 
-
-    // const bestFilms = get_films('best'); 
-    // bestFilms.shift(); 
-    // console.log(bestFilms[0].title); 
+    
 
     
-    
+    // one_modal 
+    let one_modal = document.createElement('div') 
+    one_modal.className = `modal display_none` 
 
 
 
@@ -379,8 +224,6 @@ const main = async(categories_names, category_id) => {
     
     // console.log('max : '+Math.max(films.imdb_score)+' '+films.title); 
     best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score+' '+theBest.id; 
-    // best_intro_title_h3.innerHTML = bestFilm.title+' '+bestFilm.imdb_score+' '+bestFilm.id; 
-    // best_intro_title_h3.innerHTML = films[0].title+' '+films[0].imdb_score; 
     best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${theBest.image_url}>`; 
     // best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${bestFilm.image_url}>`; 
     best_section.appendChild(best_img); 
@@ -429,45 +272,7 @@ const main = async(categories_names, category_id) => {
         } 
         one_film_div_a_button.innerHTML = 'Détails'; 
 
-        
 
-        // /* détails modal --> to integrate */ 
-
-        // // let modal_imdb_score = document.createElement('p') 
-        // // modal_imdb_score.className = 'modal__imdb_score' 
-        // // modal_imdb_score.innerHTML = element.imdb_score 
-        // // one_modal.appendChild(modal_imdb_score) 
-
-        // // let modal_director = document.createElement('p') 
-        // // modal_director.className = 'modal__director' 
-        // // modal_director.innerHTML = 'Directors : <br> ' 
-        // // directors = element.directors 
-        // // // console.log('genres 70 : '+genres) 
-        // // for(let director of directors) { 
-        // //     // console.log('genre 72 : '+genre) 
-        // //     modal_director.innerHTML += `${director}<br>` 
-        // // } 
-        // // one_modal.appendChild(modal_director) 
-        
-        // let modal_casting_list = document.createElement('p') 
-        // modal_casting_list.className = 'modal__casting_list' 
-        // one_modal.appendChild(modal_casting_list) 
-        // let modal_duration = document.createElement('p') 
-        // modal_duration.className = 'modal__duration' 
-        // one_modal.appendChild(modal_duration) 
-        // let modal_country = document.createElement('p') 
-        // modal_country.className = 'modal__country' 
-        // one_modal.appendChild(modal_country) 
-        // let modal_entries = document.createElement('p') 
-        // modal_entries.className = 'modal__entries' 
-        // one_modal.appendChild(modal_entries) 
-        // let modal_abstract = document.createElement('p') 
-        // modal_abstract.className = 'modal__abstract' 
-        // one_modal.appendChild(modal_abstract) 
-        // let clear_div = document.createElement('div') 
-        // clear_div.className = 'clear' 
-        // one_modal.appendChild(clear_div) 
-        
         
         one_film_div_a.appendChild(one_film_div_a_h5) 
         // one_film_div_a.appendChild(one_film_div_a_genre) 
