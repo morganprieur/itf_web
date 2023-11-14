@@ -33,19 +33,29 @@ async function retrieveOneFilm(id) {
     const data_one_film = await response_one_film.json(); 
     return data_one_film; 
 } 
-// export 
-async function retrieveCategoryPage2(category_name) { 
-    const response_genre_p2 = await fetch(`http://localhost:8000/api/v1/titles?genre_contains=${category_name}&page=2`, {}) 
-    const data_genre_p2 = await response_genre_p2.json(); 
-    return data_genre_p2; 
+async function retrieveCategoriesSuite(category_name) { 
+    let response_cat_suite; 
+    if(category_name == 'best') { 
+        response_cat_suite = await fetch(`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2`, {}); 
+    } else { 
+        response_cat_suite = await fetch(`http://localhost:8000/api/v1/titles?genre_contains=${category_name}&page=2`, {}); 
+    } 
+    const data_cat_suite = await response_cat_suite.json(); 
+    return data_cat_suite; 
 } 
-// export 
-async function retrieveBestsPage2() { // category_name 
-    const response_best_p2 = await fetch(`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2`, {}) 
-    const data_best_p2 = await response_best_p2.json(); 
-    return data_best_p2; 
-} 
+// // export 
+// async function retrieveCategoryPage2(category_name) { 
+//     const response_genre_p2 = await fetch(`http://localhost:8000/api/v1/titles?genre_contains=${category_name}&page=2`, {}) 
+//     const data_genre_p2 = await response_genre_p2.json(); 
+//     return data_genre_p2; 
+// } 
+// // export 
+// async function retrieveBestsPage2() { // category_name 
+//     const response_best_p2 = await fetch(`http://localhost:8000/api/v1/titles?sort_by=-imdb_score&page=2`, {}) 
+//     const data_best_p2 = await response_best_p2.json(); 
+//     return data_best_p2; 
+// } 
 
 
 // export {retrieveAllFilms, retrieveApiBestFilm, retrieveBestsPage2, retrieveFilmsByCategories, retrieveCategoryPage2, retrieveOneFilm};  
-export {retrieveAllFilms, retrieveBestsPage2, retrieveCategoryPage2, retrieveOneFilm};  
+export {retrieveAllFilms, retrieveCategoriesSuite, retrieveOneFilm};  

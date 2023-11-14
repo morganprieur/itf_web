@@ -206,7 +206,7 @@ ul, li {
   border: 2px solid green;
   display: inline-block;
   height: 250px;
-  width: 1000px;
+  width: 930px;
   display: flex;
   overflow: hidden;
 }
@@ -224,19 +224,18 @@ ul, li {
   font-size: 30px;
 }
 
-.slide_left {
+.carousel-inner {
+  display: flex;
+}
+
+.one_carousel_item {
+  position: relative;
   float: left;
-  left: 10px;
+  width: 200px;
+  margin-right: -10PX;
 }
 
-.slide_right {
-  right: 10px;
-}
-
-.one_film {
-  display: inline-block;
-}
-.one_film__img {
+.one_film_img {
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #5A565D;
@@ -244,7 +243,8 @@ ul, li {
   height: 250px;
   width: 200px;
 }
-.one_film__title {
+
+.one_film_title {
   position: relative;
   top: 10px;
   width: 100px;
