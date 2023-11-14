@@ -304,6 +304,7 @@ ul, li {
     // margin-right: -100%;
     // backface-visibility: hidden;
     // @include transition($carousel-transition); 
+    // overflow-x: visible; // marche pas 
 } 
 .one_film_img {
     @include background_image; 

@@ -32,7 +32,7 @@ const main = async(categories_names) => {
     let theBest; 
     async function get_films(categories_names) { 
 
-        let troncated_categories = []; 
+        let truncated_categories = []; 
         // let best_film; 
         for(let cat_name of categories_names) { 
             const api_category = await retrieveAllFilms(cat_name); 
@@ -47,18 +47,18 @@ const main = async(categories_names) => {
                 // console.log(one_category);  // ok 
             } 
             // console.log(theBest); // ok 
-            troncated_categories.push(one_category.slice(0, 7)); 
-            // console.log(troncated_categories); // 4 listes de 7 objets
+            truncated_categories.push(one_category.slice(0, 7)); 
+            // console.log(truncated_categories); // 4 listes de 7 objets
         } 
-        return troncated_categories; 
+        return truncated_categories; 
     } 
     const cats = await get_films(categories_names); 
-    console.log(cats);  // 4 listes de 7 objets ok 
+    // console.log(cats);  // 4 listes de 7 objets ok 
 
     // const bestsFilms = cats[0]; 
     // console.log(bestsFilms); 
     // cats.shift(); 
-    console.log(cats); 
+    // console.log(cats); 
 
 
     /* Tronquer une liste : 
@@ -134,7 +134,7 @@ const main = async(categories_names) => {
     for(let cat of cats) { 
         
         let cat_name = categories_names[cats.indexOf(cat)]; 
-        console.log(cat_name); 
+        // console.log(cat_name); 
         // Div class "sliders__category" 
         let one_category_div = document.createElement('div'); 
         one_category_div.className = `sliders__category`; 
@@ -155,16 +155,6 @@ const main = async(categories_names) => {
         one_category_slider.classList.add('slide'); 
 
         
-        function onClicNext() { 
-            one_category_slider.innerHTML += ' test'; 
-            // if('active' in cats[0].classList) { 
-            //     console.log(cats[0].title); 
-            //     // one_category_carousel_inner.setAttribute('style', 'slide_right'); 
-            //     // one_category_carousel_inner.style('animation', 'slide_right'); 
-            //     one_film_div.innerHTML = 'test'; 
-            // } 
-        } 
-
         // Buttons prev next 
         let button_prev; 
         button_prev = create_node('button', 'carousel-control-prev', one_category_slider); 
@@ -179,8 +169,18 @@ const main = async(categories_names) => {
         span_button_prev_text.innerHTML = 'Previous'; 
         let span_button_next; 
         span_button_next = create_node('span', 'carousel-control-next-icon', button_next); 
-        // span_button_next.setAttribute('onclick', onClicNext()); 
-        span_button_next.addEventListener('click', onClicNext()); 
+        // span_button_next.setAttribute('click', onClicNext()); 
+        // span_button_next.addEventListener('click', onClicNext(), false); 
+        // span_button_next.addEventListener('click', 
+        //     () => { 
+        //         one_category_carousel_inner.innerHTML += ' test'; 
+        //         for(let film of cat) { 
+        //             display_films('right'); 
+        //         } 
+        //         // one_category_carousel_inner.style.cssText += 'margin-left: -100px'; 
+        //         // one_category_carousel_inner.style.cssText += 'margin-right: 100px'; 
+        //     }, 
+        //     false); 
         let span_button_next_text; 
         span_button_next_text = create_node('span', 'visually-hidden', button_next); 
         span_button_next_text.innerHTML = 'Next'; 
@@ -219,6 +219,7 @@ const main = async(categories_names) => {
         for(let film of cat) { 
             // console.log(film);               
             console.log(film.id+' '+film.title); 
+            console.log('cat.length : '+cat.length); 
 
             // const test = document.createElement('p'); 
             // test.innerHTML = 'TEST'; 
@@ -228,33 +229,24 @@ const main = async(categories_names) => {
             // test.innerHTML = 'TEST'; 
 
             /* ==== */ 
-            // let one_film_div = document.createElement('div'); 
-            // one_film_div.className = 'carousel-item'; 
+            // let display_films = (position='left') => { 
+
+            //     if(position=='left') { 
+
+            //         console.log('left'); 
+
             // one_film_div.classList.add('active'); 
-            // one_film_div.className = 'one_film' 
             let one_film_div; 
             one_film_div = create_node('div', 'one_carousel_item', one_category_carousel_inner); 
-            // one_film_div.setAttribute('id', `one_film_${film.id}`); // à décommenter 
-            // one_category_carousel_inner.appendChild(one_film_div); 
-            // when document loaded : position 1 
-            // if(cats.indexOf(cat)<6 && cats.indexOf(cat)>0) { 
-            //     one_film_div.classList.add('active'); 
-            // }; 
-            
-            // let one_film_div_a = document.createElement('a') 
-            // one_film_div_a.className = `one_film__img one_film_${element.id}` 
+
             let one_film_div_a; 
-            // one_film_div_a = create_node('a', `one_film__img`, one_film_div); 
             one_film_div_a = create_node('a', `one_film_img`, one_film_div); 
             one_film_div_a.style.backgroundImage = `url(${film.image_url})` 
             
-            // let one_film_div_a_h5 = document.createElement('h5') 
-            // one_film_div_a_h5.className = 'one_film__title' 
             let one_film_div_a_h5; 
-            // one_film_div_a_h5 = create_node('h5', 'one_film__title', one_film_div); 
             one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
             one_film_div_a_h5.innerHTML = film.title; 
-            console.log(film.id+' '+film.image_url+' '+film.title); 
+            // console.log(film.id+' '+film.image_url+' '+film.title); 
             
             // Open modal button 
             let one_film_div_a_button; 
@@ -275,8 +267,59 @@ const main = async(categories_names) => {
                 get_details(id) 
             } 
             one_film_div_a_button.innerHTML = 'Détails'; 
+                // } else { 
+                //     console.log('right'); 
+                //     if(cat.indexOf(film)>=cat[2]) { 
 
+                //         console.log('cat films : '+film.title); 
+                //         // one_film_div.classList.add('active'); 
+                //         let one_film_div; 
+                //         one_film_div = create_node('div', 'one_carousel_item', one_category_carousel_inner); 
 
+                //         let one_film_div_a; 
+                //         one_film_div_a = create_node('a', `one_film_img`, one_film_div); 
+                //         one_film_div_a.style.backgroundImage = `url(${film.image_url})` 
+                        
+                //         let one_film_div_a_h5; 
+                //         one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
+                //         one_film_div_a_h5.innerHTML = film.title; 
+                //         // console.log(film.id+' '+film.image_url+' '+film.title); 
+                        
+                //         // Open modal button 
+                //         let one_film_div_a_button; 
+                //         // one_film_div_a_button = create_node('button', 'one_film__button', one_film_div); 
+                //         one_film_div_a_button = create_node('button', 'one_film_button', one_film_div_a); 
+                //         one_film_div_a_button.classList.add('btns__modal'); 
+
+                //         const id = film.id; 
+
+                //         // details button onclick 
+                //         one_film_div_a_button.onclick = function() { 
+                //             one_modal.classList.remove('display_none')
+                //             one_modal.classList.add('block') 
+                //             one_modal.setAttribute('id', `modal_${id}`) 
+                //             // one_modal.setAttribute('id', `modal_${element.id}`) 
+                            
+                //             /* Get the details data for one film */ 
+                //             get_details(id) 
+                //         } 
+                //         one_film_div_a_button.innerHTML = 'Détails'; 
+                //     } 
+                // }
+            // } 
+
+            // display_films(); 
+
+            // span_button_next.addEventListener('click', 
+            // () => { 
+            //     one_category_carousel_inner.innerHTML += ' test'; 
+            //     for(let film of cat) { 
+            //         // display_films('right'); 
+            //     } 
+            //     // one_category_carousel_inner.style.cssText += 'margin-left: -100px'; 
+            //     // one_category_carousel_inner.style.cssText += 'margin-right: 100px'; 
+            // }, 
+            // false); 
             
             // one_film_div_a.appendChild(one_film_div_a_h5) 
             // // one_film_div_a.appendChild(one_film_div_a_genre) 
@@ -293,14 +336,9 @@ const main = async(categories_names) => {
         // } 
     } 
 
-
-
-
-
-
     // Modal content 
     async function get_details(id) { 
-        console.log(`id T238 : ${id}`) 
+        // console.log(`id T238 : ${id}`) 
         const details = await retrieveOneFilm(id) 
         // console.log(`détails : ${details}`) 
 
@@ -418,7 +456,7 @@ const main = async(categories_names) => {
     best_intro_text_p.innerHTML = best_details.description; 
     let best__img; 
     // best_img = create_node('div', 'best__img', best_section); 
-    console.log('theBest.image_url : '+theBest.image_url); 
+    // console.log('theBest.image_url : '+theBest.image_url); 
     best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
     // best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${bestFilm.image_url}>`; 
     // best_section.appendChild(best_img); 
@@ -426,9 +464,6 @@ const main = async(categories_names) => {
     // console.log('bestsFilms[0].title T231 : '+bestsFilms[0].title); 
     // console.log('cats[0].title T357 : '+cats[0][0].title); 
     // console.log('films[0].title T229 : '+films[0].title); 
-
-
-
 } 
 
 main(['best', 'romance', 'drama', 'animation']); 
