@@ -112,7 +112,8 @@ const main = async(categories_names) => {
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
     const best_intro_subtitle_h4 = document.getElementsByClassName('best__intro__subtitle')[0]; 
     const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
-    const best_img = document.getElementsByClassName('best__img')[0]; 
+    // const best_img = document.getElementsByClassName('best__img')[0]; 
+    const best_img = document.getElementsByClassName('best_img')[0]; 
     
     //  Button "More infos" for the best film 
     const best_more_button = document.getElementsByClassName('btns__more_infos')[0]; 
@@ -152,6 +153,62 @@ const main = async(categories_names) => {
         one_category_slider = create_node('div', 'sliders__category__films', one_category_div); 
         one_category_slider.classList.add('carousel'); 
         one_category_slider.classList.add('slide'); 
+
+        
+        function onClicNext() { 
+            one_category_slider.innerHTML += ' test'; 
+            // if('active' in cats[0].classList) { 
+            //     console.log(cats[0].title); 
+            //     // one_category_carousel_inner.setAttribute('style', 'slide_right'); 
+            //     // one_category_carousel_inner.style('animation', 'slide_right'); 
+            //     one_film_div.innerHTML = 'test'; 
+            // } 
+        } 
+
+        // Buttons prev next 
+        let button_prev; 
+        button_prev = create_node('button', 'carousel-control-prev', one_category_slider); 
+        let button_next; 
+        button_next = create_node('button', 'carousel-control-next', one_category_slider); 
+
+        // Icones buttons prev next 
+        let span_button_prev; 
+        span_button_prev = create_node('span', 'carousel-control-prev-icon', button_prev); 
+        let span_button_prev_text; 
+        span_button_prev_text = create_node('span', 'visually-hidden', button_prev); 
+        span_button_prev_text.innerHTML = 'Previous'; 
+        let span_button_next; 
+        span_button_next = create_node('span', 'carousel-control-next-icon', button_next); 
+        // span_button_next.setAttribute('onclick', onClicNext()); 
+        span_button_next.addEventListener('click', onClicNext()); 
+        let span_button_next_text; 
+        span_button_next_text = create_node('span', 'visually-hidden', button_next); 
+        span_button_next_text.innerHTML = 'Next'; 
+
+        
+        // <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        //     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        //     <span class="visually-hidden">Previous</span>
+        // </button>
+        // <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        //     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        //     <span class="visually-hidden">Next</span>
+        // </button>
+
+        // exemple web 
+        // function onClickPrev(){ 
+        //     if (currentImage == 0){ 
+        //         slideTo(imageNumber - 1); 
+        //     } 
+        //     else{ 
+        //         slideTo(currentImage - 1); 
+        //     } 
+        // } 
+        // exemple codepen css 
+        // .slide-right { 
+        //     animation: 3s slide-right; 
+        // } 
+
 
         // Div class "carousel-inner" 
         let one_category_carousel_inner; 
@@ -359,9 +416,12 @@ const main = async(categories_names) => {
     best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score+' '+theBest.id; 
     const best_details = await get_details(theBest.id); 
     best_intro_text_p.innerHTML = best_details.description; 
-    best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${theBest.image_url}>`; 
+    let best__img; 
+    // best_img = create_node('div', 'best__img', best_section); 
+    console.log('theBest.image_url : '+theBest.image_url); 
+    best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
     // best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${bestFilm.image_url}>`; 
-    best_section.appendChild(best_img); 
+    // best_section.appendChild(best_img); 
     
     // console.log('bestsFilms[0].title T231 : '+bestsFilms[0].title); 
     // console.log('cats[0].title T357 : '+cats[0][0].title); 

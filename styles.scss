@@ -258,7 +258,7 @@ ul, li {
             // width: 1000px; 
             display: inline-block;
             height: 250px;
-            width: 1000px;
+            width: 930px;
             display: flex;
             overflow: hidden;
         } 
@@ -278,14 +278,14 @@ ul, li {
     font-size: 30px; 
 } 
 
-.slide_left { 
-    float: left; 
-    left: 10px;
-} 
+// .slide_left { 
+//     float: left; 
+//     left: 10px;
+// } 
 
-.slide_right { 
-    right: 10px;
-} 
+// .slide_right { 
+//     right: 10px;
+// } 
 
 .carousel-inner { 
     display: flex; 
@@ -298,12 +298,12 @@ ul, li {
     position: relative;
     // display: none;
     float: left;
-    width: 100px;
+    width: 200px;
     // width: 100%;
     margin-right: -10PX;
     // margin-right: -100%;
     // backface-visibility: hidden;
-    // @include transition($carousel-transition);
+    // @include transition($carousel-transition); 
 } 
 .one_film_img {
     @include background_image; 

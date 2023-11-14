@@ -206,7 +206,7 @@ ul, li {
   border: 2px solid green;
   display: inline-block;
   height: 250px;
-  width: 1000px;
+  width: 930px;
   display: flex;
   overflow: hidden;
 }
@@ -224,15 +224,6 @@ ul, li {
   font-size: 30px;
 }
 
-.slide_left {
-  float: left;
-  left: 10px;
-}
-
-.slide_right {
-  right: 10px;
-}
-
 .carousel-inner {
   display: flex;
 }
@@ -240,7 +231,7 @@ ul, li {
 .one_carousel_item {
   position: relative;
   float: left;
-  width: 100px;
+  width: 200px;
   margin-right: -10PX;
 }
 
