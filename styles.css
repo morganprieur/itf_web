@@ -105,7 +105,7 @@ ul, li {
   border: 2px red solid;
   background-color: #5A565D;
   height: 500px;
-  width: 80%;
+  width: 75%;
   margin: 10px auto;
 }
 .best__intro {
@@ -188,6 +188,10 @@ ul, li {
 /* SLIDERS */
 .sliders {
   background-color: #5A565D;
+  border: 1px yellow solid;
+  min-height: 300px;
+  width: 75%;
+  margin: 0 auto;
 }
 .sliders__category {
   border: 1px red solid;
@@ -206,7 +210,7 @@ ul, li {
   border: 2px solid green;
   display: inline-block;
   height: 250px;
-  width: 930px;
+  width: 1090px;
   display: flex;
   overflow: hidden;
 }
@@ -226,6 +230,8 @@ ul, li {
 
 .carousel-inner {
   display: flex;
+  height: 250px;
+  margin-left: 50px;
 }
 
 .one_carousel_item {
@@ -233,13 +239,14 @@ ul, li {
   float: left;
   width: 200px;
   margin-right: -10PX;
+  display: none;
 }
 
 .one_film_img {
   background-repeat: no-repeat;
   background-size: contain;
   background-color: #5A565D;
-  display: inline-block;
+  display: inline-block !important;
   height: 250px;
   width: 200px;
 }

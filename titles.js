@@ -18,7 +18,7 @@ import { retrieveOneFilm } from "./requests.js";
 // main 
 // const main = async(category_name, category_id) => { 
     // const main = async(categories) => { 
-const main = async(categories_names) => { 
+const main = async(categories_names, cat_titles) => { 
 
     // let categories_names = []; 
     // let categories_ids = []; 
@@ -55,12 +55,6 @@ const main = async(categories_names) => {
     const cats = await get_films(categories_names); 
     // console.log(cats);  // 4 listes de 7 objets ok 
 
-    // const bestsFilms = cats[0]; 
-    // console.log(bestsFilms); 
-    // cats.shift(); 
-    // console.log(cats); 
-
-
     /* Tronquer une liste : 
     python : 
     firsts = selected[::2] 1 sur 2 à partir de 0 
@@ -75,24 +69,6 @@ const main = async(categories_names) => {
     args : start en partant de la fin 
     */ 
 
-    // Afficher les données des films : 
-    /* 
-    id 
-    title 
-    votes 
-    image_url 
-    details.long_description 
-    genres (liste) 
-    details.date_published 
-    details.rated 
-    details.imdb_score 
-    element.directors (liste) 
-    element.actors (liste) 
-    details.duration 
-    details.countries (liste) 
-    details.worldwide_gross_income 
-    */ 
-
 
     // JS DOM 
     const create_node = (tag, class_name, parent) => { 
@@ -102,11 +78,11 @@ const main = async(categories_names) => {
         return name_var; 
     } 
     
-    
     // one_modal 
     let one_modal = document.createElement('div') 
     one_modal.className = `modal display_none` 
 
+    // theBest section 
     const best_section = document.getElementsByClassName('best')[0]; 
     const best_intro_div = document.getElementsByClassName('best__intro')[0]; 
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
@@ -118,229 +94,133 @@ const main = async(categories_names) => {
     //  Button "More infos" for the best film 
     const best_more_button = document.getElementsByClassName('btns__more_infos')[0]; 
     // console.log('best_more_button : '+best_more_button.textContent) 
-    // Voir si le bouton "fermer" s'affiche 
-    best_more_button.onclick = function() { 
-        one_modal.classList.remove('display_none') 
-        one_modal.classList.add('block') 
-        one_modal.setAttribute('id', `modal_${element.id}`) 
-        get_details(element.id); 
-    } 
+
+
+    /* ==== */ 
+    // console.log('max : '+Math.max(films.imdb_score)+' '+films.title); 
+    best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score+' '+theBest.id; 
+    // const best_details = await get_details(theBest.id); 
+    const theBestDetails = await retrieveOneFilm(theBest.id); 
+    best_intro_text_p.innerHTML = theBestDetails.description; 
+    // best_intro_text_p.innerHTML = theBest.description; 
+    console.log(theBest); 
+    // best_img = create_node('div', 'best__img', best_section); 
+    // console.log('theBest.image_url : '+theBest.image_url); 
+    best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
+    // best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${bestFilm.image_url}>`; 
+    // best_section.appendChild(best_img); 
+    /* ==== */ 
 
     // Section id "Sliders" 
-    const sliders_section = document.getElementById('sliders'); 
-    // sliders_section.innerHTML = 'sliders section'; 
+    // const sliders_section = document.getElementById('sliders'); 
+
+
     
-    // for(let cat_name of categories_names) { 
+    // Divs categries 
     for(let cat of cats) { 
-        
+
+    // h4 class "sliders__category__title" 
+    let one_category_title; 
+    for(let i=0; i<4; i++) { 
+        one_category_title = document.getElementsByClassName(`sliders__category__title`)[i]; 
+        one_category_title.innerHTML = cat_titles[i]; 
+    } 
+
         let cat_name = categories_names[cats.indexOf(cat)]; 
         // console.log(cat_name); 
-        // Div class "sliders__category" 
-        let one_category_div = document.createElement('div'); 
-        one_category_div.className = `sliders__category`; 
-        // console.log(cat_name); 
-        one_category_div.setAttribute('id', `cat_${cat_name}`); 
-        // one_category_div.innerHTML = `one_category_div ${cat_name}`; 
-        sliders_section.appendChild(one_category_div); 
 
-        // h4 class "sliders__category__title" 
-        let one_category_title; 
-        one_category_title = create_node('h4', 'sliders__category__title', one_category_div); 
-        one_category_title.innerHTML = cat_name; 
-
-        // Div id "slider_cat_name" class "carousel slide sliders__category__films" 
-        let one_category_slider; 
-        one_category_slider = create_node('div', 'sliders__category__films', one_category_div); 
-        one_category_slider.classList.add('carousel'); 
-        one_category_slider.classList.add('slide'); 
-
+        // console.log(`one_carousel_item_${cat_name}`); 
+        let x = document.getElementsByClassName(`one_carousel_item_${cat_name}`); 
+   
+        let position = 0; 
         
+        for(let i=0; i<x.length; i++) { 
+            x[i].style.display = 'none'; 
+        } 
+        
+        for(let i = position; i<position+5; i++) { 
+            x[i].style.display = 'inline-block'; 
+        } 
+
+        // const fonctionTarget = event => alert("target : " + event.target + " currentTarget : " + event.currentTarget.id); 
+        // // document.querySelector('#div').addEventListener('click', fonctionTarget);
+
         // Buttons prev next 
-        let button_prev; 
-        button_prev = create_node('button', 'carousel-control-prev', one_category_slider); 
-        let button_next; 
-        button_next = create_node('button', 'carousel-control-next', one_category_slider); 
+        let button_prev = document.getElementsByClassName('carousel-control-prev')[cats.indexOf(cat)] 
+        button_prev.setAttribute('id', `${cat_name}_prev`); 
+        button_prev.addEventListener("click", toSlide); // *** 
 
-        // Icones buttons prev next 
-        let span_button_prev; 
-        span_button_prev = create_node('span', 'carousel-control-prev-icon', button_prev); 
-        let span_button_prev_text; 
-        span_button_prev_text = create_node('span', 'visually-hidden', button_prev); 
-        span_button_prev_text.innerHTML = 'Previous'; 
-        let span_button_next; 
-        span_button_next = create_node('span', 'carousel-control-next-icon', button_next); 
-        // span_button_next.setAttribute('click', onClicNext()); 
-        // span_button_next.addEventListener('click', onClicNext(), false); 
-        // span_button_next.addEventListener('click', 
-        //     () => { 
-        //         one_category_carousel_inner.innerHTML += ' test'; 
-        //         for(let film of cat) { 
-        //             display_films('right'); 
-        //         } 
-        //         // one_category_carousel_inner.style.cssText += 'margin-left: -100px'; 
-        //         // one_category_carousel_inner.style.cssText += 'margin-right: 100px'; 
-        //     }, 
-        //     false); 
-        let span_button_next_text; 
-        span_button_next_text = create_node('span', 'visually-hidden', button_next); 
-        span_button_next_text.innerHTML = 'Next'; 
-
+        let button_next = document.getElementsByClassName('carousel-control-next')[cats.indexOf(cat)]; 
+        button_next.setAttribute('id', `${cat_name}_next`); 
+        button_next.addEventListener("click", toSlide); 
         
-        // <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        //     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        //     <span class="visually-hidden">Previous</span>
-        // </button>
-        // <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        //     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        //     <span class="visually-hidden">Next</span>
-        // </button>
+        function toSlide(event) { 
+            for(let i = 0; i<x.length; i++) { 
+                x[i].style.display = 'none'; 
+            } 
 
-        // exemple web 
-        // function onClickPrev(){ 
-        //     if (currentImage == 0){ 
-        //         slideTo(imageNumber - 1); 
-        //     } 
-        //     else{ 
-        //         slideTo(currentImage - 1); 
-        //     } 
-        // } 
-        // exemple codepen css 
-        // .slide-right { 
-        //     animation: 3s slide-right; 
-        // } 
+            if(event.currentTarget.id.includes('prev')) { 
+                for(let i=0; i<5; i++) { 
+                    console.log(i); 
+                    x[i].style.display = 'inline-block'; 
+                } 
+            } else if(event.currentTarget.id.includes('next')) { 
+                for(let i = 2; i<7; i++) { 
+                    console.log(i); 
+                    x[i].style.display = 'inline-block'; 
+                } 
+            } 
+        } 
 
 
-        // Div class "carousel-inner" 
-        let one_category_carousel_inner; 
-        one_category_carousel_inner = create_node('div', 'carousel-inner', one_category_slider); 
-        // one_category_carousel_inner = create_node('div', 'carousel-inner', one_category_div); 
-
-        // for(let cat of cats) { 
         for(let film of cat) { 
-            // console.log(film);               
-            console.log(film.id+' '+film.title); 
-            console.log('cat.length : '+cat.length); 
-
-            // const test = document.createElement('p'); 
-            // test.innerHTML = 'TEST'; 
-            // one_category_carousel_inner.appendChild(test); 
-            // let test; 
-            // test = create_node('p', 'test', one_category_carousel_inner); 
-            // test.innerHTML = 'TEST'; 
-
-            /* ==== */ 
-            // let display_films = (position='left') => { 
-
-            //     if(position=='left') { 
-
-            //         console.log('left'); 
 
             // one_film_div.classList.add('active'); 
-            let one_film_div; 
-            one_film_div = create_node('div', 'one_carousel_item', one_category_carousel_inner); 
+            let one_film_div = document.getElementsByClassName(`one_carousel_item_${cat_name}`); 
 
+            // console.log(one_film_div.length); 
+            let film_div = one_film_div[cat.indexOf(film)];
+            // for(let film_div of one_film_div) { 
             let one_film_div_a; 
-            one_film_div_a = create_node('a', `one_film_img`, one_film_div); 
+            one_film_div_a = create_node('a', `one_film_img`, film_div); 
+            // one_film_div_a = create_node('a', `one_film_img`, one_film_div); 
             one_film_div_a.style.backgroundImage = `url(${film.image_url})` 
             
             let one_film_div_a_h5; 
             one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
-            one_film_div_a_h5.innerHTML = film.title; 
-            // console.log(film.id+' '+film.image_url+' '+film.title); 
+            one_film_div_a_h5.innerHTML = film.title+' '+film.id; // à retirer *** 
+            // // console.log(film.id+' '+film.image_url+' '+film.title); 
             
             // Open modal button 
             let one_film_div_a_button; 
             // one_film_div_a_button = create_node('button', 'one_film__button', one_film_div); 
             one_film_div_a_button = create_node('button', 'one_film_button', one_film_div_a); 
             one_film_div_a_button.classList.add('btns__modal'); 
-
+            
             const id = film.id; 
-
+            
             // details button onclick 
-            one_film_div_a_button.onclick = function() { 
+            one_film_div_a_button.onclick = async function() { 
                 one_modal.classList.remove('display_none')
                 one_modal.classList.add('block') 
                 one_modal.setAttribute('id', `modal_${id}`) 
-                // one_modal.setAttribute('id', `modal_${element.id}`) 
                 
                 /* Get the details data for one film */ 
-                get_details(id) 
+                await get_details(id) 
             } 
             one_film_div_a_button.innerHTML = 'Détails'; 
-                // } else { 
-                //     console.log('right'); 
-                //     if(cat.indexOf(film)>=cat[2]) { 
+        }
 
-                //         console.log('cat films : '+film.title); 
-                //         // one_film_div.classList.add('active'); 
-                //         let one_film_div; 
-                //         one_film_div = create_node('div', 'one_carousel_item', one_category_carousel_inner); 
-
-                //         let one_film_div_a; 
-                //         one_film_div_a = create_node('a', `one_film_img`, one_film_div); 
-                //         one_film_div_a.style.backgroundImage = `url(${film.image_url})` 
-                        
-                //         let one_film_div_a_h5; 
-                //         one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
-                //         one_film_div_a_h5.innerHTML = film.title; 
-                //         // console.log(film.id+' '+film.image_url+' '+film.title); 
-                        
-                //         // Open modal button 
-                //         let one_film_div_a_button; 
-                //         // one_film_div_a_button = create_node('button', 'one_film__button', one_film_div); 
-                //         one_film_div_a_button = create_node('button', 'one_film_button', one_film_div_a); 
-                //         one_film_div_a_button.classList.add('btns__modal'); 
-
-                //         const id = film.id; 
-
-                //         // details button onclick 
-                //         one_film_div_a_button.onclick = function() { 
-                //             one_modal.classList.remove('display_none')
-                //             one_modal.classList.add('block') 
-                //             one_modal.setAttribute('id', `modal_${id}`) 
-                //             // one_modal.setAttribute('id', `modal_${element.id}`) 
-                            
-                //             /* Get the details data for one film */ 
-                //             get_details(id) 
-                //         } 
-                //         one_film_div_a_button.innerHTML = 'Détails'; 
-                //     } 
-                // }
-            // } 
-
-            // display_films(); 
-
-            // span_button_next.addEventListener('click', 
-            // () => { 
-            //     one_category_carousel_inner.innerHTML += ' test'; 
-            //     for(let film of cat) { 
-            //         // display_films('right'); 
-            //     } 
-            //     // one_category_carousel_inner.style.cssText += 'margin-left: -100px'; 
-            //     // one_category_carousel_inner.style.cssText += 'margin-right: 100px'; 
-            // }, 
-            // false); 
-            
-            // one_film_div_a.appendChild(one_film_div_a_h5) 
-            // // one_film_div_a.appendChild(one_film_div_a_genre) 
-            // one_film_div_a.appendChild(one_film_div_a_button) 
-            // one_film_div.appendChild(one_film_div_a) 
-            // // one_film_div.appendChild(one_modal) 
-            // one_category_div.appendChild(one_film_div); 
-            // // data_one_category.appendChild(one_film_div); 
-
-            let container_div = document.getElementById('container') 
-            container_div.appendChild(one_modal) 
-            /* ==== */ 
-        } 
-        // } 
+        let container_div = document.getElementById('container') 
+        container_div.appendChild(one_modal) 
+        /* ==== */ 
     } 
 
     // Modal content 
     async function get_details(id) { 
-        // console.log(`id T238 : ${id}`) 
+        console.log(`id T294 : ${id}`) 
         const details = await retrieveOneFilm(id) 
-        // console.log(`détails : ${details}`) 
+        console.log(`détails T296 : ${details.title}`) 
 
         // wraper modal 
         let modal_wraper = document.createElement('div'); 
@@ -356,7 +236,6 @@ const main = async(categories_names) => {
         // Close_modal button 
         let modal_close_button = document.createElement('button') 
         modal_close_button.className = 'modal__close_button btns__modal' 
-        
         modal_close_button.onclick = function() { 
             modal_wraper.remove(); 
             one_modal.classList.remove('block'); 
@@ -447,26 +326,22 @@ const main = async(categories_names) => {
 
         one_modal.appendChild(modal_wraper) 
 
-        return details 
+        return details; 
     } 
-    
-    // console.log('max : '+Math.max(films.imdb_score)+' '+films.title); 
-    best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score+' '+theBest.id; 
-    const best_details = await get_details(theBest.id); 
-    best_intro_text_p.innerHTML = best_details.description; 
-    let best__img; 
-    // best_img = create_node('div', 'best__img', best_section); 
-    // console.log('theBest.image_url : '+theBest.image_url); 
-    best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
-    // best_img.innerHTML = `<img class="best_img alt="Affiche best film" height="450px" src=${bestFilm.image_url}>`; 
-    // best_section.appendChild(best_img); 
-    
-    // console.log('bestsFilms[0].title T231 : '+bestsFilms[0].title); 
-    // console.log('cats[0].title T357 : '+cats[0][0].title); 
-    // console.log('films[0].title T229 : '+films[0].title); 
+
+    // Voir si le bouton "fermer" s'affiche 
+    best_more_button.onclick = function() { 
+        one_modal.classList.remove('display_none') 
+        one_modal.classList.add('block') 
+        one_modal.setAttribute('id', `modal_${theBest.id}`) 
+        // one_modal.setAttribute('id', `modal_${element.id}`) 
+        get_details(theBest.id); 
+        // get_details(element.id); 
+    } 
+
 } 
 
-main(['best', 'romance', 'drama', 'animation']); 
+main(['best', 'romance', 'drama', 'animation'], ['Les mieux notes', 'Romance', 'Drama', 'Animation']); // , 'drama', 'animation' 
 // main([['best', 'slider_mieux_notes'], ['romance', 'slider_cat1'], ['drama', 'slider_cat2'], ['animation', 'slider_cat3']]); 
 // main('best', 'slider_mieux_notes') 
 // main('romance', 'slider_cat1') 

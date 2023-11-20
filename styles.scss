@@ -161,7 +161,8 @@ ul, li {
     border: 2px red solid; 
     background-color: $loc_background_color; 
     height: 500px; 
-    width: 80%; 
+    width: 75%; 
+    // width: 80%; 
     margin: 10px auto; 
     // padding: 40px 50px 10px 50px; 
     &__intro { 
@@ -236,6 +237,11 @@ ul, li {
 /* SLIDERS */ 
 .sliders { 
     background-color: $loc_background_color; 
+    border: 1px yellow solid; 
+    min-height: 300px; 
+    width: 75%; 
+    // width: 1100px; 
+    margin: 0 auto; 
     
     &__category { 
         border: 1px red solid; 
@@ -247,18 +253,14 @@ ul, li {
         &__title { 
             text-align: left; 
             color: $title_color; 
-            // margin: 0; 
             margin: 10px; 
             margin-top: 20px; 
         } 
         &__films { 
             border: 2px solid green; 
-            // display: inline-block; 
-            // height: 250px; 
-            // width: 1000px; 
             display: inline-block;
             height: 250px;
-            width: 930px;
+            width: 1090px;
             display: flex;
             overflow: hidden;
         } 
@@ -289,7 +291,8 @@ ul, li {
 
 .carousel-inner { 
     display: flex; 
-    // display: inline-block; 
+    height: 250px; 
+    margin-left: 50px; 
 } 
 
 .one_carousel_item { 
@@ -305,10 +308,12 @@ ul, li {
     // backface-visibility: hidden;
     // @include transition($carousel-transition); 
     // overflow-x: visible; // marche pas 
+    // .mySlides {display:none}; 
+    display: none; 
 } 
 .one_film_img {
     @include background_image; 
-    display: inline-block; 
+    display: inline-block !important ;
     height: 250px; 
     width: 200px; 
 } 
