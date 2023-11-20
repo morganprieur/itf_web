@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Stream It</title>
+    <link rel="favicon" src="./imgs/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+    <header  class="header">
+        <a class="header__logo" href="index.html">
+            <img class="header__logo__img" src="./imgs/logo-jsi.png" alt="Logo Just Stream It">
+        </a>
+        <a class="header__link" href="index.html">
+            Accueil
+        </a>
+        <a class="header__link" id="liste" href="#">
+            <ul class="header__categories">
+                Catégories
+                <li class="one_category"><a href="#mieux_notes">Les mieux_notes</a></li>
+                <li class="one_category"><a href="#category_1">Catégorie 1</a></li>
+                <li class="one_category"><a href="#category_2">Catégorie 2</a></li>
+                <li class="one_category"><a href="#category_3">Catégorie 3</a></li>
+            </ul>
+        </a>
+        <div class="clear"></div>
+    </header>
+    
+    <div class="clear"></div> 
+    <!-- <div id="wraper"> -->
+
+    <div id="container">
+        <section class="best">
+            <div class="best__intro">
+                <h3 class="best__intro__title">Titre de la vidéo</h3>
+                <!-- <h4 class="best__intro__subtitle">Watch season X Episode Y</h4> -->
+                <p class="best__intro__text">
+                    résumé de la vidéo
+                </p>
+
+                <div class="btns">
+                    <a href="#" class="btns__play">Play</a>
+                    <a href="#" class="btns__more_infos">More infos</a>
+                </div>
+            </div>
+
+            <div class="best_img"></div>
+            <!-- <img 
+                class="best__img" 
+                src="" 
+            > -->
+            <!-- <img 
+                class="best__img" 
+                alt="Affiche film best note" 
+                height="450px"
+                src="https://m.media-amazon.com/images/M/MV5BNjA5Y2ZhYzctNDc1Yy00OGViLWI3NGUtOTYwZmE3NDFiYmIxXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR72,0,182,268_AL_.jpg" 
+            > -->
+
+            <!-- <div class="clear"></div>  -->
+        </section>
+
+        <!-- <section id="content"> -->
+        <section id="sliders" class="sliders">
+            <!-- <div id="cat_1" class="sliders__category"> -->
+            <!-- <div class="w3-content w3-display-container">
+                <img class="mySlides" src="images/693658-accident-gare-montparnasse.jpg" style="width:100%">
+                <img class="mySlides" src="images/cahier-des-charges.png" style="width:100%">
+                <img class="mySlides" src="images/raton_de_face.jpg" style="width:100%">
+                <img class="mySlides" src="images/raton_niche_sous_arbre.jpg" style="width:100%">
+                
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div> -->
+            <h4 class="sliders__category__title">
+                
+            </h4> 
+            <div class="sliders__category__films carousel slide">
+                <div id="carousel-inner-best" class="carousel-inner">
+                    <div class="one_carousel_item_best"></div>
+                    <div class="one_carousel_item_best"></div>
+                    <div class="one_carousel_item_best"></div>
+                    <div class="one_carousel_item_best"></div>
+                    <div class="one_carousel_item_best"></div>
+                    <div class="one_carousel_item_best"></div>
+                    <div class="one_carousel_item_best"></div>
+                </div>
+                <button class="carousel-control-prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="carousel-control-prev-text visually-hidden"></span>
+                </button>
+                <button class="carousel-control-next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="carousel-control-next-text visually-hidden"></span> 
+                </button>
+            </div>
+                
+            <h4 class="sliders__category__title">
+                
+            </h4> 
+            <div class="sliders__category__films carousel slide">
+                <div id="carousel-inner-romance" class="carousel-inner">
+                    <div class="one_carousel_item_romance"></div>
+                    <div class="one_carousel_item_romance"></div>
+                    <div class="one_carousel_item_romance"></div>
+                    <div class="one_carousel_item_romance"></div>
+                    <div class="one_carousel_item_romance"></div>
+                    <div class="one_carousel_item_romance"></div>
+                    <div class="one_carousel_item_romance"></div>
+                </div>
+                <button class="carousel-control-prev">
+                    <span class="carousel-control-prev-icon"></span>
+                    <span class="carousel-control-prev-text visually-hidden"></span>
+                </button>
+                <button class="carousel-control-next">
+                    <span class="carousel-control-next-icon"></span>
+                    <span class="carousel-control-next-text visually-hidden"></span>
+                </button>
+            </div>
+                
+            <h4 class="sliders__category__title">
+                
+            </h4> 
+            <div class="sliders__category__films carousel slide">
+                <div id="carousel-inner" class="carousel-inner">
+                    <div class="one_carousel_item_drama"></div>
+                    <div class="one_carousel_item_drama"></div>
+                    <div class="one_carousel_item_drama"></div>
+                    <div class="one_carousel_item_drama"></div>
+                    <div class="one_carousel_item_drama"></div>
+                    <div class="one_carousel_item_drama"></div>
+                    <div class="one_carousel_item_drama"></div>
+                </div>
+                <button class="carousel-control-prev">
+                    <span class="carousel-control-prev-icon" ></span>
+                    <span class="carousel-control-prev-text visually-hidden"></span>
+                </button>
+                <button class="carousel-control-next">
+                    <span class="carousel-control-next-icon" ></span>
+                    <span class="carousel-control-next-text visually-hidden"></span>
+                </button>
+            </div> 
+
+            <h4 class="sliders__category__title">
+                
+            </h4> 
+            <div class="sliders__category__films carousel slide">
+                <div id="carousel-inner" class="carousel-inner">
+                    <div class="one_carousel_item_animation"></div>
+                    <div class="one_carousel_item_animation"></div>
+                    <div class="one_carousel_item_animation"></div>
+                    <div class="one_carousel_item_animation"></div>
+                    <div class="one_carousel_item_animation"></div>
+                    <div class="one_carousel_item_animation"></div>
+                    <div class="one_carousel_item_animation"></div>
+                </div>
+                <button class="carousel-control-prev">
+                    <span class="carousel-control-prev-icon" ></span>
+                    <span class="carousel-control-prev-text visually-hidden"></span>
+                </button>
+                <button class="carousel-control-next">
+                    <span class="carousel-control-next-icon" ></span>
+                    <span class="carousel-control-next-text visually-hidden"></span>
+                </button>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <a href="#">Mentions légales</a> | <a href="#">Contact</a>
+    </footer>
+
+    <!-- <script> 
+        // cats = ['best', 'romance']; // , 'drama', 'animation'  
+        // for(let cat_name of cats) { 
+        //     console.log(`one_carousel_item_${cat_name}`); 
+        //     let x = document.getElementsByClassName(`one_carousel_item_${cat_name}`)[0]; 
+        //     // var x = document.getElementsByClassName(`one_carousel_item_${cat_name}`[cats.indexOf(cat_name)]); 
+        //     console.log(x.textContent); 
+        //     console.log(x); 
+        
+        //     position = 0; 
+            
+        //     for(let i=0; i<x.length; i++) { 
+        //         x[i].style.display = 'none'; 
+        //     } 
+            
+        //     for(let i = position; i<position+5; i++) { 
+        //         // console.log(i); 
+        //         x[i].style.display = 'inline-block'; 
+        //     } 
+            
+        // } 
+        // const toSlide = (cat, position) => { 
+        //     console.log(position); 
+        //     for(let i=0; i<x.length; i++) { 
+        //         x[i].style.display = 'none'; 
+        //     } 
+        //     for(let i = position; i<position+5; i++) { 
+        //         console.log(i); 
+        //         x[i].style.display = 'inline-block'; 
+        //     } 
+        // } 
+
+
+
+        // async function toSlide(n) { 
+        //     console.log(n); 
+        //     slideIndexes = []; 
+        //     if(n==2) { 
+        //         for(let i=0; i<5; i++) { 
+        //             slideIndexes.push(i); 
+        //         } 
+        //     } else { 
+        //         for(let i=2; i<x.length; i++) { 
+        //             slideIndexes.push(i); 
+        //         } 
+        //     } 
+        // } 
+        // // var slideIndex = 1;
+        // var slideIndexes = [];
+        // for(let i=0; i<5; i++) { 
+        //     slideIndexes.push(i); 
+        // } 
+        // console.log(slideIndexes); 
+        // // var slideIndexes = [0, 1];
+        // for(let index of slideIndexes) { 
+        //     x[index].style.display = 'inline-block'; 
+        // } 
+        // // showDivs(slideIndex);
+        // showDivs(slideIndexes);
+        
+        // async function plusDivs(n) {
+        //     console.log(n); 
+        //     //   await showDivs(slideIndex += n);
+        //     for(let i=0; i<5; i++) { 
+        //         await showDivs(slideIndexes[i] += n); 
+        //         // await showDivs(slideIndexes[0] += n, slideIndexes[1] += n);
+        //     } 
+        //     console.log(slideIndexes); 
+        // }
+        
+        // async function showDivs(n) {
+        //     var i; 
+        
+            //   var x = document.getElementsByClassName("one_carousel_item_best");
+            //   var x = document.getElementsByClassName("mySlides");
+            // if (n >= x.length) { 
+            //     // slideIndex = 1 
+            //     // slideIndexes = [0, 1] 
+            //     slideIndexes = []; 
+            //     for(let i=2; i<x.length; i++) { 
+            //         slideIndexes.push(i);  
+            //     } 
+            //     console.log(slideIndexes); 
+            // }
+            // if (n < 1) { 
+            //     // slideIndex = x.length 
+            //     console.log(n); 
+            //     if(slideIndexes[-1]==x.length) { 
+            //         slideIndexes = []; 
+            //         for(let i=0; i<x.length+=n; i++) { 
+            //             slideIndexes.push(i); 
+            //         } 
+            //     }
+            //     slideIndexes = []; 
+            //     for(let i=2; i<x.length; i++) { 
+            //         slideIndexes.push(i);  
+            //         // slideIndexes = [x.length-1, x.length] 
+            //     } 
+            //     console.log(slideIndexes); 
+            // }
+
+        //     for (i = 0; i < x.length; i++) {
+        //         x[i].style.display = "none";  
+        //     } 
+        //     console.log(n); 
+        //     if(n==2) { 
+        //         slideIndexes = []; 
+        //         for(let i=2; i<x.length; i++) { 
+        //             slideIndexes.push(i); 
+        //         } 
+        //     } else { 
+        //         slideIndexes = []; 
+        //         for(let i=0; i<5; i++) { 
+        //             slideIndexes.push(i); 
+        //         } 
+        //     } 
+        //     // slideIndexes = [0, 1]; 
+        //     console.log(slideIndexes); 
+        //     for(let index of slideIndexes) { 
+        //         x[index].style.display = "inline-block"; 
+        //         // x[slideIndexes[index]].style.display = "inline-block"; 
+        //     } 
+        //     // x[slideIndexes[0]].style.display = "inline-block"; 
+        //     // x[slideIndexes[1]].style.display = "inline-block"; 
+        // }
+
+        // var x = document.getElementsByClassName("one_carousel_item_best");
+        // // var slideIndex = 1;
+        // var slideIndexes = [0, 1];
+        // for(let index of slideIndexes) { 
+        //     console.log(index)
+        //     x[index].style.display = 'inline-bock'; 
+        // } 
+        // // showDivs(slideIndex);
+        // showDivs(slideIndexes);
+        
+        // async function plusDivs(n) {
+        // //   await showDivs(slideIndex += n);
+        //     await showDivs(slideIndexes[0] += n, slideIndexes[1] += n);
+        // }
+        
+        // async function showDivs(n) {
+        //     var i;
+        //     //   var x = document.getElementsByClassName("one_carousel_item_best");
+        //     //   var x = document.getElementsByClassName("mySlides");
+        //     if (n > x.length) { 
+        //         // slideIndex = 1 
+        //         slideIndexes = [0, 1] 
+        //     }
+        //     if (n < 1) { 
+        //         // slideIndex = x.length 
+        //         slideIndexes = [x.length-1, x.length] 
+        //     }
+        //     for (i = 0; i < x.length; i++) {
+        //         x[i].style.display = "none";  
+        //     }
+        //     // slideIndexes = [0, 1]; 
+        //     x[slideIndexes[0]].style.display = "inline-block"; 
+        //     x[slideIndexes[1]].style.display = "inline-block"; 
+        // }
+    </script> -->
+    <!-- <script src="display_films.js" type="module"></script> -->
+    <script src="titles.js" type="module"></script>
+</body>
+</html>
