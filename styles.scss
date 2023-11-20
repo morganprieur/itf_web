@@ -11,7 +11,7 @@ $dark_grey: #444;
 $button_radius: 5px; 
 $title_margin: 10px 0; 
 
-$category_title_size: 1.5rem; /* pas utilisé */ 
+$category_title_size: 2rem; 
 
 $button_shaddow: 0px 0px 2px $light_color; 
 
@@ -22,7 +22,6 @@ $button_shaddow: 0px 0px 2px $light_color;
 } 
 @mixin text_bg { 
     background-color: rgba(#eee, .8); 
-    // opacity: .8; 
     border-radius: $button_radius; 
 } 
 
@@ -42,7 +41,7 @@ $button_shaddow: 0px 0px 2px $light_color;
     box-shadow: $button_shaddow; 
 } 
 
-/*********** PROPERTIES ************/ 
+/*********** TAGS ************/ 
 
 html { 
     font-size: 16px; 
@@ -58,15 +57,24 @@ ul, li {
     padding: 0; 
 } 
 
+
+/*********** COMMON CLASSES ************/ 
+
 .clear { 
     clear: both; 
 } 
 .bold { 
     font-weight: bold; 
 } 
+.display_none { 
+    display: none; 
+} 
+.block { 
+    display: block;
+} 
 
 
-/* .header - .navbar */ 
+/**** .header - .navbar ****/ 
 
 .header { 
     position: sticky; 
@@ -96,42 +104,8 @@ ul, li {
         text-align: center; 
     } 
 } 
-.header__categories li { 
-    display: none; 
-} 
-.header__categories:hover .one_category { 
-    // text-decoration: underline; 
-    display: block; 
-    // background-color: scale-color($dark_grey, $lightness: +40%); 
-    // color: darken($dark_grey, 30%); 
-} 
-// .navbar:hover .one_category a { 
-//     display: block; 
-//     text-decoration: none;
-// } 
-.one_category { 
-    position: relative; 
-    top: 18px; 
-    width: 140px;
-    left: -20px; 
-    & a { 
-        // display: none; 
-        background-color: $loc_background_color; 
-        color: $light_grey; 
-        line-height: 1.5rem; 
-        background-color: $dark_grey; 
-        padding: 5px; 
-    } 
-    &:hover { 
-        // display: block; 
-        color: darken($dark_grey, 30%); 
-    } 
-    &:hover a { 
-        border: 1px solid white; 
-        background-color: scale-color($dark_grey, $lightness: +40%); 
-        color: darken($dark_grey, 30%); 
-    }
-}
+
+
 
 // TODO 
 @media screen and (max-width: 499px) { 
@@ -152,19 +126,13 @@ ul, li {
     }
 } 
 
-// #container { 
-//     background-color: #5A565D; 
-// } 
 
-/* best */ 
+/**** best ****/ 
 .best { 
-    border: 2px red solid; 
     background-color: $loc_background_color; 
     height: 500px; 
     width: 75%; 
-    // width: 80%; 
     margin: 10px auto; 
-    // padding: 40px 50px 10px 50px; 
     &__intro { 
         float: left; 
         width: 60%; 
@@ -174,11 +142,6 @@ ul, li {
             font-size: 3rem;
             margin: $title_margin;
         } 
-        // &__subtitle { 
-        //     @include stroked_text($light_color);
-        //     font-size: 2rem; 
-        //     margin: $title_margin;
-        // } 
         &__text { 
             font-size: 1.2rem; 
             min-height: 320px; 
@@ -192,7 +155,6 @@ ul, li {
     } 
 } 
 
-// TODO 
 @media screen and (max-width: 499px) { 
     .best__intro { 
         float: none; 
@@ -208,10 +170,7 @@ ul, li {
 } 
 
 
-
 .btns { 
-    // display: flex; 
-    // direction: row; 
     display: inline-block; 
     &__play { 
         @include button($light_color); 
@@ -233,14 +192,11 @@ ul, li {
 } 
 
 
-
-/* SLIDERS */ 
+/**** SLIDERS ****/ 
 .sliders { 
     background-color: $loc_background_color; 
-    border: 1px yellow solid; 
     min-height: 300px; 
     width: 75%; 
-    // width: 1100px; 
     margin: 0 auto; 
     
     &__category { 
@@ -253,11 +209,11 @@ ul, li {
         &__title { 
             text-align: left; 
             color: $title_color; 
+            font-size: $category_title_size; 
             margin: 10px; 
             margin-top: 20px; 
         } 
         &__films { 
-            border: 2px solid green; 
             display: inline-block;
             height: 250px;
             width: 1090px;
@@ -279,15 +235,6 @@ ul, li {
     top: 70px; 
     font-size: 30px; 
 } 
-
-// .slide_left { 
-//     float: left; 
-//     left: 10px;
-// } 
-
-// .slide_right { 
-//     right: 10px;
-// } 
 
 .carousel-inner { 
     display: flex; 
@@ -338,26 +285,30 @@ ul, li {
     z-index: 1; 
     background-color: rgba(lighten($loc_background_color, 10%), .9); 
     width: 80%; 
-    min-height: 400px; 
+    min-height: 500px; 
     max-height: 600px; 
     border-radius: 10px; 
     margin: 20px 100px; 
 
-    &__col_1, &__col_2 { 
+    &__divs { 
         float: left; 
-        // height: 500px; 
+        margin-top: 20px; 
         margin-right: 10px; 
+        min-height: 500px; 
+        max-height: 600px; 
+        padding: 5px; 
+    } 
+    &__divs:nth-child(2), 
+    &__divs:nth-child(3) { 
+        width: 28%; 
     } 
 
-    &__columns { 
-        min-height: 300px; 
-        max-height: 400px; 
-    } 
-
-    &__col_4 { 
+    &__x_div { 
         width: 90%; 
+        margin-top: 10px; 
+        padding: 5px; 
     } 
-    
+
     &__img { 
         height: 500px; 
     } 
@@ -370,19 +321,15 @@ ul, li {
 
     &__close_button { 
         float: right; 
+        position: relative;
+        top: 20px; 
+        left: 0px;
     } 
 } 
-.display_none { 
-    display: none; 
-} 
-.block { 
-    display: block;
-} 
 
 
 
-
-/* FOOTER */ 
+/**** FOOTER ****/ 
 footer { 
     width: 90%; 
     margin: 10px auto; 
