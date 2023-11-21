@@ -9,10 +9,6 @@ import { retrieveOneFilm } from "./requests.js";
 // main 
 const main = async (categories_names, cat_titles) => { 
 
-    // debug : 
-    // let films = await retrieveAllFilms('best');
-    // console.log(films.results); 
-    
     let theBest; 
     async function get_films(categories_names) { 
 
@@ -42,7 +38,6 @@ const main = async (categories_names, cat_titles) => {
     const create_node = (tag, class_name, parent) => { 
         let name_var = document.createElement(tag); 
         name_var.className = class_name; 
-        // name_var.classList.add(class_name); 
         parent.appendChild(name_var); 
         return name_var; 
     } 
@@ -53,10 +48,7 @@ const main = async (categories_names, cat_titles) => {
 
     
     // theBest section 
-    // const best_section = document.getElementsByClassName('best')[0]; 
-    // const best_intro_div = document.getElementsByClassName('best__intro')[0]; 
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
-    // const best_intro_subtitle_h4 = document.getElementsByClassName('best__intro__subtitle')[0]; 
     const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
     const best_img = document.getElementsByClassName('best_img')[0]; 
     
@@ -70,10 +62,6 @@ const main = async (categories_names, cat_titles) => {
     best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
 
 
-    // Section id "Sliders" 
-    // const sliders_section = document.getElementById('sliders'); 
-
-    
     // Divs categries 
     for(let cat of cats) { 
 
@@ -137,7 +125,6 @@ const main = async (categories_names, cat_titles) => {
             let one_film_div_a_h5; 
             one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
             one_film_div_a_h5.innerHTML = film.title+' '+film.id; // à retirer *** 
-            // // console.log(film.id+' '+film.image_url+' '+film.title); 
             
             // Open modal button 
             let one_film_div_a_button; 
@@ -183,11 +170,8 @@ const main = async (categories_names, cat_titles) => {
 
         // détails modal 
         let modal_img = create_node('img', 'modal__img', modal_div1);  
-        // let modal_img = document.createElement('img'); 
-        // modal_img.className = 'modal__img'; 
         modal_img.setAttribute('alt', `Affiche du film ${details.title}`);
         modal_img.setAttribute('src', `${details.image_url}`); 
-        // modal_wraper.appendChild(modal_img); 
 
         // Close_modal button 
         modal_close_button.onclick = function() { 
@@ -196,7 +180,6 @@ const main = async (categories_names, cat_titles) => {
             one_modal.classList.add('display_none'); 
         } 
         modal_close_button.innerHTML = 'X Fermer' 
-        // modal_wraper.appendChild(modal_close_button); 
         
         // title 
         let modal_title = create_node('h3', 'modal__title', modal_div2); 
@@ -204,8 +187,6 @@ const main = async (categories_names, cat_titles) => {
 
         // genres 
         let modal_genres = create_node('p', 'modal__genres', modal_div2); 
-        // let modal_genres = document.createElement('p'); 
-        // modal_genres.className = 'modal__genres'; 
         let modal_genres_span; 
         modal_genres_span = create_node('span', 'bold', modal_genres)
         modal_genres_span.innerHTML = 'Genres : <br> '; 
@@ -213,54 +194,39 @@ const main = async (categories_names, cat_titles) => {
         for(let genre of genres) { 
             modal_genres.innerHTML += `${genre}<br>`; 
         } 
-        // modal_wraper.appendChild(modal_genres); 
 
         // publication date 
         let modal_date = create_node('p', 'modal__publish_date', modal_div2); 
-        // let modal_date = document.createElement('p'); 
-        // modal_date.className = 'modal__publish_date'; 
         let modal_date_span; 
         modal_date_span = create_node('span', 'bold', modal_date); 
         modal_date_span.innerHTML = 'Publication : ';  
         modal_date_span.innerHTML = details.date_published;  
-        // modal_wraper.appendChild(modal_date); 
 
         // rated 
         let modal_rated; 
         modal_rated = create_node('p', 'modal__rated', modal_div2); 
         let modal_rated_span = create_node('p', 'modal__rated', modal_div2); 
-        // let modal_rated = document.createElement('p'); 
-        // modal_rated.className = 'modal__rated'; 
         modal_rated_span.innerHTML = 'Note moyenne : '; 
         modal_rated_span.innerHTML = details.rated; 
-        // modal_wraper.appendChild(modal_rated); 
 
         // imdb_score 
         let modal_imdb_score; 
         modal_imdb_score = create_node('p', 'modal__imdb_score', modal_div2); 
-        // let modal_imdb_score = document.createElement('p'); 
-        // modal_imdb_score.className = 'modal__imdb_score'; 
         let modal_imdb_score_span; 
         modal_imdb_score_span = create_node('span', 'bold', modal_imdb_score); 
         modal_imdb_score_span.innerHTML = details.imdb_score; 
         modal_imdb_score_span.innerHTML = 'Score Imdb : '; 
-        // modal_wraper.appendChild(modal_imdb_score); 
 
         // duration 
         let modal_duration; 
         modal_duration = create_node('p', 'modal__duration', modal_div2); 
-        // let modal_duration = document.createElement('p'); 
-        // modal_duration.className = 'modal__duration'; 
         let modal_duration_span; 
         modal_duration_span = create_node('span', 'bold', modal_duration); 
         modal_duration_span.innerHTML = `Durée : ${details.duration}`; 
-        // modal_wraper.appendChild(modal_duration); 
 
         // countries 
         let modal_countries; 
         modal_countries = create_node('p', 'modal__country', modal_div2); 
-        // let modal_countries = document.createElement('p'); 
-        // modal_countries.className = 'modal__country'; 
         let modal_countries_span; 
         modal_countries_span = create_node('span', 'bold', modal_countries); 
         modal_countries_span.innerHTML = 'Pays : <br>'; 
@@ -268,23 +234,17 @@ const main = async (categories_names, cat_titles) => {
         for(let country of countries) { 
             modal_countries.innerHTML += `${country}<br>`
         }
-        // modal_wraper.appendChild(modal_country); 
         
         // gross income 
         let modal_income; 
         modal_income = create_node('p', 'modal__income', modal_div2); 
-        // let modal_income = document.createElement('p'); 
-        // modal_income.className = 'modal__income'; 
         let modal_income_span; 
         modal_income_span = create_node('span', 'bold', modal_income); 
         modal_income_span.innerHTML = 'Box office : '; 
         modal_income.innerHTML = details.worldwide_gross_income; 
-        // modal_wraper.appendChild(modal_income); 
 
         // directors 
         let modal_director = create_node('p', 'modal__director', modal_div3); 
-        // let modal_director = document.createElement('p'); 
-        // modal_director.className = 'modal__director'; 
         let modal_director_span; 
         modal_director_span = create_node('span', 'bold', modal_director); 
         modal_director_span.innerHTML = 'Directors : <br>'; 
@@ -292,13 +252,10 @@ const main = async (categories_names, cat_titles) => {
         for(let director of directors) { 
             modal_director.innerHTML += `${director}<br>`; 
         } 
-        // modal_wraper.appendChild(modal_director); 
         
         // casting 
         let modal_casting; 
         modal_casting = create_node('p', 'modal__casting_list', modal_div3); 
-        // let modal_casting = document.createElement('p'); 
-        // modal_casting.className = 'modal__casting_list'; 
         let modal_casting_span; 
         modal_casting_span = create_node('span', 'bold', modal_casting); 
         modal_casting_span.innerHTML = 'Casting : <br>'; 
@@ -306,18 +263,14 @@ const main = async (categories_names, cat_titles) => {
         for(let actor of actors) { 
             modal_casting.innerHTML += `${actor}<br>`; 
         } 
-        // modal_wraper.appendChild(modal_casting); 
         
 
         // long description 
         let modal_abstract; 
         modal_abstract = create_node('p', 'modal__abstract', modal_div4); 
-        // let modal_abstract = document.createElement('p'); 
-        // modal_abstract.className = 'modal__abstract'; 
         let modal_abstract_span; 
         modal_abstract_span = create_node('span', 'bold', modal_abstract); 
         modal_abstract_span.innerHTML = `Synopsis : ${details.long_description}`; 
-        // modal_wraper.appendChild(modal_abstract); 
 
         one_modal.appendChild(modal_wraper); 
 
