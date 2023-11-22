@@ -51,11 +51,6 @@ body {
     background-color: $loc_background_color; 
     color: $light_color; 
 } 
-ul, li { 
-    list-style-type: none; 
-    margin: 0; 
-    padding: 0; 
-} 
 
 
 /*********** COMMON CLASSES ************/ 
@@ -130,13 +125,13 @@ ul, li {
 /**** best ****/ 
 .best { 
     background-color: $loc_background_color; 
-    height: 500px; 
+    min-height: 500px; 
     width: 75%; 
     margin: 10px auto; 
     &__intro { 
         float: left; 
         width: 60%; 
-        height: 400px; 
+        min-height: 200px; 
         &__title { 
             @include stroked_text($light_color);
             font-size: 3rem;
@@ -151,21 +146,29 @@ ul, li {
         float: right; 
         @include background_image; 
         height: 450px; 
-        width: 25%; 
+        width: 300px; 
+        // width: 25%; 
     } 
 } 
 
 @media screen and (max-width: 499px) { 
-    .best__intro { 
-        float: none; 
-        margin: 0 auto; 
-        &__text { 
-            min-height: 50px; 
+    .best { 
+        width: 100%; 
+        padding: 10px; 
+        &__intro { 
+            float: none; 
+            width: 100%; 
+            margin: 0 auto; 
+            padding-bottom: 20px; 
+            &__text { 
+                min-height: 50px; 
+            } 
         } 
-    } 
-    .best__img { 
-        float: none; 
-        margin: 0 auto; 
+        &__img { 
+            float: none; 
+            margin: 0 auto; 
+            width: 100%; 
+        } 
     } 
 } 
 
@@ -223,6 +226,7 @@ ul, li {
     } 
 } 
 
+
 .carousel-control-next, .carousel-control-prev { 
     width: 5%; 
     background-color: rgba(255, 255, 255, 0.2); 
@@ -243,19 +247,10 @@ ul, li {
 } 
 
 .one_carousel_item { 
-    // display: flex; 
-    // display: inline-block; 
     position: relative;
-    // display: none;
     float: left;
     width: 200px;
-    // width: 100%;
     margin-right: -10PX;
-    // margin-right: -100%;
-    // backface-visibility: hidden;
-    // @include transition($carousel-transition); 
-    // overflow-x: visible; // marche pas 
-    // .mySlides {display:none}; 
     display: none; 
 } 
 .one_film_img {
@@ -285,8 +280,8 @@ ul, li {
     z-index: 1; 
     background-color: rgba(lighten($loc_background_color, 10%), .9); 
     width: 80%; 
-    min-height: 500px; 
-    max-height: 600px; 
+    // min-height: 500px; 
+    height: 100%; 
     border-radius: 10px; 
     margin: 20px 100px; 
 
@@ -321,12 +316,47 @@ ul, li {
 
     &__close_button { 
         float: right; 
-        position: relative;
+        position: relative; 
         top: 20px; 
-        left: 0px;
+        left: 0; 
     } 
 } 
 
+
+@media screen and (max-width: 499px) { 
+    .modal { 
+        position: fixed; 
+        top: 10px; 
+        left: 10px; 
+        border-radius: 5px; 
+        margin: 20px auto; 
+        width: 95%; 
+        height: auto; 
+        &__divs { 
+            float: none; 
+            width: 100%; 
+            min-height: 50px; 
+            max-height: 1000px; 
+            padding: 5px; 
+        } 
+        &__divs:first-child { 
+            height: 420px; 
+        } 
+        &__divs:nth-child(2), 
+        &__divs:nth-child(3) { 
+            width: 100%; 
+        } 
+        &__img { 
+            width: 100%; 
+            height: 400px; 
+        } 
+        &__close_button { 
+            float: none; 
+            position: absolute; 
+            top: 0; 
+        } 
+    } 
+} 
 
 
 /**** FOOTER ****/ 

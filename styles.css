@@ -1,6 +1,3 @@
-@charset "UTF-8";
-/* pas utilisé */
-
 /*********** TAGS ************/
 html {
   font-size: 16px;
@@ -10,12 +7,6 @@ body {
   margin: 0;
   background-color: #5A565D;
   color: #eee;
-}
-
-ul, li {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 /*********** COMMON CLASSES ************/
@@ -83,14 +74,14 @@ ul, li {
 /**** best ****/
 .best {
   background-color: #5A565D;
-  height: 500px;
+  min-height: 500px;
   width: 75%;
   margin: 10px auto;
 }
 .best__intro {
   float: left;
   width: 60%;
-  height: 400px;
+  min-height: 200px;
 }
 .best__intro__title {
   color: #eee;
@@ -109,13 +100,19 @@ ul, li {
   background-size: contain;
   background-color: #5A565D;
   height: 450px;
-  width: 25%;
+  width: 300px;
 }
 
 @media screen and (max-width: 499px) {
+  .best {
+    width: 100%;
+    padding: 10px;
+  }
   .best__intro {
     float: none;
+    width: 100%;
     margin: 0 auto;
+    padding-bottom: 20px;
   }
   .best__intro__text {
     min-height: 50px;
@@ -123,6 +120,7 @@ ul, li {
   .best__img {
     float: none;
     margin: 0 auto;
+    width: 100%;
   }
 }
 .btns {
@@ -251,8 +249,7 @@ ul, li {
   z-index: 1;
   background-color: rgba(116, 111, 119, 0.9);
   width: 80%;
-  min-height: 500px;
-  max-height: 600px;
+  height: 100%;
   border-radius: 10px;
   margin: 20px 100px;
 }
@@ -286,9 +283,42 @@ ul, li {
   float: right;
   position: relative;
   top: 20px;
-  left: 0px;
+  left: 0;
 }
 
+@media screen and (max-width: 499px) {
+  .modal {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 95%;
+    height: auto;
+  }
+  .modal__divs {
+    float: none;
+    width: 100%;
+    min-height: 50px;
+    max-height: 1000px;
+    padding: 5px;
+  }
+  .modal__divs:first-child {
+    height: 420px;
+  }
+  .modal__divs:nth-child(2), .modal__divs:nth-child(3) {
+    width: 100%;
+  }
+  .modal__img {
+    width: 100%;
+    height: 400px;
+  }
+  .modal__close_button {
+    float: none;
+    position: absolute;
+    top: 0;
+  }
+}
 /**** FOOTER ****/
 footer {
   width: 90%;
