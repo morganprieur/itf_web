@@ -86,7 +86,7 @@ const main = async (categories_names, cat_titles) => {
         // Buttons prev next 
         let button_prev = document.getElementsByClassName('carousel-control-prev')[cats.indexOf(cat)] 
         button_prev.setAttribute('id', `${cat_name}_prev`); 
-        button_prev.addEventListener("click", toSlide); // *** 
+        button_prev.addEventListener("click", toSlide); 
 
         let button_next = document.getElementsByClassName('carousel-control-next')[cats.indexOf(cat)]; 
         button_next.setAttribute('id', `${cat_name}_next`); 
@@ -103,7 +103,7 @@ const main = async (categories_names, cat_titles) => {
                     x[i].style.display = 'inline-block'; 
                 } 
             } else if(event.currentTarget.id.includes('next')) { 
-                for(let i = 2; i<7; i++) { 
+                for(let i = 2; i<x.length; i++) { 
                     console.log(i); 
                     x[i].style.display = 'inline-block'; 
                 } 
