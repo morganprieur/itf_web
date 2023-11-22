@@ -14,7 +14,6 @@ const main = async (categories_names, cat_titles) => {
 
         let truncated_categories = []; 
 
-        // let best_film; 
         for(let cat_name of categories_names) { 
             const api_category = await retrieveAllFilms(cat_name); 
             const api_category_suite = await retrieveCategoriesSuite(cat_name); 
@@ -152,6 +151,7 @@ const main = async (categories_names, cat_titles) => {
     // Modal content 
     async function get_details(id) { 
         const details = await retrieveOneFilm(id) 
+        console.log(details); 
 
         // wraper modal 
         let modal_wraper = document.createElement('div'); 
@@ -161,10 +161,8 @@ const main = async (categories_names, cat_titles) => {
         let modal_div1 = create_node('div', 'modal__divs', modal_wraper); 
         let modal_div2 = create_node('div', 'modal__divs', modal_wraper); 
         let modal_div3 = create_node('div', 'modal__divs', modal_wraper); 
-        
         let modal_close_button = create_node('button', 'modal__close_button btns__modal', modal_wraper); 
         let clear_div = create_node('div', 'clear', modal_wraper); 
-        
         let modal_div4 = create_node('div', 'modal__x_div', modal_wraper); 
 
 
@@ -187,8 +185,7 @@ const main = async (categories_names, cat_titles) => {
 
         // genres 
         let modal_genres = create_node('p', 'modal__genres', modal_div2); 
-        let modal_genres_span; 
-        modal_genres_span = create_node('span', 'bold', modal_genres)
+        let modal_genres_span = create_node('span', 'bold', modal_genres)
         modal_genres_span.innerHTML = 'Genres : <br> '; 
         const genres = details.genres; 
         for(let genre of genres) { 
@@ -197,38 +194,31 @@ const main = async (categories_names, cat_titles) => {
 
         // publication date 
         let modal_date = create_node('p', 'modal__publish_date', modal_div2); 
-        let modal_date_span; 
-        modal_date_span = create_node('span', 'bold', modal_date); 
+        let modal_date_span = create_node('span', 'bold', modal_date); 
         modal_date_span.innerHTML = 'Publication : ';  
-        modal_date_span.innerHTML = details.date_published;  
+        modal_date.innerHTML += details.date_published;  
 
         // rated 
-        let modal_rated; 
-        modal_rated = create_node('p', 'modal__rated', modal_div2); 
-        let modal_rated_span = create_node('p', 'modal__rated', modal_div2); 
+        let modal_rated = create_node('p', 'modal__rated', modal_div2); 
+        let modal_rated_span = create_node('span', 'bold', modal_rated); 
         modal_rated_span.innerHTML = 'Note moyenne : '; 
-        modal_rated_span.innerHTML = details.rated; 
+        modal_rated.innerHTML += details.rated; 
 
         // imdb_score 
-        let modal_imdb_score; 
-        modal_imdb_score = create_node('p', 'modal__imdb_score', modal_div2); 
-        let modal_imdb_score_span; 
-        modal_imdb_score_span = create_node('span', 'bold', modal_imdb_score); 
-        modal_imdb_score_span.innerHTML = details.imdb_score; 
+        let modal_imdb_score = create_node('p', 'modal__imdb_score', modal_div2); 
+        let modal_imdb_score_span = create_node('span', 'bold', modal_imdb_score); 
         modal_imdb_score_span.innerHTML = 'Score Imdb : '; 
+        modal_imdb_score.innerHTML += details.imdb_score; 
 
         // duration 
-        let modal_duration; 
-        modal_duration = create_node('p', 'modal__duration', modal_div2); 
-        let modal_duration_span; 
-        modal_duration_span = create_node('span', 'bold', modal_duration); 
-        modal_duration_span.innerHTML = `Durée : ${details.duration}`; 
+        let modal_duration = create_node('p', 'modal__duration', modal_div2); 
+        let modal_duration_span = create_node('span', 'bold', modal_duration); 
+        modal_duration_span.innerHTML = 'Durée :'; 
+        modal_duration.innerHTML += details.duration; 
 
         // countries 
-        let modal_countries; 
-        modal_countries = create_node('p', 'modal__country', modal_div2); 
-        let modal_countries_span; 
-        modal_countries_span = create_node('span', 'bold', modal_countries); 
+        let modal_countries = create_node('p', 'modal__country', modal_div2); 
+        let modal_countries_span = create_node('span', 'bold', modal_countries); 
         modal_countries_span.innerHTML = 'Pays : <br>'; 
         const countries = details.countries; 
         for(let country of countries) { 
@@ -236,17 +226,14 @@ const main = async (categories_names, cat_titles) => {
         }
         
         // gross income 
-        let modal_income; 
-        modal_income = create_node('p', 'modal__income', modal_div2); 
-        let modal_income_span; 
-        modal_income_span = create_node('span', 'bold', modal_income); 
+        let modal_income = create_node('p', 'modal__income', modal_div2); 
+        let modal_income_span = create_node('span', 'bold', modal_income); 
         modal_income_span.innerHTML = 'Box office : '; 
-        modal_income.innerHTML = details.worldwide_gross_income; 
+        modal_income.innerHTML += details.worldwide_gross_income; 
 
         // directors 
         let modal_director = create_node('p', 'modal__director', modal_div3); 
-        let modal_director_span; 
-        modal_director_span = create_node('span', 'bold', modal_director); 
+        let modal_director_span = create_node('span', 'bold', modal_director); 
         modal_director_span.innerHTML = 'Directors : <br>'; 
         const directors = details.directors; 
         for(let director of directors) { 
@@ -254,23 +241,19 @@ const main = async (categories_names, cat_titles) => {
         } 
         
         // casting 
-        let modal_casting; 
-        modal_casting = create_node('p', 'modal__casting_list', modal_div3); 
-        let modal_casting_span; 
-        modal_casting_span = create_node('span', 'bold', modal_casting); 
+        let modal_casting = create_node('p', 'modal__casting_list', modal_div3); 
+        let modal_casting_span = create_node('span', 'bold', modal_casting); 
         modal_casting_span.innerHTML = 'Casting : <br>'; 
         const actors = details.actors; 
         for(let actor of actors) { 
             modal_casting.innerHTML += `${actor}<br>`; 
         } 
         
-
         // long description 
-        let modal_abstract; 
-        modal_abstract = create_node('p', 'modal__abstract', modal_div4); 
-        let modal_abstract_span; 
-        modal_abstract_span = create_node('span', 'bold', modal_abstract); 
-        modal_abstract_span.innerHTML = `Synopsis : ${details.long_description}`; 
+        let modal_abstract = create_node('p', 'modal__abstract', modal_div4); 
+        let modal_abstract_span = create_node('span', 'bold', modal_abstract); 
+        modal_abstract_span.innerHTML = 'Synopsis : '; 
+        modal_abstract.innerHTML += details.long_description; 
 
         one_modal.appendChild(modal_wraper); 
 
