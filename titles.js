@@ -54,7 +54,7 @@ const main = async (categories_names, cat_titles) => {
     //  Button "More infos" for the best film 
     const best_more_button = document.getElementsByClassName('btns__more_infos')[0]; 
 
-    best_intro_title_h3.innerHTML = theBest.title+' '+theBest.imdb_score+' '+theBest.id; 
+    best_intro_title_h3.innerHTML = theBest.title; 
     const theBestDetails = await retrieveOneFilm(theBest.id); 
     best_intro_text_p.innerHTML = theBestDetails.description; 
 
