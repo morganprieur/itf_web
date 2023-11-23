@@ -78,13 +78,15 @@ body {
     display: flex; 
     flex-direction: row; 
     align-items: center; 
-    justify-content: flex-end; 
+    justify-content: flex-start; 
     background-color: $dark_grey; 
 
     &__logo {
         float: left; 
-        margin-left: 100px; 
-        margin-right: 60%; 
+        margin-left: 12%;
+        margin-right: 55%;
+        // margin-left: 100px; 
+        // margin-right: 60%; 
         &__img { 
             height: 70px; 
         }
