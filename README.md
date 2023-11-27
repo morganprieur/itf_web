@@ -27,4 +27,9 @@ Récupérer les données d'une API (fournie) et les afficher par catégories dan
 Pour modifier les propriétés CSS via le fichier `styles.scss`, il faut lancer Sass en live-compilation : `sass.bat --watch styles.scss styles.css` 
 
 
+## Conslutation dans un navigateur 
+
+Visiter l'adresse `http://localhost:80/` ou juste `http://localhost` 
+
+
 
