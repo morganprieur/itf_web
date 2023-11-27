@@ -41,10 +41,12 @@ const main = async (categories_names, cat_titles) => {
         return name_var; 
     } 
     
+    let main_tag = document.getElementsByTagName('main')[0]; 
+    
     // one_modal 
     let one_modal = document.createElement('div') 
     one_modal.className = `modal display_none` 
-
+    
     
     // theBest section 
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
@@ -60,66 +62,55 @@ const main = async (categories_names, cat_titles) => {
 
     best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
 
+    const sliders_section = create_node('section', 'sliders', main_tag); 
+    // const sliders_section = document.getElementById('sliders'); 
 
     // Divs categries 
     for(let cat of cats) { 
 
-        // h4 class "sliders__category__title" 
-        let one_category_title; 
-        for(let i=0; i<4; i++) { 
-            one_category_title = document.getElementsByClassName(`sliders__category__title`)[i]; 
-            one_category_title.innerHTML = cat_titles[i]; 
-        } 
-
         let cat_name = categories_names[cats.indexOf(cat)]; 
-        let x = document.getElementsByClassName(`one_carousel_item_${cat_name}`); 
-        let position = 0; 
-        
-        for(let i=0; i<x.length; i++) { 
-            x[i].style.display = 'none'; 
-        } 
-        
-        for(let i = position; i<position+5; i++) { 
-            x[i].style.display = 'inline-block'; 
-        } 
+
+        // h4 class "sliders__category__title" 
+        const one_category_title = create_node('h4', `sliders__category__title`, sliders_section); 
+        one_category_title.innerHTML = cat_titles[cats.indexOf(cat)]; 
+
+        const sliders__category__films = create_node('article', 'sliders__category__films', sliders_section); 
+        sliders__category__films.className += ' carousel slide'; 
 
         // Buttons prev next 
-        let button_prev = document.getElementsByClassName('carousel-control-prev')[cats.indexOf(cat)] 
+        let button_prev = create_node('button', 'carousel-control-prev', sliders__category__films); 
+        let button_prev_icon = create_node('span', 'carousel-control-prev-icon', button_prev); 
         button_prev.setAttribute('id', `${cat_name}_prev`); 
-        button_prev.addEventListener("click", toSlide); 
+        button_prev
 
-        let button_next = document.getElementsByClassName('carousel-control-next')[cats.indexOf(cat)]; 
+        const carousel_inner = create_node('div', 'carousel-inner', sliders__category__films); 
+        carousel_inner.setAttribute('id', `carousel-inner-${cat_name}`); 
+
+        let button_next = create_node('button', 'carousel-control-next', sliders__category__films); 
+        let button_next_icon = create_node('span', 'carousel-control-next-icon', button_next); 
         button_next.setAttribute('id', `${cat_name}_next`); 
-        button_next.addEventListener("click", toSlide); 
-        
-        function toSlide(event) { 
-            for(let i = 0; i<x.length; i++) { 
-                x[i].style.display = 'none'; 
-            } 
-
-            if(event.currentTarget.id.includes('prev')) { 
-                for(let i=0; i<5; i++) { 
-                    console.log(i); 
-                    x[i].style.display = 'inline-block'; 
-                } 
-            } else if(event.currentTarget.id.includes('next')) { 
-                for(let i = 2; i<x.length; i++) { 
-                    console.log(i); 
-                    x[i].style.display = 'inline-block'; 
-                } 
-            } 
-        } 
 
 
         for(let film of cat) { 
 
-            let one_film_div = document.getElementsByClassName(`one_carousel_item_${cat_name}`); 
-
-            let film_div = one_film_div[cat.indexOf(film)];
+            let one_film_div = create_node('div', `one_carousel_item_${cat_name}`, carousel_inner); 
+            let position = 0; 
+            
+            for(let i=0; i<one_film_div.length; i++) { 
+                one_film_div.style.display = 'none'; 
+            } 
+            
+            for(let i = position; i<position+5; i++) { 
+                one_film_div.style.display = 'inline-block'; 
+            } 
 
             let one_film_div_a; 
-            one_film_div_a = create_node('a', `one_film_img`, film_div); 
-            one_film_div_a.style.backgroundImage = `url(${film.image_url})` 
+            one_film_div_a = create_node('a', `one_film_img`, one_film_div); 
+            if(film.id=='259534') { 
+                one_film_div_a.style.backgroundImage = 'url(https://m.media-amazon.com/images/M/MV5BNTJjZTViZTEtNGVhNy00ODlmLTg2YTEtZDQ4NzBiNGMzMGJkXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_.jpg)' 
+            } else { 
+                one_film_div_a.style.backgroundImage = `url(${film.image_url})` 
+            } 
             
             let one_film_div_a_h5; 
             one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
@@ -142,16 +133,37 @@ const main = async (categories_names, cat_titles) => {
                 await get_details(id) 
             } 
             one_film_div_a_button.innerHTML = 'Détails'; 
-        }
+        } 
 
-        let container_div = document.getElementById('container') 
-        container_div.appendChild(one_modal) 
+        function toSlide(event) { 
+
+            let x = document.getElementsByClassName(`one_carousel_item_${cat_name}`)
+            for(let i = 0; i<x.length; i++) { 
+                x[i].style.display = 'none'; 
+            } 
+
+            if(event.currentTarget.id.includes('prev')) { 
+                for(let i=0; i<5; i++) { 
+                    x[i].style.display = 'inline-block'; 
+                } 
+            } else if(event.currentTarget.id.includes('next')) { 
+                for(let i = 2; i<x.length; i++) { 
+                    x[i].style.display = 'inline-block'; 
+                } 
+            } 
+        } 
+
+        button_prev.addEventListener("click", toSlide); 
+        button_next.addEventListener("click", toSlide); 
+
+        // let main_tag = document.getElementsByTagName('main')[0]; 
+        main_tag.appendChild(one_modal) 
     } 
 
     // Modal content 
     async function get_details(id) { 
         const details = await retrieveOneFilm(id) 
-        console.log(details); 
+        // console.log(details); 
 
         // wraper modal 
         let modal_wraper = document.createElement('div'); 
@@ -168,8 +180,14 @@ const main = async (categories_names, cat_titles) => {
 
         // détails modal 
         let modal_img = create_node('img', 'modal__img', modal_div1);  
-        modal_img.setAttribute('alt', `Affiche du film ${details.title}`);
-        modal_img.setAttribute('src', `${details.image_url}`); 
+        modal_img.setAttribute('alt', `Affiche du film ${details.title}`); 
+        console.log(id); 
+        if(id=='259534') { 
+            modal_img.setAttribute('src', 'https://m.media-amazon.com/images/M/MV5BNTJjZTViZTEtNGVhNy00ODlmLTg2YTEtZDQ4NzBiNGMzMGJkXkEyXkFqcGdeQXVyNTgyNTA4MjM@._V1_.jpg'); 
+            // modal_img.setAttribute('src', 'https://www.imdb.com/title/tt0259534/mediaviewer/rm2605132289/?ref_=tt_ov_i'); 
+        } else { 
+            modal_img.setAttribute('src', `${details.image_url}`); 
+        } 
 
         // Close_modal button 
         modal_close_button.onclick = function() { 

@@ -206,6 +206,7 @@ body {
 
 .carousel-inner {
   display: flex;
+  width: 1000px;
   height: 250px;
   margin-left: 50px;
 }
