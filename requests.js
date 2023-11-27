@@ -9,7 +9,7 @@ async function retrieveAllFilms(category) {
         ); 
     } else { 
         response_categories = await fetch(
-            `http://localhost:8000/api/v1/titles/?genre_contains=${category}`, {}
+            `http://localhost:8000/api/v1/titles/?genre_contains=${category}&sort_by=-imdb_score`, {}
         ); 
     } 
     const data_categories = await response_categories.json(); 
@@ -24,7 +24,7 @@ async function retrieveCategoriesSuite(category_name) {
             ); 
     } else { 
         response_cat_suite = await fetch(
-            `http://localhost:8000/api/v1/titles?genre_contains=${category_name}&page=2`, {}
+            `http://localhost:8000/api/v1/titles?genre_contains=${category_name}&sort_by=-imdb_score&page=2`, {}
             ); 
     } 
     const data_cat_suite = await response_cat_suite.json(); 
