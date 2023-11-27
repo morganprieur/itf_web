@@ -32,6 +32,8 @@ const main = async (categories_names, cat_titles) => {
     } 
     const cats = await get_films(categories_names); 
 
+    let spinner = document.getElementById('spinner'); 
+    console.log(parent); 
 
     // JS DOM 
     const create_node = (tag, class_name, parent) => { 
@@ -49,12 +51,13 @@ const main = async (categories_names, cat_titles) => {
     
     
     // theBest section 
+    spinner.remove(); 
     const best_intro_title_h3 = document.getElementsByClassName('best__intro__title')[0]; 
     const best_intro_text_p = document.getElementsByClassName('best__intro__text')[0]; 
+    const best_img_a = document.getElementsByClassName('best__img__a')[0]; 
+    best_img_a.setAttribute('cursor', 'pointer'); 
     const best_img = document.getElementsByClassName('best_img')[0]; 
     
-    //  Button "More infos" for the best film 
-    const best_more_button = document.getElementsByClassName('btns__more_infos')[0]; 
 
     best_intro_title_h3.innerHTML = theBest.title; 
     const theBestDetails = await retrieveOneFilm(theBest.id); 
@@ -63,14 +66,12 @@ const main = async (categories_names, cat_titles) => {
     best_img.innerHTML = `<img class="best__img" alt="Affiche best film" height="450px" src="${theBest.image_url}">`; 
 
     const sliders_section = create_node('section', 'sliders', main_tag); 
-    // const sliders_section = document.getElementById('sliders'); 
 
     // Divs categries 
     for(let cat of cats) { 
 
         let cat_name = categories_names[cats.indexOf(cat)]; 
 
-        // h4 class "sliders__category__title" 
         const one_category_title = create_node('h4', `sliders__category__title`, sliders_section); 
         one_category_title.innerHTML = cat_titles[cats.indexOf(cat)]; 
 
@@ -114,25 +115,26 @@ const main = async (categories_names, cat_titles) => {
             
             let one_film_div_a_h5; 
             one_film_div_a_h5 = create_node('h5', 'one_film_title', one_film_div_a); 
-            one_film_div_a_h5.innerHTML = film.title+' '+film.id; // à retirer *** 
+            one_film_div_a_h5.innerHTML = film.title+' '+film.id; 
             
-            // Open modal button 
-            let one_film_div_a_button; 
-            one_film_div_a_button = create_node('button', 'one_film_button', one_film_div_a); 
-            one_film_div_a_button.classList.add('btns__modal'); 
+            // // Open modal button 
+            // let one_film_div_a_button; 
+            // one_film_div_a_button = create_node('button', 'one_film_button', one_film_div_a); 
+            // one_film_div_a_button.classList.add('btns__modal'); 
             
             const id = film.id; 
             
-            // details button onclick 
-            one_film_div_a_button.onclick = async function() { 
-                one_modal.classList.remove('display_none')
+            // details film onclick 
+            // one_film_div_a_button.onclick = async function() { 
+            one_film_div_a.onclick = async function() { 
+                one_modal.classList.remove('display_none') 
                 one_modal.classList.add('block') 
                 one_modal.setAttribute('id', `modal_${id}`) 
                 
                 /* Get the details data for one film */ 
                 await get_details(id) 
             } 
-            one_film_div_a_button.innerHTML = 'Détails'; 
+            // one_film_div_a_button.innerHTML = 'Détails'; 
         } 
 
         function toSlide(event) { 
@@ -279,7 +281,8 @@ const main = async (categories_names, cat_titles) => {
     } 
 
     // theBest details button 
-    best_more_button.onclick = function() { 
+    // best_more_button.onclick = function() { 
+    best_img_a.onclick = function() { 
         one_modal.classList.remove('display_none') 
         one_modal.classList.add('block') 
         one_modal.setAttribute('id', `modal_${theBest.id}`) 
