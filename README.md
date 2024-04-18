@@ -3,8 +3,9 @@
 
 ## Description 
 
-Get the data from a given API, to display them into the browser with Javascript. The CSS is managed with Sass. 
-Developped into a Docker container. 
+Get the data from a given API, to display them into the browser like on Netflix. 
+Display management with Javascript. The CSS is developped with Sass. 
+The project is developped into a Docker container. 
 
 ## Démarrage de l'APi 
 
