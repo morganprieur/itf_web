@@ -3,13 +3,10 @@
 
 ## Description 
 
-Récupérer les données d'une API (fournie) et les afficher par catégories dans une interface navigateur en JS. 
-
+Get the data from a given API, to display them into the browser with Javascript. The CSS is managed with Sass. 
+Developped into a Docker container. 
 
 ## Démarrage de l'APi 
-
-https://grafikart.fr/tutoriels/carrousel-javascript-87#autopla
-
 
 1. Ouvrir le dossier de l'API : `$ cd OCMovies-API-EN-FR` 
 2. Installer les dépendances du projet : `pipenv install` 
@@ -19,7 +16,7 @@ https://grafikart.fr/tutoriels/carrousel-javascript-87#autopla
 
 ## Démarrage de Docker pour l'interface 
 
-1. Ouvrir le dossier du front end : `cd P6_work` 
+1. Ouvrir le dossier du front end 
 2. Lancer le fichier compose.yaml : `docker compose up` 
 
 
@@ -30,9 +27,7 @@ https://grafikart.fr/tutoriels/carrousel-javascript-87#autopla
 Pour modifier les propriétés CSS via le fichier `styles.scss`, il faut lancer Sass en live-compilation : `sass.bat --watch styles.scss styles.css` 
 
 
-## Conslutation dans un navigateur 
+## Consultation dans un navigateur 
 
 Visiter l'adresse `http://localhost:80/` ou juste `http://localhost` 
-
-
 
